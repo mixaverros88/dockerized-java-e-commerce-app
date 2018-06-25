@@ -369,8 +369,8 @@ public class MailSender {
 "  </body>\n" +
 "</html>";
          
-          String fromEmail = "mverros@kathimerini.gr";
-          String passwordEmail = "mixalis1029";
+          String fromEmail = "";
+          String passwordEmail = "";
           //Get properties object    
           Properties props = new Properties();    
           props.put("mail.smtp.host", "smtp.gmail.com");    
