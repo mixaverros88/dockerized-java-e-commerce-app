@@ -29,4 +29,4 @@
 When a user create a automatically the web app send he an email with the the order details and the invoice in pdf format
 
 
-** ### DEPLOYING AND BUILDING ON Wildfly 11 IDE USED : Netbeans **
+### DEPLOYING AND BUILDING ON Wildfly 11 IDE USED : Netbeans
