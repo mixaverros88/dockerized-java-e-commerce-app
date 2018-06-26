@@ -27,7 +27,7 @@
 - [x] Buy Products
 - [x] See all order history
 
-When a user create a automatically the web app send he an email with the the order details and the invoice in pdf format
+When a user commit an order, automatically the web app send them an email with the order details and the invoice of the order in pdf format
 
 
 ### DEPLOYING AND BUILDING ON Wildfly 11 IDE USED : Netbeans
