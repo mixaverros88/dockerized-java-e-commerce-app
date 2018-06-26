@@ -26,6 +26,7 @@
 - [x] Log in
 - [x] Buy Products
 - [x] See all order history
+
 When a user create a automatically the web app send he an email with the the order details and the invoice in pdf format
 
 
