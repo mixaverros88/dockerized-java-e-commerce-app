@@ -32,4 +32,4 @@ When a user commit an order, automatically the web app send them an email with t
 
 ### DEPLOYING AND BUILDING ON Wildfly 11 IDE USED : Netbeans
 
-### This project was created for the final examination of [boot camp 3]https://www.afdemp.org/%CF%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/)
+### This project was created for the final examination of [boot camp 3]: https://www.afdemp.org%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/
