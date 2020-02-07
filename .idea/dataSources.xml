@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="build:web:WEB-INF:classes:hibernate.cfg.xml/Hibernate" uuid="cf2ae88d-5b47-4c27-bd07-928209867578">
+      <driver-ref>derby.remote</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/mixal/Desktop/java-e-commerce/build/web/WEB-INF/classes/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.apache.derby.jdbc.ClientDriver</jdbc-driver>
+      <jdbc-url>jdbc:derby://localhost:1527/sample</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="src:java:hibernate.cfg.xml/Hibernate" uuid="ef024ef2-ae87-4ac9-ba39-33e69c3d6216">
+      <driver-ref>derby.remote</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/mixal/Desktop/java-e-commerce/src/java/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.apache.derby.jdbc.ClientDriver</jdbc-driver>
+      <jdbc-url>jdbc:derby://localhost:1527/sample</jdbc-url>
+    </data-source>
+  </component>
+</project>

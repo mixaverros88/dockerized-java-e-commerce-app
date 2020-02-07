@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="build:web:WEB-INF:classes:hibernate.cfg.xml/Hibernate" uuid="cf2ae88d-5b47-4c27-bd07-928209867578">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="DERBY" exact-version="0.0" />
+      <first-sync>true</first-sync>
+      <user-name>app</user-name>
+    </data-source>
+    <data-source name="src:java:hibernate.cfg.xml/Hibernate" uuid="ef024ef2-ae87-4ac9-ba39-33e69c3d6216">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>app</user-name>
+    </data-source>
+  </component>
+</project>
