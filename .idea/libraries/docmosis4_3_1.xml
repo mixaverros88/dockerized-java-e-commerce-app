@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="docmosis4.3.1">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/main/resources/docmosis4.3.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
