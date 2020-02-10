@@ -1,11 +1,11 @@
 # e-commerce Web Application Using JEE and JSF Framework
 ![preview image](https://raw.githubusercontent.com/mixaverros88/java-e-commerce/master/e-commerce.jpg)
 
-### This project was created for the final examination of  [Boot Camp 3](https://www.afdemp.org/%CF%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/)
+### :ghost: This project was created for the final examination of  [Boot Camp 3](https://www.afdemp.org/%CF%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/)
 
 The main idea behind this, is that we have to create a grocery store that sales several products from various vendors.
 The grocery shop ear profit only through commission.
-### List of requirements
+### :pencil: List of requirements
 
 ## Admin Panel ##
 > A Vendor can
@@ -31,12 +31,34 @@ The grocery shop ear profit only through commission.
 
 When a user commit an order, automatically the web app send them an email with the order details and the invoice of the order in pdf format.
 
-### DEPLOYING AND BUILDING ON Wildfly 11 IDE USED : Netbeans
+### :file_folder: File Details ###
+web.xml : JSF 2.0 Servlet Configuration  
 
+persistence.xml: database configurations
 
-### File Details ###
-web.xml : JSF 2.0 Servlet Configuration 
-
-### context params ###
+### :paperclip: Context params ###
 The “context-param” tag is define in “web.xml” file and it provides parameters to the entire web application.
 * vat: 0.24
+
+### :computer: Deploy instructions ###
+Use the maven plug-in (tomcat7-maven-plugin) for tomcat server in order to automatically deploy this project in your local server. You can find this plug-in in pom.xml file in order to modify with yours configurations, also don't forget to add in settings.xml your credentials for tomcat server.
+```
+<servers>
+    <server>
+        <id>TomcatServer</id>
+        <username>admin</username>
+        <password>password</password>
+    </server>
+</servers>
+```
+You can run the below command in order to deploy the artifact in your local tomcat server
+```
+mvn clean tomcat7:deploy
+```
+### :scroll: Database instructions ###
+You can use the dataBase.sql in order to create the poll database and insert some values.
+
+### :passport_control: Initial Admin ###
+Username: 
+
+Password:
