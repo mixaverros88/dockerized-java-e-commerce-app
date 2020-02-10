@@ -32,3 +32,11 @@ The grocery shop ear profit only through commission.
 When a user commit an order, automatically the web app send them an email with the order details and the invoice of the order in pdf format.
 
 ### DEPLOYING AND BUILDING ON Wildfly 11 IDE USED : Netbeans
+
+
+### File Details ###
+web.xml : JSF 2.0 Servlet Configuration 
+
+### context params ###
+The “context-param” tag is define in “web.xml” file and it provides parameters to the entire web application.
+* vat: 0.24
