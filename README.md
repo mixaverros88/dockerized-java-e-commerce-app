@@ -1,10 +1,10 @@
-# e-commerce Web Application Using JEE and JSF Framework
-![preview image](https://raw.githubusercontent.com/mixaverros88/java-e-commerce/master/e-commerce.jpg)
+# e-commerce Web Application using JEE and JSF framework
+![preview image](https://github.com/mixaverros88/java-e-commerce/blob/master/src/main/resources/e-commerce.jpg)
 
 ### :ghost: This project was created for the final examination of  [Boot Camp 3](https://www.afdemp.org/%CF%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/)
 
-The main idea behind this, is that we have to create a grocery store that sales several products from various vendors.
-The grocery shop ear profit only through commission.
+The main idea behind this, is that we have to create a e-grocery store that sales several products from various vendors.
+The grocery shop earn profits only through commissions.
 ### :pencil: List of requirements
 
 ## Admin Panel ##
@@ -58,7 +58,7 @@ mvn clean tomcat7:deploy
 ### :scroll: Database instructions ###
 You can use the dataBase.sql in order to create the poll database and insert some values.
 
-### :passport_control: Initial Admin ###
+### :passport_control: Initial admin credentials ###
 Username: 
 
 Password:
