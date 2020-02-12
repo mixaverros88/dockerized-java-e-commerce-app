@@ -40,6 +40,11 @@ persistence.xml: database configurations
 The “context-param” tag is define in “web.xml” file and it provides parameters to the entire web application.
 * vat: 0.24
 
+### Navigate to the following link ###
+```
+[docker-machine ip]:80/java-e-commerce/
+```
+
 ### :computer: Deploy instructions ###
 Use the maven plug-in (tomcat7-maven-plugin) for tomcat server in order to automatically deploy this project in your local server. You can find this plug-in in pom.xml file in order to modify with yours configurations, also don't forget to add in settings.xml your credentials for tomcat server.
 ```
