@@ -1,5 +1,5 @@
 # e-commerce Web Application using JEE and JSF framework
-![preview image](https://github.com/mixaverros88/java-e-commerce/blob/master/src/main/resources/e-commerce.jpg)
+![preview image](https://raw.githubusercontent.com/mixaverros88/java-e-commerce/master/src/main/resources/e-commerce.jpg)
 
 ### :ghost: This project was created for the final examination of  [Boot Camp 3](https://www.afdemp.org/%CF%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/)
 
