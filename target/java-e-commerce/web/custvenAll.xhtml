@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>Χρήστες</title>
+    </h:head>
+ 
+     <h:body  class="fix-header fix-sidebar">
+           <div id="header">
+            <ui:insert name="header" >
+                <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
+        </div>
+   
+        <div id="sidebar">
+            <ui:insert name="sidebar" >
+                <ui:include src="/templates/sidebar.xhtml" />
+            </ui:insert>
+        </div>
+     
+               <!-- Page wrapper  -->
+         <div class="page-wrapper" style="height: 1200px; min-height: 212px;">
+            <!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Χρήστες</h3>
+                  
+                </div>
+                
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Αρχική</a></li>
+                        <li class="breadcrumb-item active">Χρήστες</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Bread crumb -->
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                   <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive m-t-40">
+                              <a href="custvenAdd.xhtml" class="btn btn-info m-b-10 m-l-5">Δημιουργία Χρήστη</a> 
+                  
+                            <h:messages class="alert alert-danger alert-dismissible fade show" globalOnly="true" />
+                              <h:dataTable value="#{custvendManage.allCustvendData}" var="custvend"  id="example23"  class="display nowrap table table-hover table-striped table-bordered">
+                                <h:column>
+                                        <f:facet name="header">Ονοματεπώνυμο</f:facet>
+                                        #{custvend.fname} #{custvend.lname}
+                                </h:column>
+
+                                <h:column>
+                                        <f:facet name="header">Email</f:facet>
+                                        #{custvend.email}
+                                </h:column>
+                                  
+                                <h:column>
+                                    <f:facet name="header">Κατάσταση</f:facet>
+                                        <h:form>
+                                            <h:panelGroup rendered="#{custvend.isactive == 1}">
+                                                <h:commandButton action = "#{custvendManage.changeStatusCustvend(0, custvend.custvendid)}" value="Ενεργό" class="btn btn-success m-b-10 m-l-5"></h:commandButton>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{custvend.isactive == 0}">
+                                                <h:commandButton action = "#{custvendManage.changeStatusCustvend(1, custvend.custvendid)}" value="Ανενεργό" class="btn btn-danger m-b-10 m-l-5"></h:commandButton>
+                                            </h:panelGroup>
+                                        </h:form>
+                                </h:column>
+                                  
+                                <h:column>
+                                    <f:facet name="header">Έγκριση</f:facet>
+                                        <h:form>
+                                            
+                                            <h:panelGroup rendered="#{custvendManage.chechIfTheVendorAsycToProduct(custvend) == 1 and custvend.roleid.roleid ==3}">
+                                                <h:panelGroup rendered="#{custvend.register == 1}">
+                                                    <h:commandButton action = "#{custvendManage.changeRgisterCustvend(0, custvend.custvendid, custvend)}" value="Ενεργό" class="btn btn-success m-b-10 m-l-5"></h:commandButton>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{custvend.register == 0}">
+                                                    <h:commandButton action = "#{custvendManage.changeRgisterCustvend(1, custvend.custvendid, custvend)}" value="Ανενεργό" class="btn btn-danger m-b-10 m-l-5"></h:commandButton>
+                                                </h:panelGroup>
+                                             </h:panelGroup>
+                                            
+                                            <h:panelGroup rendered="#{custvend.roleid.roleid ==1 or custvend.roleid.roleid ==2}">
+                                                <h:panelGroup rendered="#{custvend.register == 1}">
+                                                    <h:commandButton action = "#{custvendManage.changeRgisterCustvend(0, custvend.custvendid, custvend)}" value="Ενεργό" class="btn btn-success m-b-10 m-l-5"></h:commandButton>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{custvend.register == 0}">
+                                                    <h:commandButton action = "#{custvendManage.changeRgisterCustvend(1, custvend.custvendid, custvend)}" value="Ανενεργό" class="btn btn-danger m-b-10 m-l-5"></h:commandButton>
+                                                </h:panelGroup>
+                                             </h:panelGroup>
+                                            
+                                                <h:panelGroup rendered="#{custvendManage.chechIfTheVendorAsycToProduct(custvend) == 0 and custvend.roleid.roleid ==3}">
+                                                    Ο προμηθεύτης δεν έχει προϊόν
+                                                </h:panelGroup>
+                                        </h:form>
+                                </h:column>
+                                  
+                                <h:column>
+                                    
+                                        <f:facet name="header">Ρόλος</f:facet>
+                                        #{custvend.roleid.descr}
+                                </h:column>
+                                <h:column>
+                                        <f:facet name="header">Λειτουργίες</f:facet>
+                                       
+                                        <h:form>
+               
+                                            
+                                            <h:commandButton value="Επεξεργασία" action="#{custvendManage.editCustvend()}" class="btn btn-warning m-b-10 m-l-5">
+                                                <f:param name="custvendid" value="#{custvend.custvendid}" />
+                                            </h:commandButton>
+                                           
+                                        </h:form>
+                                </h:column>
+                        </h:dataTable>
+              </div>
+                        </div>
+                    </div>
+
+                <!-- End PAge Content -->
+            </div>
+            <!-- End Container fluid  -->
+ <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="/templates/footer.xhtml" />
+            </ui:insert>
+        </div>
+        </div>
+         <!-- END Page wrapper  -->
+
+         
+    </h:body>
+</html>
+
+
