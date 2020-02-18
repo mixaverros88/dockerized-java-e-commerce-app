@@ -80,7 +80,7 @@ Initial Release
 - [Bootstrap admin dashboards](https://colorlib.com/wp/free-bootstrap-admin-dashboard-templates/)
 - [Angular dashboards](https://colorlib.com/wp/angularjs-admin-templates/)
 - [Free Admin Dashboards](https://colorlib.com/wp/free-html5-admin-dashboard-templates/)
-- [Website Templates](https://colorlib.com/wp/templates/)
+- [Website Templates](https://colorlib.com/wptemplates/)
 - [WordPress Themes](https://colorlib.com/wp/free-wordpress-themes/)
 
 ### License

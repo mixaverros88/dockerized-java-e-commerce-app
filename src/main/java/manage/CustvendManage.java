@@ -95,7 +95,7 @@ public class CustvendManage implements Serializable{
         void init(){   
         roles=userAddFacade.findRoles1();
         //
-        String urlCompare = "http://localhost:8081/PrimeFaces/faces/register.xhtml";
+        String urlCompare = "/java-e-commerce/web/register.xhtml";
         String urtString = url.toString();
         if( urlCompare.equals(urtString)){
             
@@ -160,7 +160,7 @@ public class CustvendManage implements Serializable{
             
             MailSender mailSend = new MailSender();
             if ( register ==1){
-                mailSend.send(custvend.getEmail(),"ezikos.gr Έγκριση Λογαριασμού","<h3>Ο λογαριασμός σας στο ezikos.gr Εγκρίθηκε</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"http://localhost:8081/PrimeFaces/faces/login.xhtml\">εδώ</a>");   
+                mailSend.send(custvend.getEmail(),"ezikos.gr Έγκριση Λογαριασμού","<h3>Ο λογαριασμός σας στο ezikos.gr Εγκρίθηκε</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης άλλαξε κατάσταση επιτυχώς. Και θα ενημερωθή με email"));
             }
         }else{
@@ -239,13 +239,13 @@ public class CustvendManage implements Serializable{
         //mhnhmata από το magaebean στην σελίδα
         if(mr==true){
             
-            String urlCompare = "http://localhost:8081/PrimeFaces/faces/register.xhtml";
+            String urlCompare = "/java-e-commerce/web/register.xhtml";
             String urtString = url.toString();
             MailSender mailSend = new MailSender();
             if( urlCompare.equals(urtString)){
                 if(rr.getRoleid()==2){
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς"));
-                    mailSend.send(custvend.getEmail(),"ezikos.gr Δημιουργία Λογαριασμού","<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"http://localhost:8081/PrimeFaces/faces/login.xhtml\">εδώ</a>");   
+                    mailSend.send(custvend.getEmail(),"ezikos.gr Δημιουργία Λογαριασμού","<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                     return "login";
                 }else if(rr.getRoleid()==3){
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς. Θα σας αποσταλεί email όταν θα ενεργοποιηθεί"));

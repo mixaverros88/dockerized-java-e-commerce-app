@@ -25,10 +25,10 @@
 
         <div id="header">
             <ui:insert name="header" >
-                <ui:include src="/templates/headerFront.xhtml" />
+                <ui:include src="templates/headerFront.xhtml" />
             </ui:insert>
         </div>
-     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://localhost:8081/PrimeFaces/faces/resources/front/images/cart.jpg);">
+     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/java-e-commerce/web/resources/front/images/cart.jpg);">
 		<h2 class="l-text2 t-center">
 			Cart
 		</h2>
@@ -41,7 +41,7 @@
                                 <h:dataTable value="#{cartManage.products}" var="product"  class="display nowrap table table-hover table-striped table-bordered">
                                     <h:column>
                                         <f:facet name="header">Φωτογραφία</f:facet>
-                                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/#{product.photosid.url}"  style="width: 200px;"/> 
+                                        <h:graphicImage value = "/java-e-commerce/web/resources/images/#{product.photosid.url}"  style="width: 200px;"/>
                                    </h:column>
 
                                     <h:column>
@@ -119,7 +119,7 @@
                 <div class="category">
                     <div class="close_category" style="display: none;">×</div>
                         <div class="image">
-                            <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/payments-bank.svg"  width="122" height="58"/> 
+                            <h:graphicImage value = "/java-e-commerce/web/resources/images/payments-bank.svg"  width="122" height="58"/>
                         </div>
                         <div class="text">
                             <div class="title">Pay with bank transfer</div>
@@ -129,14 +129,14 @@
                         <div class="children" style="display: none;">
                             <div class="child" data-tabid="ebanking" data-gatewayabbr="mybank">
                                 <div class="heading center">
-                                    <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/mybank.png"  width="120" height="60"/> 
+                                    <h:graphicImage value = "/java-e-commerce/web/resources/images/mybank.png"  width="120" height="60"/>
                                     <div class="description">Automatic redirection to the e-banking system of your bank. Immediate activation of your order after payment</div>
                                 </div>
                             </div>
 
                             <div class="child" data-tabid="branch" data-gatewayabbr="bk">
                                 <div class="heading center">
-                                     <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/payments-bank.svg"  width="120" height="60"/>
+                                     <h:graphicImage value = "/java-e-commerce/web/resources/images/payments-bank.svg"  width="120" height="60"/>
                                     <div class="title center">E-banking or bank branch</div>
                                     <div class="description">You will be given a payment code to pay via e-banking or at the bank branch. The order will be activated as soon as the payment is verified</div>
                                 </div>
@@ -147,7 +147,7 @@
                 <div class="category">
                     <div class="close_category" style="display: none;">×</div>
                     <div class="image">
-                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/payments-cards.svg"  width="122" height="58"/>
+                        <h:graphicImage value = "/java-e-commerce/web/resources/images/payments-cards.svg"  width="122" height="58"/>
                     </div>
                     <div class="text">
                         <div class="title">Pay with card</div>
@@ -158,24 +158,24 @@
 
                                 <div class="child" onclick="visaPayf('visa.png')">
                                     <div class="heading center">
-                                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/visa.png"  width="122" height="58"/>
+                                        <h:graphicImage value = "/java-e-commerce/web/resources/images/visa.png"  width="122" height="58"/>
                                     </div>
                                 </div>
 
                                 <div class="child" onclick="visaPayf('mastercard.png')" data-tabid="mastercard" data-gatewayabbr="cc">
                                     <div class="heading center">
-                                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/mastercard.png"  width="120" height="60"/>                        
+                                        <h:graphicImage value = "/java-e-commerce/web/resources/images/mastercard.png"  width="120" height="60"/>
                                     </div>
                                 </div>
                                 <div class="child" onclick="visaPayf('visa-electron.png')"  data-tabid="visa_electron" data-gatewayabbr="cc">
                                     <div class="heading center">
-                                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/visa-electron.png"  width="120" height="60"/> 
+                                        <h:graphicImage value = "/java-e-commerce/web/resources/images/visa-electron.png"  width="120" height="60"/>
                                     </div>
                                 </div>
 
                                 <div class="child" onclick="visaPayf('maestro.png')"  data-tabid="maestro" data-gatewayabbr="cc">
                                     <div class="heading center">
-                                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/maestro.png"  width="120" height="60"/> 
+                                        <h:graphicImage value = "/java-e-commerce/web/resources/images/maestro.png"  width="120" height="60"/>
                                     </div>
                                 </div>
                         </div>
@@ -272,7 +272,7 @@
 </div>
         <div id="footer">
             <ui:insert name="footer" >
-                <ui:include src="/templates/footerFront.xhtml" />
+                <ui:include src="templates/footerFront.xhtml" />
             </ui:insert>
         </div>
 

@@ -44,9 +44,9 @@ public class WhishListFacade {
         List<Wishlist> wishlist = query.getResultList();
               
         for (Wishlist whi:wishlist){
-            //MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "<p>Αγαπητέ "+whi.getCustvendid().getFname()+" "+whi.getCustvendid().getLname()+",</p><h3>Το προϊόν: "+whi.getProductid().getName()+" είναι διαθέσιμο.</h3><p> Πατηστε <a href='http://localhost:8081/PrimeFaces/faces/proion.xhtml?id="+whi.getProductid().getProductid()+"'>εδώ</a> για να το αγοράσετε</p>");
+            //MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "<p>Αγαπητέ "+whi.getCustvendid().getFname()+" "+whi.getCustvendid().getLname()+",</p><h3>Το προϊόν: "+whi.getProductid().getName()+" είναι διαθέσιμο.</h3><p> Πατηστε <a href='/java-e-commerce/web/proion.xhtml?id="+whi.getProductid().getProductid()+"'>εδώ</a> για να το αγοράσετε</p>");
             
-            MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "Το προϊόν:"+whi.getProductid().getName()+" είναι διαθέσιμο. <br/> Πατηστε <a href='http://localhost:8081/PrimeFaces/faces/proion.xhtml?id="+whi.getProductid().getProductid()+"'>εδώ</a> για να το αγοράσεται");
+            MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "Το προϊόν:"+whi.getProductid().getName()+" είναι διαθέσιμο. <br/> Πατηστε <a href='/java-e-commerce/web/proion.xhtml?id="+whi.getProductid().getProductid()+"'>εδώ</a> για να το αγοράσεται");
             updateWhishListInform(whi.getWishlistid());
         }
         

@@ -46,7 +46,7 @@ public class PasswordResetManage implements Serializable{
         if(u !=null){    
             
             MailSender mailSend = new MailSender();
-            mailSend.send(u.getEmail(),"ezikos.gr Αλλαγή Password","<h3>Το νέο σας password είναι το "+passwordResetFacade.changeUserPass(email, mailSend.generatePassword())+"</h3><br/> Για να συνδεθείτε πατήστε <a href=\"http://localhost:8081/PrimeFaces/faces/login.xhtml\">εδώ</a>");  
+            mailSend.send(u.getEmail(),"ezikos.gr Αλλαγή Password","<h3>Το νέο σας password είναι το "+passwordResetFacade.changeUserPass(email, mailSend.generatePassword())+"</h3><br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο καινούργιος κωδικός στάθηκε στο email:"+email+" "));
             
             return "";

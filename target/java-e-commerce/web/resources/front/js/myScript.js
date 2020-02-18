@@ -54,7 +54,7 @@
 
         function visaPayf(imgeSource){
           document.getElementById('visaPay').style.display = "block";
-          document.getElementById('paymentImage').src ="http://localhost:8081/PrimeFaces/faces/resources/images/"+imgeSource;
+          document.getElementById('paymentImage').src ="/java-e-commerce/web/resources/images/"+imgeSource;
         }
   
 

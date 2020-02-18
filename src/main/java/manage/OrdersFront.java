@@ -181,7 +181,7 @@ public class OrdersFront implements Serializable{
            
             MailSender.send(custvend.getEmail(),"ezikos.gr - Λεπτομέριες Παραγγελίας","<p>Αγαπητέ "+custvend.getFname()+" "+custvend.getLname()+",</p><p>Θα θέλαμε να σας ενημερώσουμε ότι η παραγγελία σας καταχωρήθηκε.</p><p>Θα σας ενημερώσουμε άμεσα με email για την εγκριση της παράγγελέια σας.</p><p>Στοιχεία παραγγελιας.</p><table style=\"border: 1px solid #dcdcdc;\"><tr style=\"background-color: #e6e6e6;\"><td style=\"padding: 10px;\">Όνομα Προϊόντος</td><td style=\"padding: 10px;\">Ποσότητα Προϊόντος</td><td style=\"padding: 10px;\">Τιμή Προϊόντος</td></tr>"+emailProductTable+""
                     + "<tr style=\"background-color: #e6e6e6;\"><td></td><td style=\"padding: 10px;\" >Μεταφορικά</td><td style=\"padding: 10px;\">"+shipping+" €</td></tr>"
-                    + "<tr style=\"background-color: #e6e6e6;\"><td></td><td></td><td style=\"padding: 10px;\">Σύνολο: "+Math.round(totalPrice*100.00)/100.00+" €</td></tr></table><br/><p>Μπορείτε να κατεβάσετε την απόδειξή της παραγγελίας πατώντας <a href=\"http://localhost:8081/PrimeFaces/faces/resources/invoices/"+invoiceURL+"\">εδώ</a></p><p>Ευχαριστούμε για την επιλογή σας.</p>");  
+                    + "<tr style=\"background-color: #e6e6e6;\"><td></td><td></td><td style=\"padding: 10px;\">Σύνολο: "+Math.round(totalPrice*100.00)/100.00+" €</td></tr></table><br/><p>Μπορείτε να κατεβάσετε την απόδειξή της παραγγελίας πατώντας <a href=\"/java-e-commerce/web/resources/invoices/"+invoiceURL+"\">εδώ</a></p><p>Ευχαριστούμε για την επιλογή σας.</p>");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Η αγορά σας πραγματοποιήθηκε επιτυχώς. Θα σας σταλεί email με την αγορά σας"));
         }
         

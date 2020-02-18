@@ -13,11 +13,11 @@
          
         <div id="header">
             <ui:insert name="header" >
-                <ui:include src="/templates/headerFront.xhtml" />
+                <ui:include src="templates/headerFront.xhtml" />
             </ui:insert>
         </div>
          
-     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://localhost:8081/PrimeFaces/faces/resources/front/images/cart.jpg);">
+     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/java-e-commerce/web/resources/front/images/cart.jpg);">
 		<h2 class="l-text2 t-center">
 			#{param['kathgoria']}
 		</h2>
@@ -31,13 +31,13 @@
                                     <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                                             <!-- block1 -->
                                             <div class="block1 hov-img-zoom pos-relative m-b-30">
-                                                <h:outputLink value="proion.xhtml?id=#{product.productid}">
-                                                    <h:graphicImage class="bgImage" value = "http://localhost:8081/PrimeFaces/faces/resources/images/#{product.photosid.url}" /> 
+                                                <h:outputLink value="web/proion.xhtml?id=#{product.productid}">
+                                                    <h:graphicImage class="bgImage" value = "/web/resources/images/#{product.photosid.url}" />
                                                 </h:outputLink>
 
                                                     <div class="block1-wrapbtn w-size2">
                                                             <!-- Button -->
-                                                            <a href="proion.xhtml?id=#{product.productid}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                                                            <a href="/java-e-commerce/web/proion.xhtml?id=#{product.productid}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
                                                                 #{product.name} #{product.sellprice}€
                                                             </a>
                                                     </div>
@@ -58,7 +58,7 @@
 </div>
          <div id="footer">
             <ui:insert name="footer" >
-                <ui:include src="/templates/footerFront.xhtml" />
+                <ui:include src="templates/footerFront.xhtml" />
             </ui:insert>
         </div>
 

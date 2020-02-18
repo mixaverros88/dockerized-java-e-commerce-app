@@ -56,30 +56,32 @@ public class SallesFacade {
         
     
     public double countSumSallesFromDB(){
-        
-        Roles role = new Roles();
-        role.setRoleid(2);
-          try{
-            TypedQuery<Double> query = em.createQuery("SELECT ROUND(SUM(o.sumamnt), 2) FROM Orders o WHERE o.roleid = :roleid", Double.class).setParameter("roleid", role);
-            double countryCount = query.getSingleResult();
-            return countryCount;
-             } catch (Exception e) {
-           return 0.0;
-        }
+
+        return 0.0;
+//        Roles role = new Roles();
+//        role.setRoleid(2);
+//          try{
+//            TypedQuery<Double> query = em.createQuery("SELECT ROUND(SUM(o.sumamnt), 2) FROM Orders o WHERE o.roleid = :roleid", Double.class).setParameter("roleid", role);
+//            double countryCount = query.getSingleResult();
+//            return countryCount;
+//             } catch (Exception e) {
+//           return 0.0;
+//        }
     }
     
        public double countSumSallesbyVendorFromDB(Custvend custvend){
-            
-        Query query = em.createQuery("SELECT ROUND(SUM(o.sumamnt), 2) FROM Orders o WHERE o.custvendid = :custvendid");
-        query.setParameter("custvendid", custvend);        
 
-        try{
-
-           double countryCount = (double) query.getSingleResult();  
-           return countryCount;
-        } catch (Exception e) {
-           return 0.0;
-        }
+        return 0.0;
+//        Query query = em.createQuery("SELECT ROUND(SUM(o.sumamnt), 2) FROM Orders o WHERE o.custvendid = :custvendid");
+//        query.setParameter("custvendid", custvend);
+//
+//        try{
+//
+//           double countryCount = (double) query.getSingleResult();
+//           return countryCount;
+//        } catch (Exception e) {
+//           return 0.0;
+//        }
         
         
     }

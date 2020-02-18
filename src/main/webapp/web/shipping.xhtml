@@ -13,7 +13,7 @@
          
         <div id="header">
             <ui:insert name="header" >
-                <ui:include src="/templates/headerFront.xhtml" />
+                <ui:include src="templates/headerFront.xhtml" />
             </ui:insert>
         </div>
          
@@ -38,7 +38,7 @@
                                                     <div class="slick-track" style="opacity: 1; width: 1503px;">
                                                         <div class="item-slick3 slick-slide slick-current slick-active" data-thumb="images/thumb-item-01.jpg" data-slick-index="0" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide10" aria-describedby="slick-slide-control10" style="width: 501px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
                                                             <div class="wrap-pic-w">
-                                                                <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/#{proionFrontManage.product.photosid.url}"/> 
+                                                                <h:graphicImage value = "/java-e-commerce/web/resources/images/#{proionFrontManage.product.photosid.url}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,7 +125,7 @@
 
          <div id="footer">
             <ui:insert name="footer" >
-                <ui:include src="/templates/footerFront.xhtml" />
+                <ui:include src="templates/footerFront.xhtml" />
             </ui:insert>
         </div>
 

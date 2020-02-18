@@ -17,20 +17,20 @@
  
         <ui:composition>  
 
-	<link rel="stylesheet" href="resources/front/vendor/bootstrap/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="resources/front/fonts/font-awesome-4.7.0/css/font-awesome.min.css"></link>
-	<link rel="stylesheet" href="resources/front/fonts/themify/themify-icons.css"></link>
-	<link rel="stylesheet" href="resources/front/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"></link>
-	<link rel="stylesheet" href="resources/front/fonts/elegant-font/html-css/style.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/animate/animate.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/css-hamburgers/hamburgers.min.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/animsition/css/animsition.min.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/select2/select2.min.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/daterangepicker/daterangepicker.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/slick/slick.css"></link>
-	<link rel="stylesheet" href="resources/front/vendor/lightbox2/css/lightbox.min.css"></link>
-	<link rel="stylesheet" href="resources/front/css/util.css"></link>
-	<link rel="stylesheet" href="resources/front/css/main.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/bootstrap/css/bootstrap.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/fonts/font-awesome-4.7.0/css/font-awesome.min.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/fonts/themify/themify-icons.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/fonts/elegant-font/html-css/style.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/animate/animate.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/css-hamburgers/hamburgers.min.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/animsition/css/animsition.min.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/select2/select2.min.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/daterangepicker/daterangepicker.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/slick/slick.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/vendor/lightbox2/css/lightbox.min.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/css/util.css"></link>
+	<link rel="stylesheet" href="/java-e-commerce/web/resources/front/css/main.css"></link>
             
         
         	<!-- Header -->
@@ -67,7 +67,7 @@
 			<div class="wrap_header">
 				<!-- Logo -->
 				<a href="index.xhtml" class="logo">
-                                     <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/cc.png"  /> 
+                                     <h:graphicImage value = "/web/resources/images/cc.png"  />
 <!--					<img src="images/icons/logo.png" alt="IMG-LOGO">-->
 				</a>                                
 				<!-- Menu -->
@@ -78,7 +78,7 @@
                                                         <ui:repeat value="#{headerFrontManage.allUserData}" var="cat">
                                                             <li>
                                                                
-                                                                <h:outputLink value="kathgoria.xhtml">
+                                                                <h:outputLink value="web/kathgoria.xhtml">
                                                                     <f:param name="id" value="#{cat.prodcategoryid}" />
                                                                     <f:param name="kathgoria" value="#{cat.name}" />
                                                                     <h:outputText value="#{cat.name}"/>
@@ -95,7 +95,7 @@
                                     <h:panelGroup rendered="#{loginManage.custvend.roleid.roleid == null }">
                                         
                                         <a href="login.xhtml" class="header-wrapicon1 dis-block">#{loginManage.custvend.username}
-                                                <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/front/images/icons/icon-header-01.png"  /> 
+                                                <h:graphicImage value = "/web/resources/front/images/icons/icon-header-01.png"  />
     <!--						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">-->
                                             </a>
                                     </h:panelGroup>
@@ -106,7 +106,7 @@
                                         </h:form>  
                                         
                                         <a style="background-color: whitesmoke;padding: 7px;height: 39px;" href="profile.xhtml?id=#{loginManage.custvend.custvendid}" class="header-wrapicon1 dis-block">#{loginManage.custvend.username}
-                                                <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/front/images/icons/icon-header-01.png" /> 
+                                                <h:graphicImage value = "/web/resources/front/images/icons/icon-header-01.png" />
     <!--						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">-->
                                             </a>
                                       
@@ -114,7 +114,7 @@
 
 					<div class="header-wrapicon2">
                                             <a href="cart.xhtml">
-                                              <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/front/images/icons/icon-header-02.png"  style="background-color: whitesmoke;padding: 10px;height: 39px;margin-left: 10px;" /> 
+                                              <h:graphicImage value = "/java-e-commerce/web/resources/front/images/icons/icon-header-02.png"  style="background-color: whitesmoke;padding: 10px;height: 39px;margin-left: 10px;" />
 <!--						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
 						<span class="header-icons-noti">
                                                     <h:outputText id="cardSize" value="#{cartManage.cartCount}"  />
@@ -211,7 +211,7 @@
 			<!-- Logo moblie -->
 
                         <a href="index.xhtml" class="logo-mobile">
-                                     <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/cc.png"  /> 
+                                     <h:graphicImage value = "/web/resources/images/cc.png"  />
 <!--					<img src="images/icons/logo.png" alt="IMG-LOGO">-->
 				</a>  
 
@@ -220,7 +220,7 @@
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
 					<a href="#" class="header-wrapicon1 dis-block">
-                                            <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/front/images/icons/icon-header-01.png"  /> 
+                                            <h:graphicImage value = "/web/resources/front/images/icons/icon-header-01.png"  />
 					</a>
 
 					<span class="linedivide2"></span>
@@ -261,7 +261,7 @@
                                         <ui:repeat value="#{headerFrontManage.allUserData}" var="cat">
                                                             <li class="item-menu-mobile">
                                                                
-                                                                <h:outputLink value="kathgoria.xhtml">
+                                                                <h:outputLink value="web/kathgoria.xhtml">
                                                                     <f:param name="id" value="#{cat.prodcategoryid}" />
                                                                     <f:param name="kathgoria" value="#{cat.name}" />
                                                                     <h:outputText value="#{cat.name}"/>

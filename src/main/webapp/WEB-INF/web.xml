@@ -17,8 +17,9 @@
     <!-- Map these files with JSF -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-        <url-pattern>/javax.faces.resources/*</url-pattern>
+        <!--<url-pattern>/faces/*</url-pattern>-->
+        <!--<url-pattern>/javax.faces.resources/*</url-pattern>-->
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

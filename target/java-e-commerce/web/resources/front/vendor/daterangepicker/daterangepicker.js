@@ -5,7 +5,7 @@
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
 * @website: http://www.daterangepicker.com/
 */
-// Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
+// Follow the UMD template https://github.com/umdjs/umd/blob/mastertemplates/returnExportsGlobal.js
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Make globaly available as well

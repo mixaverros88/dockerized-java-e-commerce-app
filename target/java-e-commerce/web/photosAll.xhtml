@@ -12,13 +12,13 @@
      <h:body  class="fix-header fix-sidebar">
            <div id="header">
             <ui:insert name="header" >
-                <ui:include src="/templates/header.xhtml" />
+                <ui:include src="templates/header.xhtml" />
             </ui:insert>
         </div>
    
         <div id="sidebar">
             <ui:insert name="sidebar" >
-                <ui:include src="/templates/sidebar.xhtml" />
+                <ui:include src="templates/sidebar.xhtml" />
             </ui:insert>
         </div>
 
@@ -67,8 +67,8 @@
                                 <h:column>
                                     <f:facet name="header">Αρχείο</f:facet>
 
-                                    <h:outputLink target="_blank" value="http://localhost:8081/PrimeFaces/faces/resources/images/#{file.url}">
-                                        <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/#{file.url}"  style="width: 200px;"/> 
+                                    <h:outputLink target="_blank" value="/java-e-commerce/web/resources/images/#{file.url}">
+                                        <h:graphicImage value = "/java-e-commerce/web/resources/images/#{file.url}"  style="width: 200px;"/>
                                     </h:outputLink>
                                 </h:column>
                                   
@@ -92,7 +92,7 @@
             <!-- End Container fluid  -->
         <div id="footer">
             <ui:insert name="footer" >
-                <ui:include src="/templates/footer.xhtml" />
+                <ui:include src="templates/footer.xhtml" />
             </ui:insert>
         </div>
         </div>

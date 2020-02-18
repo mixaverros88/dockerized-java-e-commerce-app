@@ -13,7 +13,7 @@
          
         <div id="header">
             <ui:insert name="header" >
-                <ui:include src="/templates/headerFront.xhtml" />
+                <ui:include src="templates/headerFront.xhtml" />
             </ui:insert>
         </div>
      
@@ -192,7 +192,7 @@
                                         <h:dataTable rendered="#{not empty profileFrontManage.getAllWishlistByID(loginManage.custvend)}" value="#{profileFrontManage.getAllWishlistByID(loginManage.custvend)}" id ="wishlistProducts" var="wishlistProducts"  class="display nowrap table table-hover table-striped table-bordered">
                                             <h:column>
                                                  <f:facet name="header">Φωτογραφία</f:facet>
-                                                 <h:graphicImage value = "http://localhost:8081/PrimeFaces/faces/resources/images/#{wishlistProducts.productid.photosid.url}"  style="width: 200px;"/> 
+                                                 <h:graphicImage value = "/java-e-commerce/web/resources/images/#{wishlistProducts.productid.photosid.url}"  style="width: 200px;"/>
                                             </h:column>
 
                                              <h:column>
@@ -235,7 +235,7 @@
  
         <div id="footer">
             <ui:insert name="footer" >
-                <ui:include src="/templates/footerFront.xhtml" />
+                <ui:include src="templates/footerFront.xhtml" />
             </ui:insert>
         </div>
 

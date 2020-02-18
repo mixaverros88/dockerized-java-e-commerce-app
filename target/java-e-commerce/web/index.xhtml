@@ -13,14 +13,14 @@
          
         <div id="header">
             <ui:insert name="header" >
-                <ui:include src="/templates/headerFront.xhtml" />
+                <ui:include src="templates/headerFront.xhtml" />
             </ui:insert>
         </div>
-         
-         
+
+
         <div id="slider">
             <ui:insert name="bigSlider" >
-                <ui:include src="/templates/bigSlider.xhtml" />
+                <ui:include src="templates/bigSlider.xhtml" />
             </ui:insert>
         </div>
              <div class="cookieConsent" id="new">
@@ -63,7 +63,7 @@
 				</span>-->
 			</div>
 		</div>
-	</section>    
+	</section>
         <div class="banner2 bg5 p-t-55 p-b-55">
 		<div class="container">
 			<div class="row">
@@ -71,20 +71,20 @@
                                     <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                                             <!-- block1 -->
                                             <div class="block1 hov-img-zoom pos-relative m-b-30">
-                                                
-                                                <h:outputLink value="proion.xhtml">
+
+                                                <h:outputLink value="web/proion.xhtml">
                                                     <f:param name="id" value="#{product.productid}"/>
                                                     <f:param name="category" value="#{product.prodcategoryid.prodcategoryid}"/>
-                                                    <h:graphicImage class="bgImage" value = "http://localhost:8081/PrimeFaces/faces/resources/images/#{product.photosid.url}" /> 
+                                                    <h:graphicImage class="bgImage" value = "/web/resources/images/#{product.photosid.url}" />
                                                 </h:outputLink>
 
                                                     <div class="block1-wrapbtn w-size2">
-                                                            
-<!--                                                             Button 
+
+<!--                                                             Button
                                                             <a href="proion.xhtml?id=#{product.productid}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
                                                                 #{product.name} #{product.sellprice}€
                                                             </a>-->
-                                                            <h:outputLink value="proion.xhtml" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                                                            <h:outputLink value="/java-e-commerce/web/proion.xhtml" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
                                                                 <f:param name="id" value="#{product.productid}"/>
                                                                 <f:param name="category" value="#{product.prodcategoryid.prodcategoryid}"/>
                                                                 <h:outputText value="#{product.name} #{product.sellprice}€"/>
@@ -96,11 +96,11 @@
 			</div>
 		</div>
 	</div>
- 
- 
+
+
         <div id="footer">
             <ui:insert name="footer" >
-                <ui:include src="/templates/footerFront.xhtml" />
+                <ui:include src="templates/footerFront.xhtml" />
             </ui:insert>
         </div>
 
