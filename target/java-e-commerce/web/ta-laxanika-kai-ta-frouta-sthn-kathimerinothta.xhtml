@@ -22,7 +22,7 @@
 					<div class="p-r-50 p-r-0-lg">
 						<div class="p-b-40">
 							<div class="blog-detail-img wrap-pic-w">
-								<h:graphicImage value = "/java-e-commerce/web/resources/front/images/article.jpg"/>
+								<h:graphicImage value = "/web/resources/front/images/article.jpg"/>
 							</div>
 
 							<div class="blog-detail-txt p-t-33">
@@ -67,12 +67,12 @@
                                                     
                                                     <ui:repeat value="#{indexFrontManage.allUserData}" var="product">
                                                         <li class="flex-w p-b-20">
-                                                            <h:outputLink class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4" value="web/proion.xhtml?id=#{product.productid}">
-                                                                <h:graphicImage class="bgImage" value = "/java-e-commerce/web/resources/images/#{product.photosid.url}" />
+                                                            <h:outputLink class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4" value="proion.xhtml?id=#{product.productid}">
+                                                                <h:graphicImage class="bgImage" value = "/web/resources/images/#{product.photosid.url}" />
                                                             </h:outputLink>
 
                                                             <div class="w-size23 p-t-5"> 
-                                                                <h:outputLink value="web/proion.xhtml" class="s-text20">
+                                                                <h:outputLink value="proion.xhtml" class="s-text20">
                                                                     <f:param name="id" value="#{product.productid}"/>
                                                                     <h:outputText value="#{product.name}"/>
                                                                 </h:outputLink>
