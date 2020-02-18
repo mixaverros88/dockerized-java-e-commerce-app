@@ -5,6 +5,7 @@
  */
 package sessionsBeans;
 
+import entities.Custvend;
 import entities.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -27,9 +28,9 @@ public class UserAllFacade {
         return em;
     }
     
-    public List<User> getAllUsers(){
-        TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
-        List<User> results = query.getResultList();
+    public List<Custvend> getAllUsers(){
+        TypedQuery<Custvend> query = em.createNamedQuery("Custvend.findAll", Custvend.class);
+        List<Custvend> results = query.getResultList();
         
         return results;
     } 

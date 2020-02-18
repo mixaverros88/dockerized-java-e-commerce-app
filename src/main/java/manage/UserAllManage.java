@@ -5,6 +5,7 @@
  */
 package manage;
 
+import entities.Custvend;
 import entities.User;
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,7 @@ import sessionsBeans.UserAllFacade;
 @RequestScoped
 public class UserAllManage implements Serializable{
     
-    private List<User> users;
+    private List<Custvend> users;
     private int deleteMessage;
     private int id;
 
@@ -57,7 +58,7 @@ public class UserAllManage implements Serializable{
         return "/userEdit.xhtml?faces-redirect=true";
     }
     
-    public List<User> getAllUserData(){
+    public List<Custvend> getAllUserData(){
         return users = userAllFacade.getAllUsers();
     }
     
@@ -91,11 +92,11 @@ public class UserAllManage implements Serializable{
         this.deleteMessage = deleteMessage;
     }
     
-    public List<User> getUsers() {
+    public List<Custvend> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<Custvend> users) {
         this.users = users;
     }
     

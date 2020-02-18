@@ -116,7 +116,7 @@ public class CustvendManage implements Serializable{
         System.out.println("CCCCCCCCCC"+u);
         sessionMap.put("editCustvend", u);
   
-        return "/custvendEdit.xhtml?faces-redirect=true";        
+        return "/web/custvendEdit.xhtml?faces-redirect=true";
         
 
     }

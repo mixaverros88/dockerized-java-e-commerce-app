@@ -94,7 +94,7 @@ public class ProductAddManage implements Serializable{
         
         sessionMap.put("editProduct", u);
   
-        return "/productEdit.xhtml?faces-redirect=true";
+        return "/web/productEdit.xhtml?faces-redirect=true";
     }
         
     public List<Product> getAllUserData(){

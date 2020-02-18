@@ -51,7 +51,7 @@ public class ProductUnitManage implements Serializable{
         
         sessionMap.put("editProductUnit", u);
   
-        return "/produnitEdit.xhtml?faces-redirect=true";
+        return "/web/produnitEdit.xhtml?faces-redirect=true";
     }
     
     public String deleteProductUnit(int id){

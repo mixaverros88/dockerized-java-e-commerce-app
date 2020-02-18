@@ -91,16 +91,30 @@
        function chechqty(){
             
             document.getElementById("form:maxQty").readOnly = true;
-            
-            
-            var qty = document.getElementById("form:qty").value;
+
+           var qty;
+           if( document.getElementById("form:qty") === null ){
+               qty = 0;
+           }else {
+               qty = document.getElementById("form:qty").value;
+           }
 //            var vat = document.getElementById("vat").value;
-            var priceWithVat =document.getElementById("priceWithVat").value;
+           var priceWithVat;
+           if( document.getElementById("priceWithVat") === null ){
+               priceWithVat = 0;
+           }else {
+               priceWithVat = document.getElementById("priceWithVat").value;
+           }
+
             var priceVat =  Number((qty * priceWithVat).toFixed(2)); 
             var maxQty =  Number(document.getElementById("form:maxQty").value);
 
-console.log(qty);
-                document.getElementById("sendQty").value = qty;
+console.log("qty qty v " + qty);
+console.log("qty qty v " + qty === null);
+           qty = 1;
+
+
+                document.getElementById("sendQty").value = Number(qty);
                 
                 document.getElementById("tpBox").style.display = "block";
                 document.getElementById("tp").innerHTML = "Τελική Τιμή: <span class='totalx mainColor'>" + priceVat+"€</span>";

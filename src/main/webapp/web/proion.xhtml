@@ -141,17 +141,17 @@
     </h:panelGroup>  
 
          
-                <script>
-                $(function() {
-                   $('input').on('input', function() {
-                     this.value = this.value
-                       .replace(/[^\d.]/g, '')             // numbers and decimals only
-                       .replace(/(^[\d]{4})[\d]/g, '$1')   // not more than 2 digits at the beginning
-                       .replace(/(\.*)\./g, '$1')         // decimal can't exist more than once
-                       .replace(/(\.[\d]{0})./g, '$1');    // not more than 4 digits after decimal
-                   });
-                 });
-                </script>
+                <!--<script>-->
+                <!--$(function() {-->
+                   <!--$('input').on('input', function() {-->
+                     <!--this.value = this.value-->
+                       <!--.replace(/[^\d.]/g, '')             // numbers and decimals only-->
+                       <!--.replace(/(^[\d]{4})[\d]/g, '$1')   // not more than 2 digits at the beginning-->
+                       <!--.replace(/(\.*)\./g, '$1')         // decimal can't exist more than once-->
+                       <!--.replace(/(\.[\d]{0})./g, '$1');    // not more than 4 digits after decimal-->
+                   <!--});-->
+                 <!--});-->
+                <!--</script>-->
 
 
          <div id="footer">

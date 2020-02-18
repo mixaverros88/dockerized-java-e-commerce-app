@@ -48,7 +48,7 @@ public class VatManage implements Serializable{
         
         sessionMap.put("editVat", vat);
   
-        return "/vatEdit.xhtml?faces-redirect=true";
+        return "/web/vatEdit.xhtml?faces-redirect=true";
     }
     
     public List<Vat> getAllVat(){

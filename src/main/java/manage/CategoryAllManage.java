@@ -44,7 +44,7 @@ public class CategoryAllManage implements Serializable{
         
         sessionMap.put("editUser", u);
   
-        return "/categoryEdit.xhtml?faces-redirect=true";
+        return "/web/categoryEdit.xhtml?faces-redirect=true";
     }
     
     public String deleteCategory(int id){

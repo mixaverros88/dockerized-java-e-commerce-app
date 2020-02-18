@@ -116,13 +116,13 @@ public class MainManage implements Serializable{
     
     public int countAllUsers(){
 
-        User u;
-        List<User> users = userAllFacade.getAllUsers();
+        Custvend u;
+        List<Custvend> users = userAllFacade.getAllUsers();
         int count = 0;
         
         for(int x = 0; x < users.size(); x++) {
            u = users.get(x);
-           u.getName();
+           u.getFname();
            count ++;
         }
         
