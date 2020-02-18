@@ -115,7 +115,7 @@ public class MainManage implements Serializable{
 
     
     public int countAllUsers(){
-        
+
         User u;
         List<User> users = userAllFacade.getAllUsers();
         int count = 0;
