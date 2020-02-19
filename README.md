@@ -67,3 +67,6 @@ You can use the dataBase.sql in order to create the poll database and insert som
 Username: 
 
 Password:
+
+# Database Diagram
+![preview image](https://raw.githubusercontent.com/mixaverros88/java-e-commerce/master/src/main/resources/database_diagram.png)
