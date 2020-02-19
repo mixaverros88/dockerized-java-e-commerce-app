@@ -5,22 +5,22 @@
  */
 package manage;
 
-import javax.faces.bean.ManagedBean;  
-import javax.faces.bean.RequestScoped;  
-import javax.validation.constraints.NotNull;  
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.validation.constraints.NotNull;
 
-@ManagedBean  
-@RequestScoped  
-public class CreateUser{  
-  
-    @NotNull(message = "Name can't be null")  
-    String name;  
-  
-    public String getName() {  
-        return name;  
-    }  
-    
-    public void setName(String name) {  
-        this.name = name;  
-    }  
+@ManagedBean
+@RequestScoped
+public class CreateUser {
+
+    @NotNull(message = "Name can't be null")
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 } 

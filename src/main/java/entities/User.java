@@ -20,20 +20,19 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.surname = :username and u.pass = :pass")
-    ,@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-    , @NamedQuery(name = "User.findByAt", query = "SELECT u FROM User u WHERE u.at = :at")
-    , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
-    , @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname")
-    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
-    , @NamedQuery(name = "User.findByPass", query = "SELECT u FROM User u WHERE u.pass = :pass")})
+        @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.surname = :username and u.pass = :pass")
+        , @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+        , @NamedQuery(name = "User.findByAt", query = "SELECT u FROM User u WHERE u.at = :at")
+        , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
+        , @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname")
+        , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+        , @NamedQuery(name = "User.findByPass", query = "SELECT u FROM User u WHERE u.pass = :pass")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +62,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "pass")
     private String pass;
-    
+
     @Column(name = "email")
     private String email;
 
@@ -74,7 +73,7 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     @JoinColumn(name = "role", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Role role;
@@ -167,5 +166,5 @@ public class User implements Serializable {
     public String toString() {
         return "entities.User[ at=" + at + " ]";
     }
-    
+
 }

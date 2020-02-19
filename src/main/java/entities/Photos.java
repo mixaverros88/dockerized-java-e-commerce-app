@@ -23,17 +23,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "photos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Photos.findAll", query = "SELECT p FROM Photos p ORDER BY p.photosid ASC")
-    , @NamedQuery(name = "Photos.findByPhotosid", query = "SELECT p FROM Photos p WHERE p.photosid = :photosid")
-    , @NamedQuery(name = "Photos.findByUrl", query = "SELECT p FROM Photos p WHERE p.url = :url")
-    , @NamedQuery(name = "Photos.findByMIMEtype", query = "SELECT p FROM Photos p WHERE p.mIMEtype = :mIMEtype")})
+        @NamedQuery(name = "Photos.findAll", query = "SELECT p FROM Photos p ORDER BY p.photosid ASC")
+        , @NamedQuery(name = "Photos.findByPhotosid", query = "SELECT p FROM Photos p WHERE p.photosid = :photosid")
+        , @NamedQuery(name = "Photos.findByUrl", query = "SELECT p FROM Photos p WHERE p.url = :url")
+        , @NamedQuery(name = "Photos.findByMIMEtype", query = "SELECT p FROM Photos p WHERE p.mIMEtype = :mIMEtype")})
 public class Photos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -125,5 +124,5 @@ public class Photos implements Serializable {
     public String toString() {
         return "entities.Photos[ photosid=" + photosid + " ]";
     }
-    
+
 }

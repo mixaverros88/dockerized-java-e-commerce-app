@@ -29,35 +29,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "custvend")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Custvend.findAll", query = "SELECT c FROM Custvend c")
-    , @NamedQuery(name = "Custvend.findByCustvendid", query = "SELECT c FROM Custvend c WHERE c.custvendid = :custvendid")
-    , @NamedQuery(name = "Custvend.findByFname", query = "SELECT c FROM Custvend c WHERE c.fname = :fname")
-    , @NamedQuery(name = "Custvend.findByLname", query = "SELECT c FROM Custvend c WHERE c.lname = :lname")
-    , @NamedQuery(name = "Custvend.findByAfm", query = "SELECT c FROM Custvend c WHERE c.afm = :afm")
-    , @NamedQuery(name = "Custvend.findByUsername", query = "SELECT c FROM Custvend c WHERE c.username = :username")
-    , @NamedQuery(name = "Custvend.findByPasswd", query = "SELECT c FROM Custvend c WHERE c.passwd = :passwd")
-    , @NamedQuery(name = "Custvend.findByAddress", query = "SELECT c FROM Custvend c WHERE c.address = :address")
-    , @NamedQuery(name = "Custvend.findByZip", query = "SELECT c FROM Custvend c WHERE c.zip = :zip")
-    , @NamedQuery(name = "Custvend.findByCity", query = "SELECT c FROM Custvend c WHERE c.city = :city")
-    , @NamedQuery(name = "Custvend.findByDistrict", query = "SELECT c FROM Custvend c WHERE c.district = :district")
-    , @NamedQuery(name = "Custvend.findByPhone", query = "SELECT c FROM Custvend c WHERE c.phone = :phone")
-    , @NamedQuery(name = "Custvend.findByEmail", query = "SELECT c FROM Custvend c WHERE c.email = :email")
-    , @NamedQuery(name = "Custvend.findByJobname", query = "SELECT c FROM Custvend c WHERE c.jobname = :jobname")
-    , @NamedQuery(name = "Custvend.findByBallance", query = "SELECT c FROM Custvend c WHERE c.ballance = :ballance")
-    , @NamedQuery(name = "Custvend.findByRemarks", query = "SELECT c FROM Custvend c WHERE c.remarks = :remarks")
-    , @NamedQuery(name = "Custvend.findByRegister", query = "SELECT c FROM Custvend c WHERE c.register = :register")
-    , @NamedQuery(name = "Custvend.findByIsactive", query = "SELECT c FROM Custvend c WHERE c.isactive = :isactive")
-    , @NamedQuery(name = "Custvend.findByInsdate", query = "SELECT c FROM Custvend c WHERE c.insdate = :insdate")
-    , @NamedQuery(name = "Custvend.findByCredits", query = "SELECT c FROM Custvend c WHERE c.credits = :credits")
-    , @NamedQuery(name = "Custvend.findBySysuser", query = "SELECT c FROM Custvend c WHERE c.sysuser = :sysuser")
-    , @NamedQuery(name = "Custvend.findByUpddate", query = "SELECT c FROM Custvend c WHERE c.upddate = :upddate")})
+        @NamedQuery(name = "Custvend.findAll", query = "SELECT c FROM Custvend c")
+        , @NamedQuery(name = "Custvend.findByCustvendid", query = "SELECT c FROM Custvend c WHERE c.custvendid = :custvendid")
+        , @NamedQuery(name = "Custvend.findByFname", query = "SELECT c FROM Custvend c WHERE c.fname = :fname")
+        , @NamedQuery(name = "Custvend.findByLname", query = "SELECT c FROM Custvend c WHERE c.lname = :lname")
+        , @NamedQuery(name = "Custvend.findByAfm", query = "SELECT c FROM Custvend c WHERE c.afm = :afm")
+        , @NamedQuery(name = "Custvend.findByUsername", query = "SELECT c FROM Custvend c WHERE c.username = :username")
+        , @NamedQuery(name = "Custvend.findByPasswd", query = "SELECT c FROM Custvend c WHERE c.passwd = :passwd")
+        , @NamedQuery(name = "Custvend.findByAddress", query = "SELECT c FROM Custvend c WHERE c.address = :address")
+        , @NamedQuery(name = "Custvend.findByZip", query = "SELECT c FROM Custvend c WHERE c.zip = :zip")
+        , @NamedQuery(name = "Custvend.findByCity", query = "SELECT c FROM Custvend c WHERE c.city = :city")
+        , @NamedQuery(name = "Custvend.findByDistrict", query = "SELECT c FROM Custvend c WHERE c.district = :district")
+        , @NamedQuery(name = "Custvend.findByPhone", query = "SELECT c FROM Custvend c WHERE c.phone = :phone")
+        , @NamedQuery(name = "Custvend.findByEmail", query = "SELECT c FROM Custvend c WHERE c.email = :email")
+        , @NamedQuery(name = "Custvend.findByJobname", query = "SELECT c FROM Custvend c WHERE c.jobname = :jobname")
+        , @NamedQuery(name = "Custvend.findByBallance", query = "SELECT c FROM Custvend c WHERE c.ballance = :ballance")
+        , @NamedQuery(name = "Custvend.findByRemarks", query = "SELECT c FROM Custvend c WHERE c.remarks = :remarks")
+        , @NamedQuery(name = "Custvend.findByRegister", query = "SELECT c FROM Custvend c WHERE c.register = :register")
+        , @NamedQuery(name = "Custvend.findByIsactive", query = "SELECT c FROM Custvend c WHERE c.isactive = :isactive")
+        , @NamedQuery(name = "Custvend.findByInsdate", query = "SELECT c FROM Custvend c WHERE c.insdate = :insdate")
+        , @NamedQuery(name = "Custvend.findByCredits", query = "SELECT c FROM Custvend c WHERE c.credits = :credits")
+        , @NamedQuery(name = "Custvend.findBySysuser", query = "SELECT c FROM Custvend c WHERE c.sysuser = :sysuser")
+        , @NamedQuery(name = "Custvend.findByUpddate", query = "SELECT c FROM Custvend c WHERE c.upddate = :upddate")})
 public class Custvend implements Serializable {
 
     @Column(name = "REGISTER")
@@ -420,5 +419,5 @@ public class Custvend implements Serializable {
         this.credits = credits;
     }
 
-    
+
 }

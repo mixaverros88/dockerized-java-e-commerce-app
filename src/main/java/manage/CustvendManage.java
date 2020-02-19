@@ -13,6 +13,7 @@ import entities.User;
 import helpers.ConvertToGreeklish;
 import helpers.HashinUtils;
 import helpers.MailSender;
+
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -30,157 +31,155 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
 import sessionsBeans.UserAddFacade;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class CustvendManage implements Serializable{
-    
-    @NotNull(message = "Συμπληρώστε το όνομα")  
+public class CustvendManage implements Serializable {
+
+    @NotNull(message = "Συμπληρώστε το όνομα")
     private String fname;
-    @NotNull(message = "Συμπληρώστε το επίθετο") 
+    @NotNull(message = "Συμπληρώστε το επίθετο")
     private String lname;
-    @NotNull(message = "Συμπληρώστε το ΑΦΜ") 
-    @Size(min=10, max=10, message="Το ΑΦΜ θα πρέπει να έχει 10 αριθμούς")
+    @NotNull(message = "Συμπληρώστε το ΑΦΜ")
+    @Size(min = 10, max = 10, message = "Το ΑΦΜ θα πρέπει να έχει 10 αριθμούς")
     private String afm;
-    @Size(min=2, message="Το username θα πρέπει να έχει πάνω από2 στοιχεία")
-    @NotNull(message = "Συμπληρώστε το username") 
+    @Size(min = 2, message = "Το username θα πρέπει να έχει πάνω από2 στοιχεία")
+    @NotNull(message = "Συμπληρώστε το username")
     private String username;
-    @Size(min=5, message="Το password θα πρέπει να έχει πάνω από 5 στοιχεία")
-    @NotNull(message = "Συμπληρώστε το password") 
+    @Size(min = 5, message = "Το password θα πρέπει να έχει πάνω από 5 στοιχεία")
+    @NotNull(message = "Συμπληρώστε το password")
     private String password;
-    @Size(min=5, message="Το password θα πρέπει να έχει πάνω από 5 στοιχεία")
-    @NotNull(message = "Συμπληρώστε το password") 
+    @Size(min = 5, message = "Το password θα πρέπει να έχει πάνω από 5 στοιχεία")
+    @NotNull(message = "Συμπληρώστε το password")
     private String passwordCheck;
-    @NotNull(message = "Συμπληρώστε το ΤΚ") 
-    @Size(min=5, max=5, message="Το ΤΚ θα πρέπει να έχει 5 αριθμούς")
+    @NotNull(message = "Συμπληρώστε το ΤΚ")
+    @Size(min = 5, max = 5, message = "Το ΤΚ θα πρέπει να έχει 5 αριθμούς")
     private String zip;
-    @NotNull(message = "Συμπληρώστε την Πόλη") 
+    @NotNull(message = "Συμπληρώστε την Πόλη")
     private String city;
-    @NotNull(message = "Συμπληρώστε την περιοχή") 
+    @NotNull(message = "Συμπληρώστε την περιοχή")
     private String district;
-    @NotNull(message = "Συμπληρώστε το email") 
+    @NotNull(message = "Συμπληρώστε το email")
     private String email;
     private String jobname;
     @NotNull(message = "Συμπληρώστε την Διεύθυνση")
     private String address;
     @NotNull(message = "Συμπληρώστε τον Αριθμό Τηλεφώνου")
-    @Size(min=10, max=10, message="O αριθμός τηλεφώνου θα πρέπει να είναι 10 ψηφία")
+    @Size(min = 10, max = 10, message = "O αριθμός τηλεφώνου θα πρέπει να είναι 10 ψηφία")
     private String phone;
     private Roles rr;
-    private List<Roles> roles;  
+    private List<Roles> roles;
     private List<Custvend> custvend;
 
-    HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    HttpServletRequest origRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     private StringBuffer url = origRequest.getRequestURL();
 
-    
-    
+
     @EJB
     UserAddFacade userAddFacade;
-    
+
     @EJB
     CustvendFacade custvendFacade;
-    
+
     @EJB
     ProductFacade productFacade;
-    
+
     @PostConstruct
-        void init(){   
-        roles=userAddFacade.findRoles1();
+    void init() {
+        roles = userAddFacade.findRoles1();
         //
         String urlCompare = "/java-e-commerce/web/register.xhtml";
         String urtString = url.toString();
-        if( urlCompare.equals(urtString)){
-            
+        if (urlCompare.equals(urtString)) {
+
             roles.remove(0);
         }
-        
+
     }
-    
+
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    
-    public String editCustvend(){
-        
+
+    public String editCustvend() {
+
         System.out.println("AAAAAAAAAAAAAAAAAAAA");
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         int categoryId = Integer.parseInt(params.get("custvendid"));
-        Custvend u =  custvendFacade.searchWithID(categoryId);
-        System.out.println("CCCCCCCCCC"+u);
+        Custvend u = custvendFacade.searchWithID(categoryId);
+        System.out.println("CCCCCCCCCC" + u);
         sessionMap.put("editCustvend", u);
-  
+
         return "/web/custvendEdit.xhtml?faces-redirect=true";
-        
+
 
     }
-        
-    public List<Custvend> getAllCustvendData(){
+
+    public List<Custvend> getAllCustvendData() {
         return custvend = custvendFacade.getAllCustvendFromDB();
     }
-    
-    
-    public long chechIfTheVendorAsycToProduct(Custvend custvend){
+
+
+    public long chechIfTheVendorAsycToProduct(Custvend custvend) {
         return productFacade.chechIfTheVendorAsycToProductFromDB(custvend);
- 
+
     }
-    
-    public String deleteCustvend(int id){
-       
-        if (custvendFacade.deleteCustvendFacadeFromDB(id) == 1){
-           
+
+    public String deleteCustvend(int id) {
+
+        if (custvendFacade.deleteCustvendFacadeFromDB(id) == 1) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης Διαγράφτηκε επιτυχώς"));
-            
-        }else{
+
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης<strong>ΔΕΝ</strong> Διαγράφτηκε επιτυχώς"));
         }
-        
+
         return "";
     }
-    
-    public String changeStatusCustvend(int status,int id){
-         if (custvendFacade.changeStatusCustvendFromDB(status, id) == 1){
-           
+
+    public String changeStatusCustvend(int status, int id) {
+        if (custvendFacade.changeStatusCustvendFromDB(status, id) == 1) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης άλλαξε κατάσταση επιτυχώς"));
-            
-        }else{
+
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης άλλαξε <strong>ΔΕΝ</strong> κατάσταση επιτυχώς"));
         }
         return "";
     }
-    
-    public String changeRgisterCustvend(int register,int id, Custvend custvend){
-        if (custvendFacade.changeRegisterCustvendFromDB(register, id) == 1){
-            
+
+    public String changeRgisterCustvend(int register, int id, Custvend custvend) {
+        if (custvendFacade.changeRegisterCustvendFromDB(register, id) == 1) {
+
             MailSender mailSend = new MailSender();
-            if ( register ==1){
-                mailSend.send(custvend.getEmail(),"ezikos.gr Έγκριση Λογαριασμού","<h3>Ο λογαριασμός σας στο ezikos.gr Εγκρίθηκε</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
+            if (register == 1) {
+                mailSend.send(custvend.getEmail(), "ezikos.gr Έγκριση Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr Εγκρίθηκε</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης άλλαξε κατάσταση επιτυχώς. Και θα ενημερωθή με email"));
             }
-        }else{
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης άλλαξε <strong>ΔΕΝ</strong> κατάσταση επιτυχώς"));
         }
         return "";
     }
-        
-    public String insertCustVend() throws NoSuchAlgorithmException{
-        
+
+    public String insertCustVend() throws NoSuchAlgorithmException {
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	Date date = new Date();
-       
-        
+        Date date = new Date();
+
+
         HashinUtils hu = new HashinUtils();
-        boolean mr = false;
         Custvend custvend = new Custvend();
         custvend.setFname(fname.trim());
         custvend.setLname(lname.trim());
-      
+
 
         custvend.setAfm(afm.trim());
         custvend.setUsername(username.trim());
@@ -193,70 +192,68 @@ public class CustvendManage implements Serializable{
         custvend.setPhone(phone.trim());
         custvend.setJobname(jobname.trim());
         custvend.setBallance(0.0f);
-        custvend.setBallance((float)0.0);
+        custvend.setBallance((float) 0.0);
         custvend.setRemarks("");
-        if(rr.getRoleid() == 1 || rr.getRoleid() == 2){
+        if (rr.getRoleid() == 1 || rr.getRoleid() == 2) {
             custvend.setIsactive((short) 1);
-              custvend.setRegister(1);
-        }else{
+            custvend.setRegister(1);
+        } else {
             custvend.setIsactive((short) 0);
-             custvend.setRegister(0);
+            custvend.setRegister(0);
         }
-        
+
         custvend.setInsdate(date);
 
-        
+
         custvend.setPasswd(hu.hashPass(password.trim()));
 
-        if (custvend.getRoleid().getRoleid() == 3 && custvend.getAfm() ==null ){
+        if (custvend.getRoleid().getRoleid() == 3 && custvend.getAfm() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Εφόσον είσται προμηθευτής θα πρέπει να εισάγεται ΑΦΜ"));
             return "";
         }
 
-        if(!password.equals(passwordCheck)){
+        if (!password.equals(passwordCheck)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Τα password δεν ταιριάζουν"));
-            return "";  
-        }       
-        
+            return "";
+        }
 
-        if(custvendFacade.checkIfPhoneNumberExists(phone) > 0){
+
+        if (custvendFacade.checkIfPhoneNumberExists(phone) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο αριθμός τηλεφώνου που δώσατε υπάρχει."));
-            return "";  
-        }
- 
-        if(custvendFacade.checkIfΕmailExists(email) > 0){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το email που δώσατε υπάρχει."));
-            return "";  
-        }
-        
-        if(custvendFacade.checkIfUserNameExists(username) > 0){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το username που δώσατε υπάρχει."));
-            return "";  
+            return "";
         }
 
-        mr = custvendFacade.insertCustVendToDB(custvend);
-        
+        if (custvendFacade.checkIfΕmailExists(email) > 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το email που δώσατε υπάρχει."));
+            return "";
+        }
+
+        if (custvendFacade.checkIfUserNameExists(username) > 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το username που δώσατε υπάρχει."));
+            return "";
+        }
+
         //mhnhmata από το magaebean στην σελίδα
-        if(mr==true){
-            
+        if (custvendFacade.insertCustVendToDB(custvend)) {
+
             String urlCompare = "/java-e-commerce/web/register.xhtml";
             String urtString = url.toString();
             MailSender mailSend = new MailSender();
-            if( urlCompare.equals(urtString)){
-                if(rr.getRoleid()==2){
+            if (urlCompare.equals(urtString)) {
+                if (rr.getRoleid() == 2) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς"));
-                    mailSend.send(custvend.getEmail(),"ezikos.gr Δημιουργία Λογαριασμού","<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
+                    mailSend.send(custvend.getEmail(), "ezikos.gr Δημιουργία Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                     return "login";
-                }else if(rr.getRoleid()==3){
+                } else if (rr.getRoleid() == 3) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς. Θα σας αποσταλεί email όταν θα ενεργοποιηθεί"));
                     return "vendorMessage";
                 }
-            }else{
+            } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς"));
                 return "custvenAll";
-            }  
-        }   
-        
+            }
+        }
+
         return "";
     }
 
@@ -267,7 +264,7 @@ public class CustvendManage implements Serializable{
     public void setCustvend(List<Custvend> custvend) {
         this.custvend = custvend;
     }
-        
+
     public String getFname() {
         return fname;
     }
@@ -387,7 +384,6 @@ public class CustvendManage implements Serializable{
     public void setCity(String city) {
         this.city = city;
     }
-    
-    
-    
+
+
 }

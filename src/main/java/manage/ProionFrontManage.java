@@ -9,6 +9,7 @@ import entities.Custvend;
 import entities.Product;
 import entities.Wishlist;
 import helpers.DateTime;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -19,100 +20,101 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
 import sessionsBeans.ProductFacade;
 import sessionsBeans.WhishListFacade;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class ProionFrontManage implements Serializable{
+public class ProionFrontManage implements Serializable {
     private Product pro;
     private float selectqnt;
 
     @EJB
     ProductFacade productFacade;
-    
+
     @EJB
     WhishListFacade wishListFacade;
-    
-    @ManagedProperty(value="#{cartManage}")
+
+    @ManagedProperty(value = "#{cartManage}")
     CartManage myCart;
-    
- 
-        
-    public void addToCart(){
-        int qnt =  Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendQty"));
-    
-        int id =  Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
-        System.out.println("qnt: "+qnt+" id: "+id);
+
+
+    public void addToCart() {
+        int qnt = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendQty"));
+
+        int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
+        System.out.println("qnt: " + qnt + " id: " + id);
         Product pro = productFacade.getProductFromDatabaseByID(id);
         pro.setQty(qnt);
         myCart.add(pro);
-        
-        
-    }
-    
-   public float getRound2demicalsNumber(float num){
-        return (float) (Math.round(num*100.00)/100.00f);
+
+
     }
 
-    public float getRound(float num){
-        return Math.round(num);
-        
+    public float getRound2demicalsNumber(float num) {
+        return (Math.round(num * 100.00) / 100.00f);
     }
-    public void addToWishList(){
+
+    public float getRound(float num) {
+        return Math.round(num);
+
+    }
+
+    public void addToWishList() {
         HttpSession session = SessionUtils.getSession();
         Custvend custvend = (Custvend) session.getAttribute("Custvend");
-        
-   
-        float qnt =  Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendQty"));
-        int id =  Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
-        
-        System.out.println("qnt: "+qnt+" id: "+id);
+
+
+        float qnt = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendQty"));
+        int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
+
+        System.out.println("qnt: " + qnt + " id: " + id);
         Product pro = productFacade.getProductFromDatabaseByID(id);
         Wishlist wishlist = new Wishlist();
         wishlist.setCustvendid(custvend);
         wishlist.setProductid(pro);
         wishlist.setInsdate(DateTime.getNowDateTime());
         wishlist.setQty(qnt);
-        
-        if( wishListFacade.insertWhiShListToDB(wishlist) == true){
+
+        if (wishListFacade.insertWhiShListToDB(wishlist)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν προσθέθηκε στην Wishlist"));
-        }else{
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν Δεν προσθέθηκε στην Wishlist"));
         }
-        
-        
+
+
     }
-    
-    public String getIdFromUrl(){
+
+    public String getIdFromUrl() {
         return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
     }
-    
-    public boolean checkIfProductExists() throws IOException{
-       if( productFacade.checkIfProductExistsInDB(getIdFromUrl()) == 0 ){
+
+    public boolean checkIfProductExists() throws IOException {
+        if (productFacade.checkIfProductExistsInDB(getIdFromUrl()) == 0) {
 //           FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν που ζητήσατε δεν βρέθηκε."));
             return false;
-       }
-       return true;
+        }
+        return true;
     }
 
-    public void checkIfProductExistsInCart(int id){
+    public void checkIfProductExistsInCart(int id) {
         myCart.chechIfProducIsToCart(id);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν δεν υπάρχει"));
 
     }
-        
-    public Product getProduct(){
+
+    public Product getProduct() {
         return productFacade.returnOneProduct(getIdFromUrl());
     }
-  
+
     public CartManage getMyCart() {
         return myCart;
     }
@@ -120,8 +122,8 @@ public class ProionFrontManage implements Serializable{
     public void setMyCart(CartManage myCart) {
         this.myCart = myCart;
     }
-    
-    
+
+
     public Product getPro() {
         return pro;
     }
@@ -139,6 +141,4 @@ public class ProionFrontManage implements Serializable{
     }
 
 
-    
-    
 }

@@ -24,19 +24,18 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "wishlist")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Wishlist.findAll", query = "SELECT w FROM Wishlist w")
-    , @NamedQuery(name = "Wishlist.findByWishlistid", query = "SELECT w FROM Wishlist w WHERE w.wishlistid = :wishlistid")
-    , @NamedQuery(name = "Wishlist.findByQty", query = "SELECT w FROM Wishlist w WHERE w.qty = :qty")
-    , @NamedQuery(name = "Wishlist.findByInsdate", query = "SELECT w FROM Wishlist w WHERE w.insdate = :insdate")
-    , @NamedQuery(name = "Wishlist.findByInform", query = "SELECT w FROM Wishlist w WHERE w.inform = :inform")
-    , @NamedQuery(name = "Wishlist.findByInformdate", query = "SELECT w FROM Wishlist w WHERE w.informdate = :informdate")})
+        @NamedQuery(name = "Wishlist.findAll", query = "SELECT w FROM Wishlist w")
+        , @NamedQuery(name = "Wishlist.findByWishlistid", query = "SELECT w FROM Wishlist w WHERE w.wishlistid = :wishlistid")
+        , @NamedQuery(name = "Wishlist.findByQty", query = "SELECT w FROM Wishlist w WHERE w.qty = :qty")
+        , @NamedQuery(name = "Wishlist.findByInsdate", query = "SELECT w FROM Wishlist w WHERE w.insdate = :insdate")
+        , @NamedQuery(name = "Wishlist.findByInform", query = "SELECT w FROM Wishlist w WHERE w.inform = :inform")
+        , @NamedQuery(name = "Wishlist.findByInformdate", query = "SELECT w FROM Wishlist w WHERE w.informdate = :informdate")})
 public class Wishlist implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -157,5 +156,5 @@ public class Wishlist implements Serializable {
     public String toString() {
         return "entities.Wishlist[ wishlistid=" + wishlistid + " ]";
     }
-    
+
 }

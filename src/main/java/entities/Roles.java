@@ -24,17 +24,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "roles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
-    , @NamedQuery(name = "Roles.findByRoleid", query = "SELECT r FROM Roles r WHERE r.roleid = :roleid")
-    , @NamedQuery(name = "Roles.findByDescr", query = "SELECT r FROM Roles r WHERE r.descr = :descr")
-    , @NamedQuery(name = "Roles.findByIsactive", query = "SELECT r FROM Roles r WHERE r.isactive = :isactive")})
+        @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
+        , @NamedQuery(name = "Roles.findByRoleid", query = "SELECT r FROM Roles r WHERE r.roleid = :roleid")
+        , @NamedQuery(name = "Roles.findByDescr", query = "SELECT r FROM Roles r WHERE r.descr = :descr")
+        , @NamedQuery(name = "Roles.findByIsactive", query = "SELECT r FROM Roles r WHERE r.isactive = :isactive")})
 public class Roles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -147,5 +146,5 @@ public class Roles implements Serializable {
     public String toString() {
         return "entities.Roles[ roleid=" + roleid + " ]";
     }
-    
+
 }

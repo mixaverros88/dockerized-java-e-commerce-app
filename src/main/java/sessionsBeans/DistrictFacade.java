@@ -8,6 +8,7 @@ package sessionsBeans;
 import entities.District;
 import entities.Prodcategory;
 import entities.Roles;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,34 +16,27 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
  * @author user
  */
 @Stateless
 public class DistrictFacade {
-    
-          @PersistenceContext(unitName="PrimeFacesPU")
+
+    @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
     protected EntityManager getEm() {
         return em;
     }
-    
-    public List<District> findAllDistricts(){
-        
-        //JBQL
+
+    public List<District> findAllDistricts() {
         TypedQuery<District> query = em.createNamedQuery("District.findAll", District.class);
-        List<District> results = query.getResultList();
-        
-        return results;
+        return query.getResultList();
     }
-    
-    public District returnOneDistrict(String id){
-        
+
+    public District returnOneDistrict(String id) {
         District district;
         district = em.find(District.class, Integer.parseInt(id));
-       
         return district;
     }
-    
+
 }

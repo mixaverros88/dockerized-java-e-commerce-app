@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
@@ -41,27 +40,27 @@ import javax.xml.bind.annotation.XmlTransient;
         entities = @EntityResult(
                 entityClass = Orders.class,
                 fields = {
-                    @FieldResult(name = "orderdate", column = "dateChart"),
-                    @FieldResult(name = "sumamnt", column = "sumChart")}))
+                        @FieldResult(name = "orderdate", column = "dateChart"),
+                        @FieldResult(name = "sumamnt", column = "sumChart")}))
 
 
 @Table(name = "orders")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o ORDER BY o.orderid DESC")
-    //, @NamedQuery(name = "Orders.chart", query = "SELECT CAST(o.orderdate AS date), SUM(o.sumamnt) FROM o.Orders group by CAST(o.orderdate AS date)")
-    , @NamedQuery(name = "Orders.findByCustvendid", query = "SELECT o FROM Orders o WHERE o.custvendid = :custvendid")
-    , @NamedQuery(name = "Orders.findByOrderid", query = "SELECT o FROM Orders o WHERE o.orderid = :orderid")
-    , @NamedQuery(name = "Orders.findByOrderdate", query = "SELECT o FROM Orders o WHERE o.orderdate = :orderdate")
-    , @NamedQuery(name = "Orders.findByVatid", query = "SELECT o FROM Orders o WHERE o.vatid = :vatid")
-    , @NamedQuery(name = "Orders.findByIscancel", query = "SELECT o FROM Orders o WHERE o.iscancel = :iscancel")
-    , @NamedQuery(name = "Orders.findByIsapprv", query = "SELECT o FROM Orders o WHERE o.isapprv = :isapprv")
-    , @NamedQuery(name = "Orders.findByIspayed", query = "SELECT o FROM Orders o WHERE o.ispayed = :ispayed")
-    , @NamedQuery(name = "Orders.findBySumamnt", query = "SELECT o FROM Orders o WHERE o.sumamnt = :sumamnt")
-    , @NamedQuery(name = "Orders.findByRemarks", query = "SELECT o FROM Orders o WHERE o.remarks = :remarks")
-    , @NamedQuery(name = "Orders.findByInsdate", query = "SELECT o FROM Orders o WHERE o.insdate = :insdate")
-    , @NamedQuery(name = "Orders.findBySysuser", query = "SELECT o FROM Orders o WHERE o.sysuser = :sysuser ORDER BY o.orderid DESC")
-    , @NamedQuery(name = "Orders.findByUpddate", query = "SELECT o FROM Orders o WHERE o.upddate = :upddate")})
+        @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o ORDER BY o.orderid DESC")
+        //, @NamedQuery(name = "Orders.chart", query = "SELECT CAST(o.orderdate AS date), SUM(o.sumamnt) FROM o.Orders group by CAST(o.orderdate AS date)")
+        , @NamedQuery(name = "Orders.findByCustvendid", query = "SELECT o FROM Orders o WHERE o.custvendid = :custvendid")
+        , @NamedQuery(name = "Orders.findByOrderid", query = "SELECT o FROM Orders o WHERE o.orderid = :orderid")
+        , @NamedQuery(name = "Orders.findByOrderdate", query = "SELECT o FROM Orders o WHERE o.orderdate = :orderdate")
+        , @NamedQuery(name = "Orders.findByVatid", query = "SELECT o FROM Orders o WHERE o.vatid = :vatid")
+        , @NamedQuery(name = "Orders.findByIscancel", query = "SELECT o FROM Orders o WHERE o.iscancel = :iscancel")
+        , @NamedQuery(name = "Orders.findByIsapprv", query = "SELECT o FROM Orders o WHERE o.isapprv = :isapprv")
+        , @NamedQuery(name = "Orders.findByIspayed", query = "SELECT o FROM Orders o WHERE o.ispayed = :ispayed")
+        , @NamedQuery(name = "Orders.findBySumamnt", query = "SELECT o FROM Orders o WHERE o.sumamnt = :sumamnt")
+        , @NamedQuery(name = "Orders.findByRemarks", query = "SELECT o FROM Orders o WHERE o.remarks = :remarks")
+        , @NamedQuery(name = "Orders.findByInsdate", query = "SELECT o FROM Orders o WHERE o.insdate = :insdate")
+        , @NamedQuery(name = "Orders.findBySysuser", query = "SELECT o FROM Orders o WHERE o.sysuser = :sysuser ORDER BY o.orderid DESC")
+        , @NamedQuery(name = "Orders.findByUpddate", query = "SELECT o FROM Orders o WHERE o.upddate = :upddate")})
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -279,5 +278,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "entities.Orders[ orderid=" + orderid + " ]";
     }
-    
+
 }

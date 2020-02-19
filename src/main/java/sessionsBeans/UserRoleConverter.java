@@ -6,6 +6,7 @@
 package sessionsBeans;
 
 import entities.Role;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
@@ -13,20 +14,19 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
 /**
- *
  * @author user
  */
-@ManagedBean(name="userRoleConverter")
-public class UserRoleConverter implements Converter{
-    
+@ManagedBean(name = "userRoleConverter")
+public class UserRoleConverter implements Converter {
+
     @EJB
     private UserAddFacade roleFacade;
-    
-    public UserRoleConverter(){
-        
+
+    public UserRoleConverter() {
+
     }
 
-    
+
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         System.out.println(value);
@@ -35,11 +35,10 @@ public class UserRoleConverter implements Converter{
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        String result =(value instanceof Role) ? ((Role) value).getId().toString():null;
+        String result = (value instanceof Role) ? ((Role) value).getId().toString() : null;
         System.out.println(result);
         return result;
     }
-    
-    
-    
+
+
 }

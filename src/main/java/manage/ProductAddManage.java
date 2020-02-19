@@ -12,6 +12,7 @@ import entities.Product;
 import entities.Produnit;
 import helpers.ConvertToGreeklish;
 import helpers.DateTime;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
+
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
@@ -30,18 +32,17 @@ import sessionsBeans.ProdunitFacade;
 import sessionsBeans.UploadImageFacade;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class ProductAddManage implements Serializable{
-    
-    @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα του προϊόντος")  
+public class ProductAddManage implements Serializable {
+
+    @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα του προϊόντος")
     private String name;
     private String isactive;
 
-    @NotNull(message = "Παρακαλώ συμπληρώστε την τιμή του προϊόντος") 
+    @NotNull(message = "Παρακαλώ συμπληρώστε την τιμή του προϊόντος")
     private float buyprice;
     private String remarks;
     private Product product;
@@ -58,79 +59,77 @@ public class ProductAddManage implements Serializable{
     private List<Photos> photosList;
 
 
-
-
     @EJB
     ProductFacade productFacade;
-    
+
     @EJB
     CategoryFacade categoryFacade;
 
     @EJB
     ProductUnitFacade productUnitFacade;
-    
+
     @EJB
     UploadImageFacade uploadImageFacade;
-    
+
     @EJB
     CustvendFacade custvendFacade;
-    
+
     @PostConstruct
-    void init(){
+    void init() {
         custvends = custvendFacade.getAllCustvendVendorFromDB();
         prodcategorys = categoryFacade.getAllCategoriesWhereIsActive();
         photosList = uploadImageFacade.getAllfiles();
         produnits = productUnitFacade.getAllProdunit();
     }
-        
+
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    
-    public String editProduct(){
+
+    public String editProduct() {
 
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         int productId = Integer.parseInt(params.get("productID"));
-        Product u =  productFacade.getProductFromDatabaseByID(productId);
-        
+        Product u = productFacade.getProductFromDatabaseByID(productId);
+
         sessionMap.put("editProduct", u);
-  
+
         return "/web/productEdit.xhtml?faces-redirect=true";
     }
-        
-    public List<Product> getAllUserData(){
+
+    public List<Product> getAllUserData() {
         return products = productFacade.getAllProductsFromDatabase();
     }
-    
-    public String deleteProduct(int id){
-        if (productFacade.deleteProductFromDatabase(id) == 1){
+
+    public String deleteProduct(int id) {
+        if (productFacade.deleteProductFromDatabase(id) == 1) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("To προϊόν διαγράφτηκε επιτυχώς"));
-        }else{
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("To προϊόν δεν διαγράφτηκε επιτυχώς"));
         }
         return "";
     }
-    
-    public String changeStatusProduct(int status, int id){
-        if (productFacade.changeStatusProductFromDatabase(status, id) == 1){
+
+    public String changeStatusProduct(int status, int id) {
+        if (productFacade.changeStatusProductFromDatabase(status, id) == 1) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("To προϊόν είναι ανεργό"));
-        }else{
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("To προϊόν είναι ενεργό"));
         }
-        
+
         return "";
     }
-    public String productInsert(){
-        
-        boolean mr=false;
+
+    public String productInsert() {
+
         Product productInsert = new Product();
         productInsert.setName(name);
         productInsert.setSlugname(ConvertToGreeklish.greek2Roman(name));
-        
+
         int isactiveInt;
-        if(isactive.equals("true")){
-            isactiveInt=1;
-        }else{
-            isactiveInt=0;
+        if (isactive.equals("true")) {
+            isactiveInt = 1;
+        } else {
+            isactiveInt = 0;
         }
         productInsert.setIsactive((short) isactiveInt);
         productInsert.setIsvisible((short) 1);
@@ -140,20 +139,18 @@ public class ProductAddManage implements Serializable{
         productInsert.setSellprice(sellprice);
         productInsert.setVendor(custvend);
         productInsert.setQty(0);
-        productInsert.setPhotosid(photos); 
-        productInsert.setRemarks(remarks); 
+        productInsert.setPhotosid(photos);
+        productInsert.setRemarks(remarks);
         productInsert.setInsdate(DateTime.getNowDateTime());
         productInsert.setSysuser(39);
-        
-       mr = productFacade.insertProductToDB(productInsert);
-        
+
         //mhnhmata από το magaebean στην σελίδα
-        if(mr==true){
-           
+        if (productFacade.insertProductToDB(productInsert)) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προίόν δημιουργήθηκε επιτυχώς"));
             return "productAll";
-        }   
-        
+        }
+
         return "";
     }
 
@@ -180,7 +177,7 @@ public class ProductAddManage implements Serializable{
     public void setProdunits(List<Produnit> produnits) {
         this.produnits = produnits;
     }
-    
+
     public Produnit getProdunit() {
         return produnit;
     }
@@ -188,7 +185,7 @@ public class ProductAddManage implements Serializable{
     public void setProdunit(Produnit produnit) {
         this.produnit = produnit;
     }
-    
+
     public List<Prodcategory> getProdcategorys() {
         return prodcategorys;
     }
@@ -197,7 +194,7 @@ public class ProductAddManage implements Serializable{
         this.prodcategorys = prodcategorys;
     }
 
-    
+
     public Prodcategory getProdcategory() {
         return prodcategory;
     }
@@ -206,7 +203,7 @@ public class ProductAddManage implements Serializable{
         this.prodcategory = prodcategory;
     }
 
-    
+
     public int getProdcategoryid() {
         return prodcategoryid;
     }
@@ -214,7 +211,7 @@ public class ProductAddManage implements Serializable{
     public void setProdcategoryid(short prodcategoryid) {
         this.prodcategoryid = prodcategoryid;
     }
-    
+
     public List<Product> getProducts() {
         return products;
     }
@@ -223,7 +220,7 @@ public class ProductAddManage implements Serializable{
         this.products = products;
     }
 
-    
+
     public String getName() {
         return name;
     }
@@ -289,5 +286,4 @@ public class ProductAddManage implements Serializable{
     }
 
 
-    
 }

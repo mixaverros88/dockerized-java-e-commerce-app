@@ -16,21 +16,20 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
- *
  * @author user
  */
 public class DBConnections {
-    
-        public Connection getConnection() throws SQLException {
-            Connection conn = null;
-            try {
-                Context initContext = new InitialContext();
-                Context envContext = (Context) initContext.lookup("java:/comp/env");
-                DataSource ds = (DataSource) envContext.lookup("jdbc/poll");
-                conn = ds.getConnection();
-            } catch (NamingException ex) {
-                Logger.getLogger(DBConnections.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return conn;
+
+    public Connection getConnection() throws SQLException {
+        Connection conn = null;
+        try {
+            Context initContext = new InitialContext();
+            Context envContext = (Context) initContext.lookup("java:/comp/env");
+            DataSource ds = (DataSource) envContext.lookup("jdbc/poll");
+            conn = ds.getConnection();
+        } catch (NamingException ex) {
+            Logger.getLogger(DBConnections.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
     }
 }

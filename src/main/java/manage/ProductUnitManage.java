@@ -8,6 +8,7 @@ package manage;
 import entities.Prodcategory;
 import entities.Product;
 import entities.Produnit;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -17,74 +18,72 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
+
 import sessionsBeans.ProductUnitFacade;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class ProductUnitManage implements Serializable{
-    
-    @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα της Μονάδας Μέτρησης")  
+public class ProductUnitManage implements Serializable {
+
+    @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα της Μονάδας Μέτρησης")
     private String name;
     private String isactive;
     private List<Produnit> produnit;
-    
+
     @EJB
     ProductUnitFacade productUnitFacade;
 
-    public String changeStatusProductUnit(int status, int id){
+    public String changeStatusProductUnit(int status, int id) {
         productUnitFacade.changeStatusProductUnitFromDB(status, id);
         return "";
     }
-    
-   private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    
-    public String editProductUnit(){
+
+    private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+    public String editProductUnit() {
 
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         int produnitId = Integer.parseInt(params.get("productUnitID"));
-        Produnit u =  productUnitFacade.searchWithID(produnitId);
-        
+        Produnit u = productUnitFacade.searchWithID(produnitId);
+
         sessionMap.put("editProductUnit", u);
-  
+
         return "/web/produnitEdit.xhtml?faces-redirect=true";
     }
-    
-    public String deleteProductUnit(int id){
+
+    public String deleteProductUnit(int id) {
         productUnitFacade.deleteProductUnitFromDB(id);
         return "";
     }
-    
-    public String insertProductUnit(){
-        
-        boolean mr=false;
+
+    public String insertProductUnit() {
+
         Produnit productUnitInsert = new Produnit();
         productUnitInsert.setName(name);
-        
-        
+
+
         int isactiveInt;
-        if(isactive.equals("true")){
-            isactiveInt=1;
-        }else{
-            isactiveInt=0;
+        if (isactive.equals("true")) {
+            isactiveInt = 1;
+        } else {
+            isactiveInt = 0;
         }
         productUnitInsert.setIsactive(isactiveInt);
-        mr = productUnitFacade.insertProductUnitToDB(productUnitInsert);
-        
+
         //mhnhmata από το magaebean στην σελίδα
-        if(mr==true){
-           
+        if (productUnitFacade.insertProductUnitToDB(productUnitInsert)) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("DATA OK"));
             return "produnitAll";
-        }   
-        
+        }
+
         return "";
     }
-              
+
     public String getName() {
         return name;
     }
@@ -100,9 +99,9 @@ public class ProductUnitManage implements Serializable{
     public void setIsactive(String isactive) {
         this.isactive = isactive;
     }
-    
-    
-    public List<Produnit> getAllProdunit(){
+
+
+    public List<Produnit> getAllProdunit() {
         return produnit = productUnitFacade.getAllProdunitFromDB();
     }
 
@@ -113,7 +112,6 @@ public class ProductUnitManage implements Serializable{
     public void setProdunit(List<Produnit> produnit) {
         this.produnit = produnit;
     }
-    
-    
-    
+
+
 }

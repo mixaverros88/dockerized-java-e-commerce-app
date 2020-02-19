@@ -23,17 +23,16 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "subscribe")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subscribe.findAll", query = "SELECT s FROM Subscribe s")
-    , @NamedQuery(name = "Subscribe.findBySubscribe", query = "SELECT s FROM Subscribe s WHERE s.subscribe = :subscribe")
-    , @NamedQuery(name = "Subscribe.findByEmail", query = "SELECT s FROM Subscribe s WHERE s.email = :email")
-    , @NamedQuery(name = "Subscribe.findByInsdate", query = "SELECT s FROM Subscribe s WHERE s.insdate = :insdate")})
+        @NamedQuery(name = "Subscribe.findAll", query = "SELECT s FROM Subscribe s")
+        , @NamedQuery(name = "Subscribe.findBySubscribe", query = "SELECT s FROM Subscribe s WHERE s.subscribe = :subscribe")
+        , @NamedQuery(name = "Subscribe.findByEmail", query = "SELECT s FROM Subscribe s WHERE s.email = :email")
+        , @NamedQuery(name = "Subscribe.findByInsdate", query = "SELECT s FROM Subscribe s WHERE s.insdate = :insdate")})
 public class Subscribe implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -112,5 +111,5 @@ public class Subscribe implements Serializable {
     public String toString() {
         return "entities.Subscribe[ subscribe=" + subscribe + " ]";
     }
-    
+
 }

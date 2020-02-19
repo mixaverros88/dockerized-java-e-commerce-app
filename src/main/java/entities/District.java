@@ -20,17 +20,16 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "district")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "District.findAll", query = "SELECT d FROM District d")
-    , @NamedQuery(name = "District.findByDistrict", query = "SELECT d FROM District d WHERE d.district = :district")
-    , @NamedQuery(name = "District.findByName", query = "SELECT d FROM District d WHERE d.name = :name")
-    , @NamedQuery(name = "District.findByTransfee", query = "SELECT d FROM District d WHERE d.transfee = :transfee")})
+        @NamedQuery(name = "District.findAll", query = "SELECT d FROM District d")
+        , @NamedQuery(name = "District.findByDistrict", query = "SELECT d FROM District d WHERE d.district = :district")
+        , @NamedQuery(name = "District.findByName", query = "SELECT d FROM District d WHERE d.name = :name")
+        , @NamedQuery(name = "District.findByTransfee", query = "SELECT d FROM District d WHERE d.transfee = :transfee")})
 public class District implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -108,5 +107,5 @@ public class District implements Serializable {
     public String toString() {
         return "entities.District[ district=" + district + " ]";
     }
-    
+
 }

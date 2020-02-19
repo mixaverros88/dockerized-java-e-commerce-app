@@ -22,21 +22,20 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "orderlines")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Orderlines.findAll", query = "SELECT o FROM Orderlines o")
-    , @NamedQuery(name = "Orderlines.findByOrderlinesid", query = "SELECT o FROM Orderlines o WHERE o.orderlinesid = :orderlinesid")
-    , @NamedQuery(name = "Orderlines.findByQty", query = "SELECT o FROM Orderlines o WHERE o.qty = :qty")
-    , @NamedQuery(name = "Orderlines.findByPrice", query = "SELECT o FROM Orderlines o WHERE o.price = :price")
-    , @NamedQuery(name = "Orderlines.findByLinenetval", query = "SELECT o FROM Orderlines o WHERE o.linenetval = :linenetval")
-    , @NamedQuery(name = "Orderlines.findByLinevatval", query = "SELECT o FROM Orderlines o WHERE o.linevatval = :linevatval")
-    , @NamedQuery(name = "Orderlines.findByLinesumval", query = "SELECT o FROM Orderlines o WHERE o.linesumval = :linesumval")
-    , @NamedQuery(name = "Orderlines.findByRemarks", query = "SELECT o FROM Orderlines o WHERE o.remarks = :remarks")})
+        @NamedQuery(name = "Orderlines.findAll", query = "SELECT o FROM Orderlines o")
+        , @NamedQuery(name = "Orderlines.findByOrderlinesid", query = "SELECT o FROM Orderlines o WHERE o.orderlinesid = :orderlinesid")
+        , @NamedQuery(name = "Orderlines.findByQty", query = "SELECT o FROM Orderlines o WHERE o.qty = :qty")
+        , @NamedQuery(name = "Orderlines.findByPrice", query = "SELECT o FROM Orderlines o WHERE o.price = :price")
+        , @NamedQuery(name = "Orderlines.findByLinenetval", query = "SELECT o FROM Orderlines o WHERE o.linenetval = :linenetval")
+        , @NamedQuery(name = "Orderlines.findByLinevatval", query = "SELECT o FROM Orderlines o WHERE o.linevatval = :linevatval")
+        , @NamedQuery(name = "Orderlines.findByLinesumval", query = "SELECT o FROM Orderlines o WHERE o.linesumval = :linesumval")
+        , @NamedQuery(name = "Orderlines.findByRemarks", query = "SELECT o FROM Orderlines o WHERE o.remarks = :remarks")})
 public class Orderlines implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -215,5 +214,5 @@ public class Orderlines implements Serializable {
     public String toString() {
         return "entities.Orderlines[ orderlinesid=" + orderlinesid + " ]";
     }
-    
+
 }

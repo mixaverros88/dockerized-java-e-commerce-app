@@ -24,20 +24,19 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "ballance")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Ballance.findAll", query = "SELECT b FROM Ballance b")
-    , @NamedQuery(name = "Ballance.findByBallanceid", query = "SELECT b FROM Ballance b WHERE b.ballanceid = :ballanceid")
-    , @NamedQuery(name = "Ballance.findByTransactiondate", query = "SELECT b FROM Ballance b WHERE b.transactiondate = :transactiondate")
-    , @NamedQuery(name = "Ballance.findByAmount", query = "SELECT b FROM Ballance b WHERE b.amount = :amount")
-    , @NamedQuery(name = "Ballance.findByInsdate", query = "SELECT b FROM Ballance b WHERE b.insdate = :insdate")
-    , @NamedQuery(name = "Ballance.findBySysuser", query = "SELECT b FROM Ballance b WHERE b.sysuser = :sysuser")
-    , @NamedQuery(name = "Ballance.findByUpddate", query = "SELECT b FROM Ballance b WHERE b.upddate = :upddate")})
+        @NamedQuery(name = "Ballance.findAll", query = "SELECT b FROM Ballance b")
+        , @NamedQuery(name = "Ballance.findByBallanceid", query = "SELECT b FROM Ballance b WHERE b.ballanceid = :ballanceid")
+        , @NamedQuery(name = "Ballance.findByTransactiondate", query = "SELECT b FROM Ballance b WHERE b.transactiondate = :transactiondate")
+        , @NamedQuery(name = "Ballance.findByAmount", query = "SELECT b FROM Ballance b WHERE b.amount = :amount")
+        , @NamedQuery(name = "Ballance.findByInsdate", query = "SELECT b FROM Ballance b WHERE b.insdate = :insdate")
+        , @NamedQuery(name = "Ballance.findBySysuser", query = "SELECT b FROM Ballance b WHERE b.sysuser = :sysuser")
+        , @NamedQuery(name = "Ballance.findByUpddate", query = "SELECT b FROM Ballance b WHERE b.upddate = :upddate")})
 public class Ballance implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -160,5 +159,5 @@ public class Ballance implements Serializable {
     public String toString() {
         return "entities.Ballance[ ballanceid=" + ballanceid + " ]";
     }
-    
+
 }

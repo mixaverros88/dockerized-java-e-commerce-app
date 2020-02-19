@@ -11,6 +11,7 @@ import helpers.Chart;
 import entities.Orders;
 import entities.Product;
 import entities.User;
+
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.OrderlinesFacade;
@@ -27,82 +29,79 @@ import sessionsBeans.SallesFacade;
 import sessionsBeans.UserAllFacade;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class MainManage implements Serializable{
-    
+public class MainManage implements Serializable {
+
     private int countCategories;
     private List<Chart> chart;
 
     @EJB
     CategoryFacade categoryFacade;
-    
+
     @EJB
     UserAllFacade userAllFacade;
-    
+
     @EJB
     ProductFacade productFacade;
-    
+
     @EJB
     OrdersFacade ordersFacade;
-    
+
     @EJB
     SallesFacade sallesFacade;
-    
+
     @EJB
     CustvendFacade custvendFacade;
-    
+
     @EJB
     OrderlinesFacade orderlinesFacade;
-    
+
     @PostConstruct
-        void init(){   
-            //chart = ordersFacade.listForChartFromDB();
-        }
-        
- 
-    public int countAllCategories(){
+    void init() {
+        //chart = ordersFacade.listForChartFromDB();
+    }
+
+
+    public int countAllCategories() {
         return categoryFacade.coutnCategories();
     }
-    
-    public float countBallance(int id){
+
+    public float countBallance(int id) {
         return custvendFacade.countBallanceOFAdminFromDB(id);
     }
-    
-    public long countAllProducts(int role, int custvendId){
+
+    public long countAllProducts(int role, int custvendId) {
         return productFacade.countProductsFromDB(role, custvendId);
     }
-    
-    public double countAllPSUMAMNT(){
-         return ordersFacade.countSumOrdersFromDB();
+
+    public double countAllPSUMAMNT() {
+        return ordersFacade.countSumOrdersFromDB();
     }
-    
-    public double countAllPSUMAMNTByVendor(Custvend custvend){
-         return orderlinesFacade.orderDetailsSallesByVendorFROMDB(custvend);
+
+    public double countAllPSUMAMNTByVendor(Custvend custvend) {
+        return orderlinesFacade.orderDetailsSallesByVendorFROMDB(custvend);
     }
-    
-    public List<Orderlines> getAllProductsOrderByMaxSells(){
-         return orderlinesFacade.getAllProductsOrderByMaxSellsFromDB();
+
+    public List<Orderlines> getAllProductsOrderByMaxSells() {
+        return orderlinesFacade.getAllProductsOrderByMaxSellsFromDB();
     }
-    public double countAllSallesSUMAMNT(){
+
+    public double countAllSallesSUMAMNT() {
         return sallesFacade.countSumSallesFromDB();
     }
-    
-    public double countAllSallesSUMAMNTbyVendor(Custvend custvend){
+
+    public double countAllSallesSUMAMNTbyVendor(Custvend custvend) {
         return sallesFacade.countSumSallesbyVendorFromDB(custvend);
     }
-    
-    public List<Chart> chartOrders(){
-        List<Chart> ch = ordersFacade.listForChartFromDB();
-        return ch;
+
+    public List<Chart> chartOrders() {
+        return ordersFacade.listForChartFromDB();
     }
-    
-    public void makeApDF(){
-        
-    }
+
+    public void makeApDF() { }
 
     public List<Chart> getChart() {
         return chart;
@@ -113,22 +112,21 @@ public class MainManage implements Serializable{
     }
 
 
-    
-    public int countAllUsers(){
+    public int countAllUsers() {
 
         Custvend u;
         List<Custvend> users = userAllFacade.getAllUsers();
         int count = 0;
-        
-        for(int x = 0; x < users.size(); x++) {
-           u = users.get(x);
-           u.getFname();
-           count ++;
+
+        for (int x = 0; x < users.size(); x++) {
+            u = users.get(x);
+            u.getFname();
+            count++;
         }
-        
+
         return count;
     }
-    
+
     public int getCountCategories() {
         return countCategories;
     }

@@ -7,35 +7,35 @@ package sessionsBeans;
 
 import entities.Subscribe;
 import entities.User;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
  * @author user
  */
 @Stateless
 public class SubscribeFacade {
-    
-    @PersistenceContext(unitName="PrimeFacesPU")
+
+    @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
     protected EntityManager getEm() {
         return em;
     }
-    
-    public boolean insertSubscriberToDB(Subscribe subscribe){
-        
-      try{  
-        em.persist(subscribe);
-        em.flush();
-        return true;
-      }catch(Exception ex){
-        System.out.println(ex);
-        return false;
-      }
-      
+
+    public boolean insertSubscriberToDB(Subscribe subscribe) {
+
+        try {
+            em.persist(subscribe);
+            em.flush();
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return false;
+        }
+
     }
-    
+
 }

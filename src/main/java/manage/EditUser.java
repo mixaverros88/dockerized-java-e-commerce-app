@@ -6,9 +6,8 @@
 package manage;
 
 /**
- *
  * @author user
  */
 public class EditUser {
-    
+
 }

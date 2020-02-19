@@ -29,27 +29,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p ORDER BY p.productid DESC")
-    , @NamedQuery(name = "Product.findByProduCategorytid", query = "SELECT p FROM Product p WHERE p.prodcategoryid = :prodcategoryid")
-    , @NamedQuery(name = "Product.findByProductid", query = "SELECT p FROM Product p WHERE p.productid = :productid")
-    , @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name")
-    , @NamedQuery(name = "Product.findBySlugname", query = "SELECT p FROM Product p WHERE p.slugname = :slugname")
-    , @NamedQuery(name = "Product.findByIsactive", query = "SELECT p FROM Product p WHERE p.isactive = :isactive")
-    , @NamedQuery(name = "Product.findByIsvisible", query = "SELECT p FROM Product p WHERE p.isvisible = :isvisible")
-    , @NamedQuery(name = "Product.findByBuyprice", query = "SELECT p FROM Product p WHERE p.buyprice = :buyprice")
-    , @NamedQuery(name = "Product.findBySellprice", query = "SELECT p FROM Product p WHERE p.sellprice = :sellprice")
-    , @NamedQuery(name = "Product.findByQty", query = "SELECT p FROM Product p WHERE p.qty = :qty")
-    , @NamedQuery(name = "Product.findByRemarks", query = "SELECT p FROM Product p WHERE p.remarks = :remarks")
-    , @NamedQuery(name = "Product.findByInsdate", query = "SELECT p FROM Product p WHERE p.insdate = :insdate")
-    , @NamedQuery(name = "Product.findBySysuser", query = "SELECT p FROM Product p WHERE p.sysuser = :sysuser")
-    , @NamedQuery(name = "Product.findByUpddate", query = "SELECT p FROM Product p WHERE p.upddate = :upddate")})
+        @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p ORDER BY p.productid DESC")
+        , @NamedQuery(name = "Product.findByProduCategorytid", query = "SELECT p FROM Product p WHERE p.prodcategoryid = :prodcategoryid")
+        , @NamedQuery(name = "Product.findByProductid", query = "SELECT p FROM Product p WHERE p.productid = :productid")
+        , @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name")
+        , @NamedQuery(name = "Product.findBySlugname", query = "SELECT p FROM Product p WHERE p.slugname = :slugname")
+        , @NamedQuery(name = "Product.findByIsactive", query = "SELECT p FROM Product p WHERE p.isactive = :isactive")
+        , @NamedQuery(name = "Product.findByIsvisible", query = "SELECT p FROM Product p WHERE p.isvisible = :isvisible")
+        , @NamedQuery(name = "Product.findByBuyprice", query = "SELECT p FROM Product p WHERE p.buyprice = :buyprice")
+        , @NamedQuery(name = "Product.findBySellprice", query = "SELECT p FROM Product p WHERE p.sellprice = :sellprice")
+        , @NamedQuery(name = "Product.findByQty", query = "SELECT p FROM Product p WHERE p.qty = :qty")
+        , @NamedQuery(name = "Product.findByRemarks", query = "SELECT p FROM Product p WHERE p.remarks = :remarks")
+        , @NamedQuery(name = "Product.findByInsdate", query = "SELECT p FROM Product p WHERE p.insdate = :insdate")
+        , @NamedQuery(name = "Product.findBySysuser", query = "SELECT p FROM Product p WHERE p.sysuser = :sysuser")
+        , @NamedQuery(name = "Product.findByUpddate", query = "SELECT p FROM Product p WHERE p.upddate = :upddate")})
 public class Product implements Serializable {
 
     @Basic(optional = false)
@@ -302,5 +301,5 @@ public class Product implements Serializable {
     public void setWishlistCollection(Collection<Wishlist> wishlistCollection) {
         this.wishlistCollection = wishlistCollection;
     }
-    
+
 }

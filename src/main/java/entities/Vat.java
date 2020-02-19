@@ -19,17 +19,16 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "vat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Vat.findAll", query = "SELECT v FROM Vat v")
-    , @NamedQuery(name = "Vat.findByVatid", query = "SELECT v FROM Vat v WHERE v.vatid = :vatid")
-    , @NamedQuery(name = "Vat.findByPercnt", query = "SELECT v FROM Vat v WHERE v.percnt = :percnt")
-    , @NamedQuery(name = "Vat.findByIsactive", query = "SELECT v FROM Vat v WHERE v.isactive = :isactive")})
+        @NamedQuery(name = "Vat.findAll", query = "SELECT v FROM Vat v")
+        , @NamedQuery(name = "Vat.findByVatid", query = "SELECT v FROM Vat v WHERE v.vatid = :vatid")
+        , @NamedQuery(name = "Vat.findByPercnt", query = "SELECT v FROM Vat v WHERE v.percnt = :percnt")
+        , @NamedQuery(name = "Vat.findByIsactive", query = "SELECT v FROM Vat v WHERE v.isactive = :isactive")})
 public class Vat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -108,5 +107,5 @@ public class Vat implements Serializable {
     public String toString() {
         return "entities.Vat[ vatid=" + vatid + " ]";
     }
-    
+
 }

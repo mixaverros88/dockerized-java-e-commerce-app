@@ -9,6 +9,7 @@ import entities.Custvend;
 import entities.Prodcategory;
 import entities.Roles;
 import helpers.HashinUtils;
+
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -24,79 +25,77 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import sessionsBeans.CustvendFacade;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class CustvendEditManage implements Serializable{
-    
-    @NotNull(message = "Συμπληρώστε το όνομα")  
+public class CustvendEditManage implements Serializable {
+
+    @NotNull(message = "Συμπληρώστε το όνομα")
     private String fname;
-    @NotNull(message = "Συμπληρώστε το επίθετο") 
+    @NotNull(message = "Συμπληρώστε το επίθετο")
     private String lname;
-    @NotNull(message = "Συμπληρώστε το ΑΦΜ") 
-    @Size(min=10, max=10, message="Το ΑΦΜ θα πρέπει να έχει 10 αριθμούς")
+    @NotNull(message = "Συμπληρώστε το ΑΦΜ")
+    @Size(min = 10, max = 10, message = "Το ΑΦΜ θα πρέπει να έχει 10 αριθμούς")
     private String afm;
-    @Size(min=25, message="Το username θα πρέπει να έχει πάνω από2 στοιχεία")
-    @NotNull(message = "Συμπληρώστε το username") 
+    @Size(min = 25, message = "Το username θα πρέπει να έχει πάνω από2 στοιχεία")
+    @NotNull(message = "Συμπληρώστε το username")
     private String username;
-    @Size(min=5, message="Το password θα πρέπει να έχει πάνω από 5 στοιχεία")
-    @NotNull(message = "Συμπληρώστε το password") 
+    @Size(min = 5, message = "Το password θα πρέπει να έχει πάνω από 5 στοιχεία")
+    @NotNull(message = "Συμπληρώστε το password")
     private String password;
-    @NotNull(message = "Συμπληρώστε το password") 
+    @NotNull(message = "Συμπληρώστε το password")
     private String passwordCheck;
-    @NotNull(message = "Συμπληρώστε το ΤΚ") 
-    @Size(min=5, max=5, message="Το ΤΚ θα πρέπει να έχει 5 αριθμούς")
+    @NotNull(message = "Συμπληρώστε το ΤΚ")
+    @Size(min = 5, max = 5, message = "Το ΤΚ θα πρέπει να έχει 5 αριθμούς")
     private String zip;
-    @NotNull(message = "Συμπληρώστε την Πόλη") 
+    @NotNull(message = "Συμπληρώστε την Πόλη")
     private String city;
-    @NotNull(message = "Συμπληρώστε την περιοχή") 
+    @NotNull(message = "Συμπληρώστε την περιοχή")
     private String district;
-    @NotNull(message = "Συμπληρώστε το email") 
+    @NotNull(message = "Συμπληρώστε το email")
     private String email;
     private String jobname;
-    private String remarks="1";
+    private String remarks = "1";
     private String isactive;
     @NotNull(message = "Συμπληρώστε την Διεύθυνση")
     private String address;
     @NotNull(message = "Συμπληρώστε τον Αριθμό Τηλεφώνου")
-    @Size(min=10, max=10, message="O αριθμός τηλεφώνου θα πρέπει να είναι 10 ψηφία")
+    @Size(min = 10, max = 10, message = "O αριθμός τηλεφώνου θα πρέπει να είναι 10 ψηφία")
     private String phone;
     private Roles rr;
-    private List<Roles> roles;  
+    private List<Roles> roles;
     private List<Custvend> custvend;
-    
-    
-    
+
+
     private Custvend custvendA;
-    
+
     @EJB
     CustvendFacade custvendFacade;
-    
+
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    
+
     @PostConstruct
     public void init() {
-        
+
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        
-        custvendA =(Custvend) sessionMap.get("editCustvend");
-        System.out.println("22222"+custvendA.getFname());
+
+        custvendA = (Custvend) sessionMap.get("editCustvend");
+        System.out.println("22222" + custvendA.getFname());
     }
 
-    
-    public String updateCustvend() throws NoSuchAlgorithmException{
 
-        boolean mr=false;
-        Custvend custvendpdate = new Custvend(); 
-         HashinUtils hu = new HashinUtils();
+    public String updateCustvend() throws NoSuchAlgorithmException {
+
+        Custvend custvendpdate = new Custvend();
+        HashinUtils hu = new HashinUtils();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	Date date = new Date();
+        Date date = new Date();
 
         custvendpdate.setCustvendid(custvendA.getCustvendid());
         custvendpdate.setFname(custvendA.getFname().trim());
@@ -113,25 +112,25 @@ public class CustvendEditManage implements Serializable{
         custvendpdate.setJobname(custvendA.getJobname().trim());
         custvendpdate.setPasswd(custvendA.getPasswd());
         custvendpdate.setBallance(custvendA.getBallance());
-        
-        if (custvendA.getRoleid().getRoleid() == 3 && custvendA.getAfm() ==null ){
+
+        if (custvendA.getRoleid().getRoleid() == 3 && custvendA.getAfm() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Εφόσον είσται προμηθευτής θα πρέπει να εισάγεται ΑΦΜ"));
             return "";
         }
-        
-         if(custvendFacade.checkIfPhoneNumberExists(phone) > 0){
+
+        if (custvendFacade.checkIfPhoneNumberExists(phone) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο αριθμός τηλεφώνου που δώσατε υπάρχει."));
-            return "";  
+            return "";
         }
- 
-        if(custvendFacade.checkIfΕmailExists(email) > 0){
+
+        if (custvendFacade.checkIfΕmailExists(email) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το email που δώσατε υπάρχει."));
-            return "";  
+            return "";
         }
-        
-        if(custvendFacade.checkIfUserNameExists(username) > 0){
+
+        if (custvendFacade.checkIfUserNameExists(username) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το username που δώσατε υπάρχει."));
-            return "";  
+            return "";
         }
 
         custvendpdate.setRegister(custvendA.getRegister());
@@ -139,20 +138,17 @@ public class CustvendEditManage implements Serializable{
         custvendpdate.setInsdate(date);
         custvendpdate.setSysuser(custvendA.getSysuser());
         custvendpdate.setUpddate(date);
-        
-        
-        mr = custvendFacade.updateCustvendToDatabase(custvendpdate);
-        
+
         //mhnhmata από το magaebean στην σελίδα
-        if(mr==true){
-           
+        if (custvendFacade.updateCustvendToDatabase(custvendpdate)) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Η επεξεργασία του χρήστη"));
             return "custvenAll";
-        }   
-        
+        }
+
         return "";
     }
-        
+
     public String getFname() {
         return fname;
     }
@@ -280,6 +276,6 @@ public class CustvendEditManage implements Serializable{
     public void setCustvendA(Custvend custvendA) {
         this.custvendA = custvendA;
     }
-    
-    
+
+
 }

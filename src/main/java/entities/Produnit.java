@@ -24,17 +24,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "produnit")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Produnit.findAll", query = "SELECT p FROM Produnit p")
-    , @NamedQuery(name = "Produnit.findByProdunitid", query = "SELECT p FROM Produnit p WHERE p.produnitid = :produnitid")
-    , @NamedQuery(name = "Produnit.findByName", query = "SELECT p FROM Produnit p WHERE p.name = :name")
-    , @NamedQuery(name = "Produnit.findByIsactive", query = "SELECT p FROM Produnit p WHERE p.isactive = :isactive")})
+        @NamedQuery(name = "Produnit.findAll", query = "SELECT p FROM Produnit p")
+        , @NamedQuery(name = "Produnit.findByProdunitid", query = "SELECT p FROM Produnit p WHERE p.produnitid = :produnitid")
+        , @NamedQuery(name = "Produnit.findByName", query = "SELECT p FROM Produnit p WHERE p.name = :name")
+        , @NamedQuery(name = "Produnit.findByIsactive", query = "SELECT p FROM Produnit p WHERE p.isactive = :isactive")})
 public class Produnit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -136,5 +135,5 @@ public class Produnit implements Serializable {
     public String toString() {
         return "entities.Produnit[ produnitid=" + produnitid + " ]";
     }
-    
+
 }

@@ -10,7 +10,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 
 /**
- *
  * @author user
  */
 @Named(value = "userEditManage")
@@ -22,5 +21,5 @@ public class userEditManage implements Serializable {
      */
     public userEditManage() {
     }
-    
+
 }

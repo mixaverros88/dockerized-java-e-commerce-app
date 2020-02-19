@@ -23,18 +23,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "prodcategory")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Prodcategory.findAll", query = "SELECT p FROM Prodcategory p ORDER BY p.prodcategoryid DESC")
-    , @NamedQuery(name = "Prodcategory.findByProdcategoryid", query = "SELECT p FROM Prodcategory p WHERE p.prodcategoryid = :prodcategoryid")
-    , @NamedQuery(name = "Prodcategory.findByName", query = "SELECT p FROM Prodcategory p WHERE p.name = :name")
-    , @NamedQuery(name = "Prodcategory.findBySlugname", query = "SELECT p FROM Prodcategory p WHERE p.slugname = :slugname")
-    , @NamedQuery(name = "Prodcategory.findByIsactive", query = "SELECT p FROM Prodcategory p WHERE p.isactive = :isactive")})
+        @NamedQuery(name = "Prodcategory.findAll", query = "SELECT p FROM Prodcategory p ORDER BY p.prodcategoryid DESC")
+        , @NamedQuery(name = "Prodcategory.findByProdcategoryid", query = "SELECT p FROM Prodcategory p WHERE p.prodcategoryid = :prodcategoryid")
+        , @NamedQuery(name = "Prodcategory.findByName", query = "SELECT p FROM Prodcategory p WHERE p.name = :name")
+        , @NamedQuery(name = "Prodcategory.findBySlugname", query = "SELECT p FROM Prodcategory p WHERE p.slugname = :slugname")
+        , @NamedQuery(name = "Prodcategory.findByIsactive", query = "SELECT p FROM Prodcategory p WHERE p.isactive = :isactive")})
 public class Prodcategory implements Serializable {
 
     @OneToMany(mappedBy = "prodcategoryid")
@@ -140,5 +139,5 @@ public class Prodcategory implements Serializable {
     public void setProductCollection(Collection<Product> productCollection) {
         this.productCollection = productCollection;
     }
-    
+
 }

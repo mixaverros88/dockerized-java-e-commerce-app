@@ -12,6 +12,7 @@ import entities.Product;
 import entities.Produnit;
 import helpers.ConvertToGreeklish;
 import helpers.DateTime;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
+
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
@@ -29,18 +31,17 @@ import sessionsBeans.ProductUnitFacade;
 import sessionsBeans.UploadImageFacade;
 
 /**
- *
  * @author user
  */
 @ManagedBean
 @RequestScoped
-public class ProductEditManage implements Serializable{
-    
-    @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα του προϊόντος")  
+public class ProductEditManage implements Serializable {
+
+    @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα του προϊόντος")
     private String name;
     private String isactive;
 
-    @NotNull(message = "Παρακαλώ συμπληρώστε την τιμή του προϊόντος") 
+    @NotNull(message = "Παρακαλώ συμπληρώστε την τιμή του προϊόντος")
     private float buyprice;
     private String remarks;
     private float sellprice;
@@ -54,61 +55,58 @@ public class ProductEditManage implements Serializable{
     private List<Produnit> produnits;
     private Photos photos;
     private List<Photos> photosList;
-    
+
     private Product product;
-    
+
     @EJB
     ProductFacade productFacade;
-    
+
     @EJB
     CategoryFacade categoryFacade;
 
     @EJB
     ProductUnitFacade productUnitFacade;
-    
+
     @EJB
     UploadImageFacade uploadImageFacade;
-    
+
     @EJB
     CustvendFacade custvendFacade;
-    
-    
+
+
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-       
-       
+
+
     @PostConstruct
     public void init() {
-        
+
         custvends = custvendFacade.getAllCustvendVendorFromDB();
         prodcategorys = categoryFacade.getAllCategoriesWhereIsActive();
         photosList = uploadImageFacade.getAllfiles();
         produnits = productUnitFacade.getAllProdunit();
-        
+
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        
-        product =(Product) sessionMap.get("editProduct");
-        System.out.println("22222"+product.getName());
-        
+
+        product = (Product) sessionMap.get("editProduct");
+        System.out.println("22222" + product.getName());
+
         photos = product.getPhotosid();
         prodcategory = product.getProdcategoryid();
         custvend = product.getVendor();
         produnit = product.getProdunitid();
     }
 
-    
-    public String updateProduct(){
-            
-        boolean mr=false;
-        
+
+    public String updateProduct() {
+
         Product producUpdate = new Product();
-        
-  
-        
+
+
         producUpdate.setProductid(product.getProductid());
         producUpdate.setName(product.getName());
         producUpdate.setSlugname(ConvertToGreeklish.greek2Roman(product.getName()));
-        
+
 //        int isactiveInt;
 //        if(isactive.equals("true")){
 //            isactiveInt=1;
@@ -116,7 +114,7 @@ public class ProductEditManage implements Serializable{
 //            isactiveInt=0;
 //        }
 
-        producUpdate.setIsactive( 1);
+        producUpdate.setIsactive(1);
         producUpdate.setIsvisible((short) 1);
         producUpdate.setProdcategoryid(prodcategory);
         producUpdate.setProdunitid(produnit);
@@ -125,24 +123,21 @@ public class ProductEditManage implements Serializable{
         producUpdate.setVendor(custvend);
         producUpdate.setQty(product.getQty());
         producUpdate.setPhotosid(photos);
-        producUpdate.setRemarks(product.getRemarks()); 
+        producUpdate.setRemarks(product.getRemarks());
         producUpdate.setInsdate(DateTime.getNowDateTime());
         producUpdate.setSysuser(39);
-        
-        
-        mr = productFacade.updateProductToDatabase(producUpdate);
-        
+
         //mhnhmata από το magaebean στην σελίδα
-        if(mr==true){
-           
+        if (productFacade.updateProductToDatabase(producUpdate)) {
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν ανανεώθηκε επιτυχώς"));
             return "productAll";
-        }   
-        
+        }
+
         return "";
-         
+
     }
-    
+
     public Product getProduct() {
         return product;
     }
@@ -318,7 +313,6 @@ public class ProductEditManage implements Serializable{
     public void setSessionMap(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
     }
-    
-    
-    
+
+
 }
