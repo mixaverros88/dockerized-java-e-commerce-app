@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+                           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Αρχική</title>
+    </h:head>
+ 
+     <h:body  class="animsition" onload="qntSetZero()">
+         
+         
+        <div id="header">
+            <ui:insert name="header" >
+                <ui:include src="templates/headerFront.xhtml" />
+            </ui:insert>
+        </div>
+         
+              <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/java-e-commerce/web/resources/front/images/product.jpg);">
+		<h2 class="l-text2 t-center">
+			
+		</h2>
+	</section>
+         
+        
+		<div class="container" >
+			
+           <h:messages class="alert alert-danger alert-dismissible fade show" style="margin-top: 20px;margin-bottom: 3px;" globalOnly="true" />      
+
+</div>
+
+       
+
+<h:panelGroup rendered="#{proionFrontManage.checkIfProductExists() == true }"> 
+<h:form id="form"> 
+           <div class="container bgwhite p-t-35 p-b-80" >
+		<div class="flex-w flex-sb">
+			<div class="w-size13 p-t-30 respon5">
+				<div class="wrap-slick3 flex-sb flex-w">
+                                    
+					<div class="slick3 slick-initialized slick-slider slick-dotted">
+						<div class="slick-list draggable">
+                                                    <div class="slick-track" style="opacity: 1; width: 1503px;">
+                                                        <div class="item-slick3 slick-slide slick-current slick-active" data-thumb="images/thumb-item-01.jpg" data-slick-index="0" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide10" aria-describedby="slick-slide-control10" style="width: 501px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
+                                                            <div class="wrap-pic-w">
+                                                                <h:graphicImage value = "/web/resources/images/#{proionFrontManage.product.photosid.url}"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+					</div>
+				</div>
+			</div>
+
+
+                     
+                     
+			<div class="w-size14 p-t-30 respon5 myBox">
+				<h4 class="product-detail-name m-text16 p-b-13">
+                                    <span style="float: left;margin-right: 40px;">
+                                        #{proionFrontManage.product.name}</span> <span class="flex-c-m sizefull bg1 bo-rad-7 hov1 s-text1 trans-0-4 addcart" id="wlMesaage" style="display: inline-flex;">Επιλέξτε Ποσότητα - Whilslist</span><h:panelGroup rendered="#{loginManage.custvend.roleid.roleid == 2 }">  <h:commandButton id = "sentToWhishListButton" class="flex-c-m sizefull bg1 bo-rad-7 hov1 s-text1 trans-0-4 addcart whishlist" value="Εισαγωγή στην Wishlist" action="#{proionFrontManage.addToWishList()}" style="display: none;"></h:commandButton></h:panelGroup> 
+				</h4>
+                            
+
+                            
+			
+                                
+				<p class="m-text15 p-t-10"  style="clear: both;">
+                                    
+					#{proionFrontManage.product.remarks} #{proionFrontManage.product.produnitid.name}
+				</p>
+
+
+                            <div class="p-t-13 p-b-60" onload="setQTY()">
+                                
+                                 <div class="rowx flex-m flex-w p-b-10">
+                                     <p class="m-text15 p-t-10">
+                                         Τιμή: <span class="totalx">#{ proionFrontManage.getRound2demicalsNumber( (proionFrontManage.product.sellprice * initParam['vat'])+proionFrontManage.product.sellprice )}€</span><span class="weightinfo"> / #{proionFrontManage.product.produnitid.name}</span>
+                                 </p> 
+                                </div>
+                                
+                                <div class="rowx flex-m flex-w p-b-10">
+                                    <p class="m-text15 p-t-10">
+                                        Μέγιστη Ποσότητα Προϊόντος: <h:inputText id = "maxQty" value="#{proionFrontManage.product.qty}" style="background-color: #f3f3f3;" ></h:inputText> 
+                                        <a href="templates/headerFront.xhtml"></a>
+                                    </p> 
+                                </div>
+                                
+                                
+				<div class="rowx flex-m flex-w p-b-10 m-text15 p-t-10"  >
+                                    <span>Επιλογή Ποσότητας :</span>
+                                    <span class="btn mainColor" id="plus" onclick = "changeQTY('+')"><i class="fa fa-plus"></i></span>
+                                    <span style="border: 3px solid #e8e8e8;padding: 3px 5px 3px 5px;">
+                                        <h:inputText id="qty"  onkeyup = "chechqty()"  value="#{proionFrontManage.selectqnt}" readonly = "true" style="background-color: #f3f3f3; width: 20px;" ></h:inputText>
+                                         / #{proionFrontManage.product.produnitid.name}
+                                    </span>
+                                    <span class="btn mainColor" id="minus" onclick = "changeQTY('-')"><i class="fa fa-minus"></i></span>
+                               </div> 
+                                
+                                <div class="rowx flex-m flex-w m-text15 p-t-10" id="tpBox" style="margin-bottom: 8px;">    
+                                    <span id="tp" >Τελική Τιμή: <span class="totalx mainColor">0€</span></span>
+                                    
+				</div>
+                                <h:message for="qty" class="customErrorMessage"/>  
+                                <div class="flex-m flex-w p-b-10">  
+                                        <span id ="messageForButton" class="alert alertGreen alert-dismissible fade show widthFullTextCenter">Επιλέξτε ποσότητα</span>
+                                        
+                                </div>
+                                <h:panelGroup rendered="#{loginManage.custvend.roleid.roleid == 2 }">
+                                
+					<div class="flex-r-m">
+                                            
+						<div class="w-size16 flex-m flex-w">
+	
+
+							<div class="btn-addcart-product-detail size9 trans-0-4">
+                                                            <input type="hidden" id = "priceWithVat" name="priceWithVat" value="#{ proionFrontManage.getRound2demicalsNumber( (proionFrontManage.product.sellprice * initParam['vat'])+proionFrontManage.product.sellprice )}"/>
+                                                            <input type="hidden" id = "vat" name="vat" value="#{initParam['vat']}"/>
+                                                            <input type="hidden" name="id" value="#{proionFrontManage.product.productid}"/>
+                                                            <input type="hidden" id="sendQty" name="sendQty" value="0"/>
+                                                            <h:commandButton id = "sentToCartButton" class="flex-c-m sizefull bg1 bo-rad-7 hov1 s-text1 trans-0-4 addcart " value="Προσθήκη στο καλάθι" action="#{proionFrontManage.addToCart()}" style="display: none;">
+<!--                                                                <f:ajax execute="@form" render=":cardSize" ></f:ajax>-->
+                                                            </h:commandButton>
+                                                        
+
+							</div>
+						</div>
+					</div>
+                                </h:panelGroup>    
+				</div>
+                                 
+			</div>
+		</div>
+	</div> 
+         
+         </h:form>
+
+    </h:panelGroup>  
+
+         
+                <!--<script>-->
+                <!--$(function() {-->
+                   <!--$('input').on('input', function() {-->
+                     <!--this.value = this.value-->
+                       <!--.replace(/[^\d.]/g, '')             // numbers and decimals only-->
+                       <!--.replace(/(^[\d]{4})[\d]/g, '$1')   // not more than 2 digits at the beginning-->
+                       <!--.replace(/(\.*)\./g, '$1')         // decimal can't exist more than once-->
+                       <!--.replace(/(\.[\d]{0})./g, '$1');    // not more than 4 digits after decimal-->
+                   <!--});-->
+                 <!--});-->
+                <!--</script>-->
+
+
+         <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="templates/footerFront.xhtml" />
+            </ui:insert>
+        </div>
+
+         <!-- END Page wrapper  -->
+
+         
+    </h:body>
+</html>
+

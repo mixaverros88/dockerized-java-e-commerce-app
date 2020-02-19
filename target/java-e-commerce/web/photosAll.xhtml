@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Φωτογραφίες</title>
+    </h:head>
+
+
+     <h:body  class="fix-header fix-sidebar">
+           <div id="header">
+            <ui:insert name="header" >
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+        </div>
+   
+        <div id="sidebar">
+            <ui:insert name="sidebar" >
+                <ui:include src="templates/sidebar.xhtml" />
+            </ui:insert>
+        </div>
+
+         
+    
+               <!-- Page wrapper  -->
+         <div class="page-wrapper" style="height: 1200px; min-height: 212px;">
+            <!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Φωτογραφίες</h3>
+                  
+                </div>
+                
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Αρχική</a></li>
+                        <li class="breadcrumb-item active">Φωτογραφίες</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Bread crumb -->
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                   <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive m-t-40">
+                              <a href="uploadImage.xhtml" class="btn btn-info m-b-10 m-l-5">Εισαγωγή Φωτογραφίας</a> 
+                              <h:messages class="alert alert-danger alert-dismissible fade show" globalOnly="true" />
+                              <h:dataTable id="example23" value="#{uploadImageController.photos}" var="file"   class="table table-striped table-bordered">
+      
+                                  
+                                  <h:column>
+                                        <!-- column header -->
+                                        <f:facet name="header">File name</f:facet>
+                                        <!-- row record -->
+                                        #{file.url}
+                                </h:column>
+
+                                <h:column>
+                                        <f:facet name="header">File Type</f:facet>
+                                        #{file.MIMEtype}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Αρχείο</f:facet>
+
+                                    <h:outputLink target="_blank" value="/java-e-commerce/web/resources/images/#{file.url}">
+                                        <h:graphicImage value = "/web/resources/images/#{file.url}"  style="width: 200px;"/>
+                                    </h:outputLink>
+                                </h:column>
+                                  
+                                <h:column>
+                                    <f:facet name="header">Λειτουργίες</f:facet>
+                                        <h:form>
+                                            
+                                            <h:commandButton onclick="return confirm('Είσται σίγουρος για την διαγραφή της φωτογραφίας: #{file.url}')" action = "#{uploadImageController.deleteImage(file.url, file.photosid)}" value="Διαγραφή" class="btn btn-danger m-b-10 m-l-5"></h:commandButton>
+
+                                        </h:form>
+                                    </h:column>
+                        </h:dataTable>
+                        </div>
+                    </div>
+                </div>
+
+       
+
+                <!-- End PAge Content -->
+            </div>
+            <!-- End Container fluid  -->
+        <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="templates/footer.xhtml" />
+            </ui:insert>
+        </div>
+        </div>
+         <!-- END Page wrapper  -->
+
+         
+    </h:body>
+</html>
+
+

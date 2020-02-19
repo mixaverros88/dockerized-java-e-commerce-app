@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Πωλήσεις</title>
+    </h:head>
+ 
+     <h:body  class="fix-header fix-sidebar">
+           <div id="header">
+            <ui:insert name="header" >
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+        </div>
+   
+        <div id="sidebar">
+            <ui:insert name="sidebar" >
+                <ui:include src="templates/sidebar.xhtml" />
+            </ui:insert>
+        </div>
+     
+               <!-- Page wrapper  -->
+         <div class="page-wrapper" style="height: 1200px; min-height: 212px;">
+            <!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Πωλήσεις</h3>
+                  
+                </div>
+                
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Αρχική</a></li>
+                        <li class="breadcrumb-item active">Πωλήσης</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Bread crumb -->
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                   <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive m-t-40">
+                                <h:messages class="alert alert-danger alert-dismissible fade show" globalOnly="true" />
+                                <a href="sallesAdd.xhtml" class="btn btn-info m-b-10 m-l-5">Δημιουργία Πωλήσης</a> 
+                              
+                              <h:dataTable value="#{sallesManage.getAllSalles(loginManage.custvend.roleid, loginManage.custvend, 1, 'sallesAll')}" var="ord"  id="example23" class="display nowrap table table-hover table-striped table-bordered">
+                                    <h:column>
+                                            <!-- column header -->
+                                            <f:facet name="header">Όνομα Προμηθευτή</f:facet>
+                                            <!-- row record -->
+                                            #{ord.custvendid.fname} #{ord.custvendid.lname} 
+                                    </h:column>
+
+                                    <h:column>
+                                            <!-- column header -->
+                                            <f:facet name="header">Hμερ/μηνια Παραγγελίας</f:facet>
+                                            <!-- row record -->
+                                            #{ord.orderdate}
+                                    </h:column>
+
+                                  
+                                    <h:column>
+                                            <!-- column header -->
+                                            <f:facet name="header">Τιμή<br/><sup>με ΦΠΑ</sup></f:facet>
+                                            <!-- row record -->
+                                            #{ord.sumamnt}€ 
+                                           
+                                    </h:column>
+
+                                    <h:column>
+                                            <!-- column header -->
+                                            <f:facet name="header">Λειτουργίες</f:facet>
+                                            <!-- row record -->
+                                            <h:outputLink value="salleDesc.xhtml">
+                                                <span class="btn btn-warning m-b-10 m-l-5">Περισσότερα</span>
+                                                <f:param name="id" value="#{ord.orderid}" />
+                                                <f:param name="orderDate" value="#{ord.orderdate}" />
+                                                <f:param name="sumamnt" value="#{ord.sumamnt}" />
+                                                <f:param name="vendorORuser" value="vendor" />
+                                                <f:param name="custvenFullName" value="#{ord.custvendid.fname} #{ord.custvendid.lname}" />
+                                            </h:outputLink>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                            <f:facet name="header">Status</f:facet>
+                                            <h:panelGroup rendered="#{loginManage.getRole() == 1}">
+                                                <h:form>
+                                                    <h:panelGroup rendered="#{ord.isapprv == 1}">
+                                                        <h:commandButton onclick="return confirm('Με την απενεργοποίηση της πώληση ο Προμηθεύτης θα ενημερωθεί μέσω email')" action = "#{sallesManage.changeStatusOrder(0, ord.orderid)}" value="Ενεργό" class="btn btn-success m-b-10 m-l-5"></h:commandButton>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{ord.isapprv == 0}">
+                                                         <h:commandButton onclick="return confirm('Με την ενεργοποίηση της πώληση ο Προμηθεύτης θα ενημερωθεί μέσω email')" action = "#{sallesManage.changeStatusOrder(1, ord.orderid )}" value="Ανενεργό" class="btn btn-danger m-b-10 m-l-5"></h:commandButton>
+                                                    </h:panelGroup>
+                                                </h:form>
+                                            </h:panelGroup>
+                                            
+                                             <h:panelGroup rendered="#{loginManage.getRole() == 3}">
+                                                <h:form id="form">
+                                                    <h:panelGroup rendered="#{ord.isapprv == 1}">
+                                                       <span id ="chValueByVendorButton#{ord.orderid}" onclick="chValueByVendor(#{ord.orderid})" class="btn btn-success m-b-10 m-l-5">Ενεργό</span>
+                                                       <span id ="chValueByVendorMessage#{ord.orderid}"></span>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{ord.isapprv == 0}">
+                                                        <span id ="chValueByVendorButton#{ord.orderid}" onclick="chValueByVendor(#{ord.orderid})" class="btn btn-danger m-b-10 m-l-5">Ανενεργό</span>
+                                                        <span id ="chValueByVendorMessage#{ord.orderid}"></span>
+                                                    </h:panelGroup>
+                                                </h:form>
+                                            </h:panelGroup>
+                           
+                                    </h:column>
+                                  <h:panelGroup rendered="#{loginManage.getRole() == 3}">
+                                    <h:column>
+                                            <f:facet name="header">Λειτουργίες</f:facet>
+                                            <h:form>
+                                                <h:commandButton onclick="return confirm('Είσται σίγουρος για την διαγραφή της κατηγορίας: #{cat.name}')" action = "#{categoryAllManage.deleteCategory(cat.prodcategoryid)}" value="Διαγραφή" class="btn btn-danger m-b-10 m-l-5"></h:commandButton>  
+                                            </h:form>
+                                    </h:column>
+                                  </h:panelGroup>
+                                </h:dataTable>
+                              <script>
+                                 function chValueByVendor(id){
+                                     document.getElementById("chValueByVendorButton"+id).style.display="none";
+                                     document.getElementById("chValueByVendorMessage"+id).innerHTML="Δεν έχετε δικαίωμα να αλλάξετε την κατάσταση της παραγγελίας";
+                                 }
+                              </script>
+                        </div>
+                        </div>
+                    </div>
+
+                <!-- End PAge Content -->
+            </div>
+            <!-- End Container fluid  -->
+        <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="templates/footer.xhtml" />
+            </ui:insert>
+        </div>
+        </div>
+         <!-- END Page wrapper  -->
+
+         
+    </h:body>
+</html>
+
+

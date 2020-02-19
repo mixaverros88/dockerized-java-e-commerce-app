@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>Αρχική</title>
+    </h:head>
+ 
+     <h:body  class="animsition">
+         
+        <div id="header">
+            <ui:insert name="header" >
+                <ui:include src="templates/headerFront.xhtml" />
+            </ui:insert>
+        </div>
+     
+       <div class="banner bgwhite p-t-40 p-b-40">
+		<div class="container">
+			<div class="row">
+                            
+                            <br/>
+                            <div class="col-sm-12">
+                                
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Παραγγελίες</a></li>
+  <li><a data-toggle="tab" href="#profile">Προφιλ</a></li>
+  <li><a data-toggle="tab" href="#credits">Credits</a></li>
+   <li><a data-toggle="tab" href="#wishlist">Wishlist</a></li>
+</ul>
+
+<div class="tab-content">
+  
+
+                                <h:panelGroup rendered="#{loginManage.custvend.roleid.roleid != 2}">
+                                <span id="messageForButton" class="alert alert-danger alert-dismissible fade show widthFullTextCenter">
+                                    Πρέπει να είσται πελάτης για να έχετε πρόσβαση.
+                                </span>
+                                    
+                                </h:panelGroup>
+                                
+                                <h:panelGroup rendered="#{loginManage.custvend.custvendid == param['id'] and loginManage.custvend.roleid.roleid == 2}">
+                                
+                                    
+                                <div id="home" class="tab-pane fade in active">
+                                    <h3>Παραγγελίες</h3>
+
+                                    <h:dataTable rendered="#{not empty profileFrontManage.getAllOrdersByID(param['id'])}" value="#{profileFrontManage.getAllOrdersByID(param['id'])}" id ="customers" var="order"  class="display nowrap table table-hover table-striped table-bordered">
+                                        <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header">Ημερομηνία παραγγελίας</f:facet>
+                                                <!-- row record -->
+                                                #{order.orderdate}
+                                        </h:column>
+
+                                        <h:column>
+                                                <!-- column header -->
+                                                <f:facet name="header">Ποσό παραγγελίας</f:facet>
+                                                <!-- row record -->
+                                                #{order.sumamnt} €
+                                        </h:column>
+
+                                        
+                                        <h:column>
+                                                <f:facet name="header">Παραστατικό</f:facet>
+                                                <a class="btn btn-success" href="/PrimeFaces/faces/resources/invoices/#{order.invoice}" target="_blank">Προβολή</a>
+                                        </h:column>
+
+                                    </h:dataTable>
+                                </div>
+                                
+                                    
+                                 <div id="profile" class="tab-pane fade">
+                                <h:form>
+                             
+                                    
+                                <div class="col-sm-6" style="margin-top: 30px;background-color: whitesmoke;padding: 20px;border-radius: 10px;">     
+                                   <div class="form-group">
+                                        <h:outputLabel for="fname" >Όνομα <span class="red">*</span></h:outputLabel>
+                                            <h:inputText  id="fname" value="#{profileFrontManage.getCustvendByID(param['id']).fname}" class="form-control" ></h:inputText>
+                                        <div class="col-sm-4">
+                                            <h:messages for = "fname"  class="customErrorMessage"></h:messages>  
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:outputLabel for="lname" class="control-label">Επίθετο <span class="red">*</span></h:outputLabel>
+                                            <h:inputText  id="lname" value="#{profileFrontManage.getCustvendByID(param['id']).lname}" class="form-control" ></h:inputText> 
+                                        <div class="col-sm-4">
+                                        <h:messages for = "lname"  class="customErrorMessage"></h:messages>  
+                                        </div>
+                                    </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="afm" class="control-label">ΑΦΜ </h:outputLabel> 
+                                        <h:inputText id="afm" value="#{profileFrontManage.getCustvendByID(param['id']).afm}" class="form-control" >
+                                            <f:validateLongRange maximum="9999999999" minimum="0000000000" />
+                                        </h:inputText>
+                                    <div class="col-sm-4">
+                                        <h:message for="afm" class="customErrorMessage"/>  
+                                    </div>
+                                </div> 
+
+                                    <div class="form-group">
+                                    <h:outputLabel for="username" class="control-label">User Name <span class="red">*</span></h:outputLabel>
+                                        <h:inputText id="username" value="#{profileFrontManage.getCustvendByID(param['id']).username}" class="form-control"></h:inputText>
+                                    <div class="col-sm-4">
+                                    <h:message for="username" class="customErrorMessage"/>  
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="address" class="control-label">Διεύθυνση <span class="red">*</span></h:outputLabel>
+                                        <h:inputText id="address" value="#{profileFrontManage.getCustvendByID(param['id']).address}" class="form-control"></h:inputText>
+                                    <div class="col-sm-4">
+                                    <h:message for="address" class="customErrorMessage"/>  
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="zip" class="control-label">T.K <span class="red">*</span></h:outputLabel>
+                                        <h:inputText id="zip" value="#{profileFrontManage.getCustvendByID(param['id']).zip}" class="form-control"></h:inputText>
+                                    <div class="col-sm-4">
+                                    <h:message for="zip" class="customErrorMessage"/>  
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="district" class="control-label">Περιοχή <span class="red">*</span></h:outputLabel>
+                                        <h:inputText id="district" value="#{profileFrontManage.getCustvendByID(param['id']).district}" class="form-control"></h:inputText>
+                                    <div class="col-sm-4">
+                                    <h:message for="district" class="customErrorMessage"/>  
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="phone" class="control-label">Τηλέφωνο <span class="red">*</span></h:outputLabel>
+                                        <h:inputText id="phone" value="#{profileFrontManage.getCustvendByID(param['id']).phone}" class="form-control" >
+                                            <f:validateLongRange maximum="9999999999" minimum="0000000000" />
+                                        </h:inputText>
+                                    <div class="col-sm-4">
+                                        <h:message for="phone" class="customErrorMessage"/>  
+                                    </div>
+                                </div> 
+
+
+                                <div class="form-group">
+                                    <h:outputLabel for="email" class="control-label">EMAIL <span class="red">*</span></h:outputLabel>
+                                        <h:inputText id="email" value="#{profileFrontManage.getCustvendByID(param['id']).email}" class="form-control"></h:inputText>
+                                    <div class="col-sm-4">
+                                    <h:message for="email" class="customErrorMessage"/>  
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <h:outputLabel for="jobname" class="control-label">Επάγγελμα</h:outputLabel>
+                                        <h:inputText id="jobname" value="#{profileFrontManage.getCustvendByID(param['id']).jobname}" class="form-control"></h:inputText>
+                                    <div class="col-sm-4">
+                                    <h:message for="jobname" class="customErrorMessage"/>  
+                                    </div>
+                                </div>
+
+
+                                    <div class="form-group">   
+                                        <div class="col-sm-12">  
+                                            <h:commandButton value="Επεξεργασία" action="#{profileFrontManage.updateCustvend()}" class="btn btn-success"></h:commandButton>  
+                                        </div>  
+                                    </div>  
+                                </div> 
+                                </h:form>  
+                                     
+                                 </div>
+                                    <div id="credits" class="tab-pane fade">
+                                         <div class="form-group" style="padding: 20px;">
+                                            <h:outputLabel for="jobname" class="control-label">Διαθέσημα Credits: #{loginManage.custvend.credits} €</h:outputLabel>
+                                            
+                                        </div> 
+                                    </div>  
+                                    
+                                    
+                                    
+                                    <div id="wishlist" class="tab-pane fade in active">
+                                    <h3>Wishlist</h3>
+
+                                        <h:dataTable rendered="#{not empty profileFrontManage.getAllWishlistByID(loginManage.custvend)}" value="#{profileFrontManage.getAllWishlistByID(loginManage.custvend)}" id ="wishlistProducts" var="wishlistProducts"  class="display nowrap table table-hover table-striped table-bordered">
+                                            <h:column>
+                                                 <f:facet name="header">Φωτογραφία</f:facet>
+                                                 <h:graphicImage value = "/java-e-commerce/web/resources/images/#{wishlistProducts.productid.photosid.url}"  style="width: 200px;"/>
+                                            </h:column>
+
+                                             <h:column>
+                                                 <f:facet name="header">Όνομα</f:facet>
+                                                 #{wishlistProducts.productid.name}
+                                             </h:column>
+
+                                             <h:column>
+                                                 <input type="hidden" id="cartPrices" value="#{product.buyprice}"> </input>
+                                                 <f:facet  name="header">Τιμή</f:facet>
+                                                 #{cartManage.getRound2demicalsNumber( wishlistProducts.productid.sellprice* (initParam['vat']+1) )} €
+                                             </h:column>
+
+                                             <h:column>
+                                                 <input type="hidden" id="cartPrices" value="#{product.qty}"> </input>
+                                                 <f:facet  name="header">Ποσότητα</f:facet>
+                                                 #{wishlistProducts.qty} / #{wishlistProducts.productid.produnitid.name}
+                                             </h:column>
+
+                                             <h:column>
+                                                 <input type="hidden" id="cartPrices" value="#{product.qty}"> </input>
+                                                 <f:facet  name="header">Τελική Τιμή</f:facet>
+                                                 #{cartManage.getRound2demicalsNumber(wishlistProducts.productid.sellprice * wishlistProducts.qty* (initParam['vat']+1) )} €
+                                             </h:column>
+                                        </h:dataTable>
+                                    </div>
+                                    
+                                    
+                            </h:panelGroup>
+                                </div>
+                            </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+			
+		
+           <h:messages class="alert alert-danger alert-dismissible fade show" globalOnly="true" />
+
+ 
+        <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="templates/footerFront.xhtml" />
+            </ui:insert>
+        </div>
+
+         <!-- END Page wrapper  -->
+
+         
+    </h:body>
+</html>
+
