@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
@@ -20,7 +15,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author user
+ * <h1>District Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "district")
@@ -97,10 +95,7 @@ public class District implements Serializable {
             return false;
         }
         District other = (District) object;
-        if ((this.district == null && other.district != null) || (this.district != null && !this.district.equals(other.district))) {
-            return false;
-        }
-        return true;
+        return (this.district != null || other.district == null) && (this.district == null || this.district.equals(other.district));
     }
 
     @Override

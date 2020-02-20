@@ -62,12 +62,9 @@ public class UserAllManage implements Serializable {
     }
 
     public void deleteUser(int at) {
-
         deleteMessage = userAllFacade.deleteUser(at);
         getAllUserData();
-
     }
-
 
     public int getId() {
         return id;
@@ -75,12 +72,6 @@ public class UserAllManage implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public void searchWithid(int at) {
-
-        //users = userAllFacade.searchWithat(2);
     }
 
     public int getDeleteMessage() {
@@ -98,6 +89,5 @@ public class UserAllManage implements Serializable {
     public void setUsers(List<Custvend> users) {
         this.users = users;
     }
-
 
 }

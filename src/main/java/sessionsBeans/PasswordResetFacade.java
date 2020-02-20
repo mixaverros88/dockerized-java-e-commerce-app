@@ -7,12 +7,8 @@ package sessionsBeans;
 
 import entities.Custvend;
 
-import java.util.Random;
-
-import entities.User;
 import helpers.HashinUtils;
 
-import java.security.NoSuchAlgorithmException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,7 +28,7 @@ public class PasswordResetFacade {
         return em;
     }
 
-    public String changeUserPass(String email, String newPass) throws NoSuchAlgorithmException {
+    public String changeUserPass(String email, String newPass) {
 
         HashinUtils hash = new HashinUtils();
         String hashpass = hash.hashPass(newPass);

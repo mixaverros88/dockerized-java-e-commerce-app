@@ -5,7 +5,6 @@
  */
 package manage;
 
-import com.itextpdf.text.DocumentException;
 import entities.Custvend;
 import entities.User;
 import java.io.Serializable;
@@ -42,7 +41,7 @@ public class LoginManage implements Serializable {
     @EJB
     ProductFacade productFacade;
 
-    public String valid() throws NoSuchAlgorithmException, DocumentException {
+    public String valid() throws NoSuchAlgorithmException {
         Custvend u = loginFacade.getUser(username, pass);
 
         if (u != null) {

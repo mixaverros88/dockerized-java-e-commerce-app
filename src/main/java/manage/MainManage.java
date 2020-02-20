@@ -8,12 +8,8 @@ package manage;
 import entities.Custvend;
 import entities.Orderlines;
 import helpers.Chart;
-import entities.Orders;
-import entities.Product;
-import entities.User;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -60,10 +56,7 @@ public class MainManage implements Serializable {
     OrderlinesFacade orderlinesFacade;
 
     @PostConstruct
-    void init() {
-        //chart = ordersFacade.listForChartFromDB();
-    }
-
+    void init() {}
 
     public int countAllCategories() {
         return categoryFacade.coutnCategories();
@@ -101,8 +94,6 @@ public class MainManage implements Serializable {
         return ordersFacade.listForChartFromDB();
     }
 
-    public void makeApDF() { }
-
     public List<Chart> getChart() {
         return chart;
     }
@@ -118,8 +109,8 @@ public class MainManage implements Serializable {
         List<Custvend> users = userAllFacade.getAllUsers();
         int count = 0;
 
-        for (int x = 0; x < users.size(); x++) {
-            u = users.get(x);
+        for (Custvend user : users) {
+            u = user;
             u.getFname();
             count++;
         }

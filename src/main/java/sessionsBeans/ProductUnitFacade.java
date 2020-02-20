@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
-import entities.Prodcategory;
 import entities.Produnit;
-
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,18 +27,13 @@ public class ProductUnitFacade {
     }
 
     public List<Produnit> getAllProdunitFromDB() {
-
         TypedQuery<Produnit> query = em.createNamedQuery("Produnit.findAll", Produnit.class);
-        List<Produnit> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
     public List<Produnit> getAllProdunit() {
         TypedQuery<Produnit> query = em.createNamedQuery("Produnit.findByIsactive", Produnit.class).setParameter("isactive", 1);
-        List<Produnit> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
     public boolean updatProductUnitToDB(Produnit produnitid) {
@@ -60,11 +48,7 @@ public class ProductUnitFacade {
 
         Produnit produnit = null;
         TypedQuery<Produnit> query = em.createNamedQuery("Produnit.findByProdunitid", Produnit.class).setParameter("produnitid", id);
-        Produnit results = query.getSingleResult();
-        System.out.println("cccccccccccccc" + results.getName());
-
-
-        return results;
+        return query.getSingleResult();
 
     }
 
@@ -79,7 +63,6 @@ public class ProductUnitFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
     }

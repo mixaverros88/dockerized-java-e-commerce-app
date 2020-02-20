@@ -29,8 +29,6 @@ public class ProdunitFacade {
 
     public List<Produnit> getAllProdunit() {
         TypedQuery<Produnit> query = em.createNamedQuery("Produnit.findAll", Produnit.class);
-        List<Produnit> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 }

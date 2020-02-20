@@ -24,7 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author user
+ * <h1>Roles Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "roles")
@@ -136,10 +139,7 @@ public class Roles implements Serializable {
             return false;
         }
         Roles other = (Roles) object;
-        if ((this.roleid == null && other.roleid != null) || (this.roleid != null && !this.roleid.equals(other.roleid))) {
-            return false;
-        }
-        return true;
+        return (this.roleid != null || other.roleid == null) && (this.roleid == null || this.roleid.equals(other.roleid));
     }
 
     @Override

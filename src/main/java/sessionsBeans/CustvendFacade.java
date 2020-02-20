@@ -6,15 +6,11 @@
 package sessionsBeans;
 
 import entities.Custvend;
-import entities.Prodcategory;
 import entities.Roles;
-import entities.User;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -22,6 +18,7 @@ import javax.persistence.TypedQuery;
 /**
  * @author user
  */
+@SuppressWarnings("ALL")
 @Stateless
 public class CustvendFacade {
 
@@ -69,9 +66,7 @@ public class CustvendFacade {
 
     public Custvend getCreditsAmount(int id) {
         TypedQuery<Custvend> query = em.createNamedQuery("Custvend.findByCredits", Custvend.class).setParameter("custvendid", id);
-        Custvend results = query.getSingleResult();
-
-        return results;
+        return query.getSingleResult();
     }
 
     public void changeBallanceCustvendFromDB(float linesumval, int id) {
@@ -116,8 +111,7 @@ public class CustvendFacade {
 
     public Long checkIfPhoneNumberExists(String phone) {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(o) FROM Custvend o WHERE o.phone = :phone", Long.class).setParameter("phone", phone);
-        Long countryCount = query.getSingleResult();
-        return countryCount;
+        return query.getSingleResult();
     }
 
     public Long checkIfΕmailExists(String email) {
@@ -127,8 +121,7 @@ public class CustvendFacade {
 
     public Long checkIfUserNameExists(String username) {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(o) FROM Custvend o WHERE o.username = :username", Long.class).setParameter("username", username);
-        Long countryCount = query.getSingleResult();
-        return countryCount;
+        return query.getSingleResult();
     }
 
 
@@ -150,7 +143,6 @@ public class CustvendFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
     }

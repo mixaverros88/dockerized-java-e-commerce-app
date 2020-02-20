@@ -5,8 +5,6 @@
  */
 package manage;
 
-import entities.Prodcategory;
-import entities.Product;
 import entities.Produnit;
 
 import java.io.Serializable;

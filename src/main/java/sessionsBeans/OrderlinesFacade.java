@@ -8,7 +8,6 @@ package sessionsBeans;
 import entities.Custvend;
 import entities.Orderlines;
 import entities.Orders;
-import entities.Product;
 import entities.Roles;
 
 import java.util.List;
@@ -16,8 +15,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.hibernate.criterion.Order;
 
 /**
  * @author user
@@ -41,8 +38,7 @@ public class OrderlinesFacade {
             TypedQuery<Double> query = em.createQuery("SELECT ROUND(SUM(o.linesumval), 2) FROM Orderlines o WHERE o.vendor = :vendor AND o.roleid = :roleid", Double.class)
                     .setParameter("vendor", custvend)
                     .setParameter("roleid", r);
-            double countryCount = query.getSingleResult();
-            return countryCount;
+            return query.getSingleResult();
         } catch (Exception e) {
             return 0.0;
         }
@@ -83,8 +79,7 @@ public class OrderlinesFacade {
     public double orderDetailsFROMDB(Custvend custvend) {
         try {
             TypedQuery<Double> query = em.createQuery("SELECT ROUND(SUM(o.linesumval), 2) FROM Orderlines o WHERE o.vendor = :vendor", Double.class).setParameter("vendor", custvend);
-            double countryCount = query.getSingleResult();
-            return countryCount;
+            return query.getSingleResult();
         } catch (Exception e) {
             return 0.0;
         }
@@ -98,7 +93,6 @@ public class OrderlinesFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
 

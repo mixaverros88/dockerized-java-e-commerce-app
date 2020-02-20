@@ -28,7 +28,6 @@ import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
 import sessionsBeans.ProductUnitFacade;
-import sessionsBeans.ProdunitFacade;
 import sessionsBeans.UploadImageFacade;
 
 /**

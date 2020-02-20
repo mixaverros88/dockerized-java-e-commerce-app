@@ -6,7 +6,6 @@
 package manage;
 
 import entities.Prodcategory;
-import entities.User;
 
 import java.io.Serializable;
 import java.util.List;

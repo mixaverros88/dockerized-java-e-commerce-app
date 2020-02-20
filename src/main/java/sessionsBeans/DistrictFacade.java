@@ -6,8 +6,6 @@
 package sessionsBeans;
 
 import entities.District;
-import entities.Prodcategory;
-import entities.Roles;
 
 import java.util.List;
 import javax.ejb.Stateless;

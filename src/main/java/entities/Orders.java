@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
@@ -32,7 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author user
+ * <h1>Orders Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @SqlResultSetMapping(
@@ -268,10 +266,7 @@ public class Orders implements Serializable {
             return false;
         }
         Orders other = (Orders) object;
-        if ((this.orderid == null && other.orderid != null) || (this.orderid != null && !this.orderid.equals(other.orderid))) {
-            return false;
-        }
-        return true;
+        return (this.orderid != null || other.orderid == null) && (this.orderid == null || this.orderid.equals(other.orderid));
     }
 
     @Override

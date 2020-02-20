@@ -7,16 +7,11 @@ package sessionsBeans;
 
 import entities.Custvend;
 import entities.Product;
-import entities.Role;
-import entities.Roles;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -33,28 +28,17 @@ public class SallesFacade {
     }
 
     public List<Product> findProducts() {
-
-        //JBQL
         TypedQuery<Product> query = em.createNamedQuery("Product.findAll", Product.class);
-        List<Product> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
 
     public List<Product> findProductsCombineByVendor(Custvend custvend) {
-
-        //JBQL
-//        TypedQuery<Product> query = em.createNamedQuery("Product.findAll", Product.class);
-//        List<Product> results = query.getResultList();
-
         TypedQuery<Product> query = em.createQuery("SELECT o FROM Product o WHERE o.vendor = :vendor", Product.class).setParameter("vendor", custvend);
-        List<Product> products = query.getResultList();
-        return products;
-
+        return query.getResultList();
     }
 
-
+    // TODO
     public double countSumSallesFromDB() {
 
         return 0.0;
@@ -69,6 +53,7 @@ public class SallesFacade {
 //        }
     }
 
+    // TODO
     public double countSumSallesbyVendorFromDB(Custvend custvend) {
 
         return 0.0;

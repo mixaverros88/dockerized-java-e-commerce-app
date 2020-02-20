@@ -6,12 +6,10 @@
 package manage;
 
 import entities.Custvend;
-import entities.Prodcategory;
 import entities.Roles;
 import helpers.HashinUtils;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -90,7 +88,7 @@ public class CustvendEditManage implements Serializable {
     }
 
 
-    public String updateCustvend() throws NoSuchAlgorithmException {
+    public String updateCustvend() {
 
         Custvend custvendpdate = new Custvend();
         HashinUtils hu = new HashinUtils();

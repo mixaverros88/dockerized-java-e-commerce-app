@@ -1,31 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import helpers.Chart;
 import entities.Custvend;
 import entities.Orderlines;
 import entities.Orders;
-import entities.Prodcategory;
-import entities.Product;
 import entities.Roles;
-import helpers.DBConnections;
 import helpers.MailSender;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,9 +17,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @Stateless
 public class OrdersFacade {
 
@@ -86,7 +67,6 @@ public class OrdersFacade {
 
 
     public Orders getOrderByIDFromDB(int orderid) {
-
         Orders orders = null;
         TypedQuery<Orders> query = em.createNamedQuery("Orders.findByOrderid", Orders.class).setParameter("orderid", orderid);
         return query.getSingleResult();
@@ -139,42 +119,19 @@ public class OrdersFacade {
 
 
     public void insertPdfToOrderToDb(int id) {
-
         Query query = em.createNativeQuery("UPDATE orders SET invoice ='" + id + ".pdf' WHERE ORDERID=" + id);
         query.executeUpdate();
-
     }
 
     public List<Chart> listForChartFromDB() {
 
-//https://www.thoughts-on-java.org/result-set-mapping-basics/
-//SQL result set mapping
-//http://www.java2s.com/Tutorial/Java/0355__JPA/SqlResultSetMappingWithEntityResultAndFieldResult.htm 
-
-//        TypedQuery<Chart> query  = em.createQuery("SELECT CAST(o.orderdate AS date) as dateChart, ROUND(SUM(o.sumamnt),2) as sumChart FROM Orders o group by CAST(o.orderdate AS date)", Chart.class);
-//        List<Chart> results = query.getResultList();
-
-
-//        List<TestClass> result = new ArrayList<>();
-//        Query query = em.createQuery("SELECT new model.TestClass(c.cName, v.vName) FROM Candidates c, Voters v where c.cName=v.vName");
-//        result = query.getResultList();
-//        return result;
-
         Roles r = new Roles();
         r.setRoleid(2);
-        List<Chart> result = new ArrayList<>();
+        List<Chart> result;
         String queryStr = "SELECT new helpers.Chart(CAST(o.orderdate AS date) as dateChart, ROUND(SUM(o.sumamnt),2) as sumChart) FROM Orders o WHERE o.isapprv= :isapprv AND o.roleid= :roleid group by CAST(o.orderdate AS date)";
         short isapprv = 1;
         Query query = em.createQuery(queryStr).setParameter("isapprv", isapprv).setParameter("roleid", r);
-        result = query.setMaxResults(6).getResultList();
-
-
-//         List<Chart> ch = (List<Chart>)results;
-//
-//        System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+results.size());
-
-        return result;
-
+        return query.setMaxResults(6).getResultList();
 
     }
 
@@ -185,7 +142,6 @@ public class OrdersFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
 

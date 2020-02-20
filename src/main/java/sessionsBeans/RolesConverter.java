@@ -5,7 +5,6 @@
  */
 package sessionsBeans;
 
-import entities.Role;
 import entities.Roles;
 
 import javax.ejb.EJB;

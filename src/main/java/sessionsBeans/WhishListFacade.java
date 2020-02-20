@@ -5,15 +5,12 @@
  */
 package sessionsBeans;
 
-import entities.Ballance;
 import entities.Custvend;
 import entities.Product;
 import entities.Wishlist;
-import helpers.DateTime;
 import helpers.MailSender;
 
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,7 +54,6 @@ public class WhishListFacade {
     }
 
     public void updateWhishListInform(int id) {
-        // , INFORMDATE ="+DateTime.getDateTimeForDatabase()+"
         Query query = em.createNativeQuery("UPDATE wishlist SET INFORM =" + 1 + " WHERE WISHLISTID=" + id);
         query.executeUpdate();
     }
@@ -69,7 +65,6 @@ public class WhishListFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
     }

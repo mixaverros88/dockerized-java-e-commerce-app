@@ -20,7 +20,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author user
+ * <h1>Use Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "user")
@@ -156,10 +159,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.at == null && other.at != null) || (this.at != null && !this.at.equals(other.at))) {
-            return false;
-        }
-        return true;
+        return (this.at != null || other.at == null) && (this.at == null || this.at.equals(other.at));
     }
 
     @Override

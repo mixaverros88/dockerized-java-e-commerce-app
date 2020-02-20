@@ -6,7 +6,6 @@
 package sessionsBeans;
 
 import entities.Ballance;
-import entities.Product;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,7 +32,6 @@ public class BallanceFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
     }

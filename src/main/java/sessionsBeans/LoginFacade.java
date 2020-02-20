@@ -7,15 +7,11 @@ package sessionsBeans;
 
 
 import entities.Custvend;
-import entities.User;
 import helpers.HashinUtils;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 /**
  * @author user
@@ -30,7 +26,7 @@ public class LoginFacade {
         return em;
     }
 
-    public Custvend getUser(String username, String password) throws NoSuchAlgorithmException {
+    public Custvend getUser(String username, String password) {
 
         HashinUtils hu = new HashinUtils();
         String hashPassword = hu.hashPass(password);

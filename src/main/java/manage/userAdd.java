@@ -9,7 +9,6 @@ import entities.Role;
 import entities.User;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -72,11 +71,11 @@ public class userAdd implements Serializable {
     }
 
 
-    public void insertUser() throws NoSuchAlgorithmException {
-        User u = null;
+    public void insertUser() {
+        User u;
         boolean mr = false;
 //        HashinUtils hash = new HashinUtils();
-        if (password.equals(passwordCheck) == true) {
+        if (password.equals(passwordCheck)) {
             u = new User();
             u.setAt(Integer.toString(at));
             u.setName(name);
@@ -89,7 +88,7 @@ public class userAdd implements Serializable {
             mr = userAddFacade.insertUserToDB(u);
         }
         //mhnhmata από το magaebean στην σελίδα
-        if (mr == true) {
+        if (mr) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("DATA OK"));
         }
 

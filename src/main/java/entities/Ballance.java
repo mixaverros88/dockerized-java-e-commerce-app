@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
@@ -24,7 +19,10 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author user
+ * <h1>Balance Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "ballance")
@@ -149,10 +147,7 @@ public class Ballance implements Serializable {
             return false;
         }
         Ballance other = (Ballance) object;
-        if ((this.ballanceid == null && other.ballanceid != null) || (this.ballanceid != null && !this.ballanceid.equals(other.ballanceid))) {
-            return false;
-        }
-        return true;
+        return (this.ballanceid != null || other.ballanceid == null) && (this.ballanceid == null || this.ballanceid.equals(other.ballanceid));
     }
 
     @Override

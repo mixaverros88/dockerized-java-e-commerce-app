@@ -11,12 +11,10 @@ import entities.Wishlist;
 import helpers.HashinUtils;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -90,7 +88,7 @@ public class ProfileFrontManage implements Serializable {
 
     }
 
-    public String updateCustvend() throws NoSuchAlgorithmException {
+    public String updateCustvend() {
 
         Custvend custvendpdate = new Custvend();
         HashinUtils hu = new HashinUtils();
@@ -125,20 +123,15 @@ public class ProfileFrontManage implements Serializable {
     }
 
     public Custvend getCustvendByID(int id) {
-        Custvend cv = custvendFacade.searchWithID(id);
-        return cv;
+        return custvendFacade.searchWithID(id);
     }
-
 
     public List<Orders> getAllOrdersByID(int id) {
-        List<Orders> orders = ordersFacade.getAllSallesBySyuserFromDB(id);
-        return orders;
+        return ordersFacade.getAllSallesBySyuserFromDB(id);
     }
 
-
     public List<Wishlist> getAllWishlistByID(Custvend custvend) {
-        List<Wishlist> orders = whishListFacade.getAllWishlistBySyuserFromDB(custvend);
-        return orders;
+        return whishListFacade.getAllWishlistBySyuserFromDB(custvend);
     }
 
     public Custvend getCustvend() {

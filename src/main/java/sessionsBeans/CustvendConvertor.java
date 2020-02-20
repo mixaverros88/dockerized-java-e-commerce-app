@@ -6,7 +6,6 @@
 package sessionsBeans;
 
 import entities.Custvend;
-import entities.Prodcategory;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;

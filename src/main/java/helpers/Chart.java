@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpers;
-
 
 import java.util.Date;
 
-
 /**
- * @author user
+ * <h1>Chart</h1>
+ * Evaluate the values for the main chart.
+ * @author Mike-George Verros
+ * @version 1.0
  */
 
 public class Chart {

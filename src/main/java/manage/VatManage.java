@@ -6,7 +6,6 @@
 package manage;
 
 
-import entities.Prodcategory;
 import entities.Vat;
 
 import java.io.Serializable;

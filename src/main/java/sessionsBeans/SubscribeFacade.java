@@ -6,7 +6,6 @@
 package sessionsBeans;
 
 import entities.Subscribe;
-import entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,7 +31,6 @@ public class SubscribeFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
 

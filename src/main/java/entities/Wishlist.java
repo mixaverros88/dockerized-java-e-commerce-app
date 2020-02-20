@@ -24,7 +24,10 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author user
+ * <h1>Wishlist Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "wishlist")
@@ -146,10 +149,7 @@ public class Wishlist implements Serializable {
             return false;
         }
         Wishlist other = (Wishlist) object;
-        if ((this.wishlistid == null && other.wishlistid != null) || (this.wishlistid != null && !this.wishlistid.equals(other.wishlistid))) {
-            return false;
-        }
-        return true;
+        return (this.wishlistid != null || other.wishlistid == null) && (this.wishlistid == null || this.wishlistid.equals(other.wishlistid));
     }
 
     @Override

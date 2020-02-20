@@ -1,29 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpers;
-
 
 import java.util.Properties;
 import java.util.Random;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.PasswordAuthentication;
 
 /**
- * @author user
+ * <h1>Mail Sender/h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 
 public class MailSender {
-
 
     public String generatePassword() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -34,7 +28,6 @@ public class MailSender {
             salt.append(SALTCHARS.charAt(index));
         }
         return salt.toString();
-
     }
 
     public static boolean send(String to, String sub, String msg) {
@@ -401,6 +394,5 @@ public class MailSender {
         }
 
     }
-
 
 }

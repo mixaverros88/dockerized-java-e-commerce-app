@@ -6,16 +6,11 @@
 package manage;
 
 import entities.Custvend;
-import entities.Prodcategory;
-import entities.Role;
 import entities.Roles;
-import entities.User;
-import helpers.ConvertToGreeklish;
 import helpers.HashinUtils;
 import helpers.MailSender;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +23,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -78,7 +72,7 @@ public class CustvendManage implements Serializable {
     private List<Roles> roles;
     private List<Custvend> custvend;
 
-    HttpServletRequest origRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    private HttpServletRequest origRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     private StringBuffer url = origRequest.getRequestURL();
 
 
@@ -160,7 +154,7 @@ public class CustvendManage implements Serializable {
 
             MailSender mailSend = new MailSender();
             if (register == 1) {
-                mailSend.send(custvend.getEmail(), "ezikos.gr Έγκριση Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr Εγκρίθηκε</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
+                MailSender.send(custvend.getEmail(), "ezikos.gr Έγκριση Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr Εγκρίθηκε</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο χρήστης άλλαξε κατάσταση επιτυχώς. Και θα ενημερωθή με email"));
             }
         } else {
@@ -169,7 +163,7 @@ public class CustvendManage implements Serializable {
         return "";
     }
 
-    public String insertCustVend() throws NoSuchAlgorithmException {
+    public String insertCustVend() {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -242,7 +236,7 @@ public class CustvendManage implements Serializable {
             if (urlCompare.equals(urtString)) {
                 if (rr.getRoleid() == 2) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς"));
-                    mailSend.send(custvend.getEmail(), "ezikos.gr Δημιουργία Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
+                    MailSender.send(custvend.getEmail(), "ezikos.gr Δημιουργία Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                     return "login";
                 } else if (rr.getRoleid() == 3) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς. Θα σας αποσταλεί email όταν θα ενεργοποιηθεί"));

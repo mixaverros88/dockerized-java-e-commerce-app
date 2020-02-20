@@ -5,17 +5,17 @@
  */
 package helpers;
 
-import java.security.NoSuchAlgorithmException;
-
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * @author user
+ * <h1>Hash Utils</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 public class HashinUtils {
-    public String hashPass(String password) throws NoSuchAlgorithmException {
-        String generatedSecurePasswordHash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        return generatedSecurePasswordHash;
+    public String hashPass(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
     public boolean checkHash(String userPassword, String dbPassword) {

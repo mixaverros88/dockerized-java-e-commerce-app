@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpers;
 
 /**
- * @author user
+ * <h1>Slug Name</h1>
+ * Convert the image name, to the appropriate file name.
+ * @author Mike-George Verros
+ * @version 1.0
  */
 public class SlugName {
     public static String convertToSlugName(String name) {
-
-        String greeklish =
-                name
+        return name
                         .replaceAll(" ", "-")
                         .replaceAll("α", "a")
                         .replaceAll("ά", "a")
@@ -97,7 +93,5 @@ public class SlugName {
                         .replaceAll("<", "")
                         .replaceAll("`", "")
                         .replaceAll("~", "");
-
-        return greeklish;
     }
 }

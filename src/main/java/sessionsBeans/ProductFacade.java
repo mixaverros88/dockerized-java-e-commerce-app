@@ -17,14 +17,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.Criteria;
-
-import org.hibernate.cfg.Configuration;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.service.ServiceRegistry;
-
 /**
  * @author user
  */
@@ -64,7 +56,6 @@ public class ProductFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
     }
@@ -72,15 +63,12 @@ public class ProductFacade {
 
     public long chechIfTheVendorAsycToProductFromDB(Custvend custvend) {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.vendor = :vendor", Long.class).setParameter("vendor", custvend);
-        long countryCount;
-        return countryCount = query.getSingleResult();
+        return  query.getSingleResult();
 
     }
 
 
     public long countProductsFromDB(int roleid, int sysuser) {
-        //TypedQuery<Double> query = em.createQuery("SELECT SUM(o.sumamnt) FROM Orders o WHERE o.roleid = :roleid", Double.class)
-        //     .setParameter(roleid, roleid);
         long countryCount;
         if (roleid == 1) {
             TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p", Long.class);
@@ -89,8 +77,6 @@ public class ProductFacade {
             TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.sysuser = :sysuser", Long.class).setParameter("sysuser", sysuser);
             countryCount = query.getSingleResult();
         }
-
-
         return countryCount;
     }
 
@@ -115,51 +101,36 @@ public class ProductFacade {
     }
 
     public List<Product> getAllProductsFromDatabase() {
-
         TypedQuery<Product> query = em.createNamedQuery("Product.findAll", Product.class);
-        List<Product> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
 
     public List<Product> getAllProductsByIsactiveFromDB(int isactive) {
-
         TypedQuery<Product> query = em.createNamedQuery("Product.findByIsactive", Product.class).setParameter("isactive", 1);
-        List<Product> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
     public List<Product> getAllProductsFromDBByCategory(Prodcategory prodcategory) {
-
         TypedQuery<Product> query = em.createNamedQuery("Product.findByProduCategorytid", Product.class).setParameter("prodcategoryid", prodcategory);
-        List<Product> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
     public List<Product> getAllProductsFromDatabaseByID(int id) {
-
         TypedQuery<Product> query = em.createNamedQuery("Product.findByProductid", Product.class).setParameter("productid", id);
-        List<Product> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
 
     public int checkIfProductExistsInDB(String id) {
         int foo = Integer.parseInt(id);
         TypedQuery<Product> query = em.createNamedQuery("Product.findByProductid", Product.class).setParameter("productid", foo);
-        List<Product> results = query.getResultList();
-        return results.size();
+        return query.getResultList().size();
     }
 
     public Product getProductFromDatabaseByID(int id) {
-
         Product product;
         product = em.find(Product.class, id);
-
         return product;
     }
 
@@ -177,31 +148,14 @@ public class ProductFacade {
 
         Product product;
         product = em.find(Product.class, Integer.parseInt(id));
-
         return product;
     }
 
     public Produnit returnOneUnit(String id) {
 
-        Produnit rol = new Produnit();
+        Produnit rol;
         rol = em.find(Produnit.class, Integer.parseInt(id));
-
         return rol;
     }
 
-    public List<Product> searchProduct() {
-
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        Criteria criteria = session.createCriteria(Product.class);
-        criteria.add(Restrictions.eq("NAME", "test2"));
-
-        List<Product> products = (List<Product>) criteria.list();
-        session.getTransaction().commit();
-        session.close();
-
-        return products;
-    }
 }

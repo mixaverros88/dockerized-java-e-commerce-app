@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class CreateUser {
 
     @NotNull(message = "Name can't be null")
-    String name;
+    private String name;
 
     public String getName() {
         return name;

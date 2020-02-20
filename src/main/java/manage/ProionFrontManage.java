@@ -10,9 +10,7 @@ import entities.Product;
 import entities.Wishlist;
 import helpers.DateTime;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,9 +21,6 @@ import javax.servlet.http.HttpSession;
 
 import sessionsBeans.ProductFacade;
 import sessionsBeans.WhishListFacade;
-
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 /**
  * @author user
@@ -96,7 +91,7 @@ public class ProionFrontManage implements Serializable {
         return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
     }
 
-    public boolean checkIfProductExists() throws IOException {
+    public boolean checkIfProductExists() {
         if (productFacade.checkIfProductExistsInDB(getIdFromUrl()) == 0) {
 //           FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν που ζητήσατε δεν βρέθηκε."));

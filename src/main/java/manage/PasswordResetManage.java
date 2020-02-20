@@ -6,25 +6,15 @@
 package manage;
 
 import entities.Custvend;
-import entities.User;
 import helpers.MailSender;
 
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.validation.constraints.NotNull;
 
 import sessionsBeans.PasswordResetFacade;
@@ -42,12 +32,12 @@ public class PasswordResetManage implements Serializable {
     @EJB
     PasswordResetFacade passwordResetFacade;
 
-    public String valid() throws MessagingException, NoSuchAlgorithmException {
+    public String valid() throws NoSuchAlgorithmException {
         Custvend u = passwordResetFacade.validateEmail(email);
         if (u != null) {
 
             MailSender mailSend = new MailSender();
-            mailSend.send(u.getEmail(), "ezikos.gr Αλλαγή Password", "<h3>Το νέο σας password είναι το " + passwordResetFacade.changeUserPass(email, mailSend.generatePassword()) + "</h3><br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
+            MailSender.send(u.getEmail(), "ezikos.gr Αλλαγή Password", "<h3>Το νέο σας password είναι το " + passwordResetFacade.changeUserPass(email, mailSend.generatePassword()) + "</h3><br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο καινούργιος κωδικός στάθηκε στο email:" + email + " "));
 
             return "";

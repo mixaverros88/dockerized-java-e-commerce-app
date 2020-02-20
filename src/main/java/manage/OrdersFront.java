@@ -11,18 +11,12 @@ import entities.Custvend;
 import entities.Orderlines;
 import entities.Orders;
 import entities.Product;
-import entities.Produnit;
-import entities.Role;
-import entities.Roles;
 import helpers.CreatePdf;
 import helpers.DateTime;
 import helpers.MailSender;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -46,7 +40,6 @@ import sessionsBeans.ProductFacade;
 public class OrdersFront implements Serializable {
 
     Orderlines orderlines = new Orderlines();
-    private List<Product> products = new ArrayList<>();
     private float credits;
     float newCredits;
 
@@ -76,7 +69,7 @@ public class OrdersFront implements Serializable {
         HttpSession session = SessionUtils.getSession();
         Custvend custvend = (Custvend) session.getAttribute("Custvend");
 
-        products = myCart.getProducts();
+        List<Product> products = myCart.getProducts();
 
 
         if (totalPrice > 100) {

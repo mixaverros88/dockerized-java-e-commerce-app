@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 public class CartManage implements Serializable {
 
 
-    private List<Product> products = new ArrayList<Product>();
+    private List<Product> products = new ArrayList<>();
     private float credits;
 
     public CartManage() {

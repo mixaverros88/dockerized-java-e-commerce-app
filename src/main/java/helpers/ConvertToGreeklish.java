@@ -6,7 +6,10 @@
 package helpers;
 
 /**
- * @author user
+ * <h1>Convert To Greeklish</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 public class ConvertToGreeklish {
 

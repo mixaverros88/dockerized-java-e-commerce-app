@@ -33,9 +33,6 @@ public class UploadImageController implements Serializable {
 
     private List<Photos> photos;
 
-    @NotNull(message = "Επιλέξτε ένα αρχείο")
-    private String filename;
-
     // TODO Chnage image path
     private String path = "C:/Users/user/Documents/NetBeansProjects/PrimeFaces/web/resources/images/";
 
@@ -48,7 +45,7 @@ public class UploadImageController implements Serializable {
     public String doUpload() throws IOException {
 
 
-        filename = getFilename(file);
+        @NotNull(message = "Επιλέξτε ένα αρχείο") String filename = getFilename(file);
         if (filename == null) {
             return "";
         }

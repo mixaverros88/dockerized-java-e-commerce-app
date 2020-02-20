@@ -1,28 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
-
-/**
- * @author user
- */
 
 import entities.Role;
 import entities.Roles;
 import entities.User;
-
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author user
- */
 @Stateless
 public class UserAddFacade {
 
@@ -71,13 +57,13 @@ public class UserAddFacade {
 
 
     public Role returnOneRole(String id) {
-        Role rol = new Role();
+        Role rol;
         rol = em.find(Role.class, Integer.parseInt(id));
         return rol;
     }
 
     public Roles returnOneRoles(String id) {
-        Roles roles = new Roles();
+        Roles roles;
         roles = em.find(Roles.class, Integer.parseInt(id));
         return roles;
     }
@@ -89,7 +75,6 @@ public class UserAddFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
 

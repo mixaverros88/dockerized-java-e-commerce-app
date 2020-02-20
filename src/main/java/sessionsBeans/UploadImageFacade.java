@@ -6,7 +6,6 @@
 package sessionsBeans;
 
 import entities.Photos;
-import entities.Prodcategory;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -31,22 +30,17 @@ public class UploadImageFacade {
 
     public List<Photos> getAllfiles() {
         TypedQuery<Photos> query = em.createNamedQuery("Photos.findAll", Photos.class);
-        List<Photos> results = query.getResultList();
-
-        return results;
+        return query.getResultList();
     }
 
     public Photos returnOnePhoto(String id) {
-
-        Photos photos = new Photos();
+        Photos photos;
         photos = em.find(Photos.class, Integer.parseInt(id));
-
         return photos;
     }
 
     public int deletePhotoFromDatabase(int photosid) {
         Query query = em.createNativeQuery("DELETE FROM photos WHERE photosid =" + photosid);
-        //System.out.println(query.executeUpdate());
         return query.executeUpdate();
     }
 
@@ -57,7 +51,6 @@ public class UploadImageFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
 

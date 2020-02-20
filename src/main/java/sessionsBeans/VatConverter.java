@@ -5,7 +5,6 @@
  */
 package sessionsBeans;
 
-import entities.Prodcategory;
 import entities.Vat;
 
 import javax.ejb.EJB;

@@ -5,7 +5,6 @@
  */
 package manage;
 
-import entities.Prodcategory;
 import entities.Produnit;
 
 import java.io.Serializable;
@@ -18,7 +17,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
-import sessionsBeans.CategoryFacade;
 import sessionsBeans.ProductUnitFacade;
 
 /**

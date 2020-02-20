@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpers;
 
 import java.util.List;
-
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import entities.Custvend;
 import entities.Product;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -21,17 +14,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-
 import sessionsBeans.ProductFacade;
 
 /**
- * @author user
+ * <h1>Create Pdf</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 public class CreatePdf {
 
     @EJB
     ProductFacade productFacade;
 
+    // TODO change file path
     public static String File = "C:/Users/user/Documents/NetBeansProjects/PrimeFaces/new.pdf";
     public static final String DEST = "results/zugferd/pdf/basic%05d.pdf";
     public static final String ICC = "resources/color/sRGB_CS_profile.icm";

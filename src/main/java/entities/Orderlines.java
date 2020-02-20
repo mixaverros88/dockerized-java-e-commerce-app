@@ -22,7 +22,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author user
+ * <h1>Order lines Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "orderlines")
@@ -204,10 +207,7 @@ public class Orderlines implements Serializable {
             return false;
         }
         Orderlines other = (Orderlines) object;
-        if ((this.orderlinesid == null && other.orderlinesid != null) || (this.orderlinesid != null && !this.orderlinesid.equals(other.orderlinesid))) {
-            return false;
-        }
-        return true;
+        return (this.orderlinesid != null || other.orderlinesid == null) && (this.orderlinesid == null || this.orderlinesid.equals(other.orderlinesid));
     }
 
     @Override

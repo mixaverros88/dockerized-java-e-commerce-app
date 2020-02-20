@@ -5,7 +5,6 @@
  */
 package sessionsBeans;
 
-import entities.Prodcategory;
 import entities.Vat;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class VatFacade {
     }
 
     public Vat returnOneVat(String id) {
-        Vat vat = new Vat();
+        Vat vat;
         vat = em.find(Vat.class, Integer.parseInt(id));
         return vat;
     }
@@ -52,8 +51,7 @@ public class VatFacade {
 
     public List<Vat> getAllVatFromDB() {
         TypedQuery<Vat> query = em.createNamedQuery("Vat.findAll", Vat.class);
-        List<Vat> results = query.getResultList();
-        return results;
+        return query.getResultList();
     }
 
     public int deleteVatFromDB(int id) {
@@ -74,7 +72,6 @@ public class VatFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            System.out.println(ex);
             return false;
         }
     }

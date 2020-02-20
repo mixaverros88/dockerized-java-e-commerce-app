@@ -19,7 +19,10 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author user
+ * <h1>Vat Entity</h1>
+ *
+ * @author Mike-George Verros
+ * @version 1.0
  */
 @Entity
 @Table(name = "vat")
@@ -97,10 +100,7 @@ public class Vat implements Serializable {
             return false;
         }
         Vat other = (Vat) object;
-        if ((this.vatid == null && other.vatid != null) || (this.vatid != null && !this.vatid.equals(other.vatid))) {
-            return false;
-        }
-        return true;
+        return (this.vatid != null || other.vatid == null) && (this.vatid == null || this.vatid.equals(other.vatid));
     }
 
     @Override
