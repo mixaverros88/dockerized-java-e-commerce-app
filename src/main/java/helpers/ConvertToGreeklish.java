@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpers;
+
+import org.apache.log4j.Logger;
 
 /**
  * <h1>Convert To Greeklish</h1>
@@ -13,8 +10,11 @@ package helpers;
  */
 public class ConvertToGreeklish {
 
+    final static Logger logger = Logger.getLogger(ConvertToGreeklish.class);
 
     public static String greek2Roman(String name) {
+
+        if(logger.isDebugEnabled()){ logger.debug("Convert greek name to greeklish "); }
 
         return name
                         .replaceAll("α", "a")

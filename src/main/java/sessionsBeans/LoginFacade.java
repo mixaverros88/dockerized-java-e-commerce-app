@@ -1,23 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
-
 
 import entities.Custvend;
 import helpers.HashinUtils;
-
+import org.apache.log4j.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- * @author user
- */
 @Stateless
 public class LoginFacade {
+
+    final static Logger logger = Logger.getLogger(LoginFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -30,8 +23,6 @@ public class LoginFacade {
 
         HashinUtils hu = new HashinUtils();
         String hashPassword = hu.hashPass(password);
-
-
         Custvend user = null;
         try {
             user = (Custvend) em.createQuery(
@@ -56,7 +47,6 @@ public class LoginFacade {
         }
 
         return user;
-
     }
 
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import com.itextpdf.text.DocumentException;
@@ -14,10 +9,10 @@ import entities.Product;
 import helpers.CreatePdf;
 import helpers.DateTime;
 import helpers.MailSender;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -25,19 +20,18 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.BallanceFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.OrderlinesFacade;
 import sessionsBeans.OrdersFacade;
 import sessionsBeans.ProductFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class OrdersFront implements Serializable {
+
+    final static Logger logger = Logger.getLogger(OrdersFront.class);
 
     Orderlines orderlines = new Orderlines();
     private float credits;
@@ -62,15 +56,16 @@ public class OrdersFront implements Serializable {
     @ManagedProperty(value = "#{cartManage}")
     CartManage myCart;
 
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Oders Front Manage"); }
+    }
 
     public String addOrder(float totalPrice, int shipping) throws DocumentException {
 
-
         HttpSession session = SessionUtils.getSession();
         Custvend custvend = (Custvend) session.getAttribute("Custvend");
-
         List<Product> products = myCart.getProducts();
-
 
         if (totalPrice > 100) {
             newCredits = 5.00f;
@@ -81,9 +76,7 @@ public class OrdersFront implements Serializable {
         credits = Float.parseFloat(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendCredits"));
         totalPrice -= credits;
 
-
         Orders orders = new Orders();
-
         orders.setRoleid(custvend.getRoleid());
         orders.setOrderdate(DateTime.getNowDateTime());
         orders.setCustvendid(custvend);
@@ -92,7 +85,6 @@ public class OrdersFront implements Serializable {
         orders.setInsdate(DateTime.getNowDateTime());
         orders.setSysuser(custvend.getCustvendid());
         List<Orderlines> orderlinesL = new ArrayList<>();
-
 
         StringBuilder emailProductTable = new StringBuilder();
 

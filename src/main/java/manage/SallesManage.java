@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Ballance;
@@ -12,7 +7,6 @@ import entities.Orders;
 import entities.Product;
 import entities.Role;
 import entities.Roles;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,7 +21,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.BallanceFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.OrderlinesFacade;
@@ -36,12 +30,11 @@ import sessionsBeans.ProductFacade;
 import sessionsBeans.SallesFacade;
 import sessionsBeans.WhishListFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class SallesManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(SallesManage.class);
 
     @NotNull(message = "Συμπληρώστε την ποσότητα")
     private float qty;
@@ -55,7 +48,6 @@ public class SallesManage implements Serializable {
     HttpSession session = SessionUtils.getSession();
     Custvend custvend = (Custvend) session.getAttribute("Custvend");
 
-
     @EJB
     OrdersFacade ordersFacade;
 
@@ -63,19 +55,15 @@ public class SallesManage implements Serializable {
     SallesFacade sallesFacade;
 
     @EJB
-    OrderlinesFacade orderlinesFacade;
-
-    @EJB
     BallanceFacade ballanceFacade;
 
     @EJB
     CustvendFacade custvendFacade;
 
-    @EJB
-    ProductFacade productFacade;
 
     @EJB
     WhishListFacade whishListFacade;
+
 
     public String getContextParameter() {
         return FacesContext
@@ -88,7 +76,6 @@ public class SallesManage implements Serializable {
 
         FacesContext ctx = FacesContext.getCurrentInstance();
         Float vat1 = Float.parseFloat(ctx.getExternalContext().getInitParameter("vat"));
-
 
         List<Orderlines> orderlinesL = new ArrayList<>();
 
@@ -137,9 +124,7 @@ public class SallesManage implements Serializable {
         System.out.print("User Id" + custvend.getCustvendid() + "custvend");
 
         custvendFacade.changeBallanceCustvendFromDB(-linesumval, custvend.getCustvendid());
-        //productFacade.updateQntProductVendorSalle(qty, product.getProductid());
         whishListFacade.chechIfTheProductIsInWhishList(product, qty);
-
 
         if (ordersFacade.insertProductToOrdersToDB(orders)) {
 
@@ -151,23 +136,20 @@ public class SallesManage implements Serializable {
     }
 
     public String changeStatusOrder(int status, int id) {
-
         Orders order = ordersFacade.getOrderByIDFromDB(id);
-
         if (ordersFacade.changeStatusOrderFromDatabase(status, id, order) == 1) {
             if (status == 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("H παραγγελεία είναι ανενεργή"));
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("H παραγγελεία είναι ενεργή"));
-
             }
         }
-
         return "";
     }
 
     @PostConstruct
     void init() {
+       if (logger.isDebugEnabled()) {  logger.debug("Init Sales Manage"); }
         Products = sallesFacade.findProductsCombineByVendor(custvend);
     }
 
@@ -233,6 +215,5 @@ public class SallesManage implements Serializable {
     public void setVat(float vat) {
         this.vat = vat;
     }
-
 
 }

@@ -6,6 +6,7 @@ import entities.Orderlines;
 import entities.Orders;
 import entities.Roles;
 import helpers.MailSender;
+import org.apache.log4j.Logger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class OrdersFacade {
 
+    final static Logger logger = Logger.getLogger(OrdersFacade.class);
+
     @EJB
     ProductFacade productFacade;
 
@@ -32,7 +35,6 @@ public class OrdersFacade {
     protected EntityManager getEm() {
         return em;
     }
-
 
     //vendorTransaction if is 1 the transaction is sale from vendor to as
     //vendorTransaction if is 2 the transaction is sale from as to customer
@@ -70,7 +72,6 @@ public class OrdersFacade {
         Orders orders = null;
         TypedQuery<Orders> query = em.createNamedQuery("Orders.findByOrderid", Orders.class).setParameter("orderid", orderid);
         return query.getSingleResult();
-
     }
 
     public double countSumOrdersFromDB() {
@@ -88,7 +89,6 @@ public class OrdersFacade {
         List<Orderlines> orderlines = orderlinesFacade.orderDetailsFROMDB(order);
 
         for (Orderlines ol : orderlines) {
-
             emailProductTable.append("<tr style=\"background-color: #e6e6e6;\"><td style=\"padding: 10px;\">").append(ol.getProductid().getName()).append("</td><td style=\"padding: 10px;\">").append(ol.getProductid().getBuyprice()).append(" €</td></tr>");
         }
 
@@ -101,8 +101,6 @@ public class OrdersFacade {
 
             return query.executeUpdate();
         } else {
-
-
             List<Orderlines> orlines = orderlinesFacade.getQntsOfProduct(order);
 
             for (Orderlines ord : orlines) {
@@ -114,9 +112,7 @@ public class OrdersFacade {
 
             return query.executeUpdate();
         }
-
     }
-
 
     public void insertPdfToOrderToDb(int id) {
         Query query = em.createNativeQuery("UPDATE orders SET invoice ='" + id + ".pdf' WHERE ORDERID=" + id);
@@ -124,7 +120,6 @@ public class OrdersFacade {
     }
 
     public List<Chart> listForChartFromDB() {
-
         Roles r = new Roles();
         r.setRoleid(2);
         List<Chart> result;
@@ -132,11 +127,9 @@ public class OrdersFacade {
         short isapprv = 1;
         Query query = em.createQuery(queryStr).setParameter("isapprv", isapprv).setParameter("roleid", r);
         return query.setMaxResults(6).getResultList();
-
     }
 
     public boolean insertProductToOrdersToDB(Orders Orders) {
-
         try {
             em.persist(Orders);
             em.flush();
@@ -144,6 +137,5 @@ public class OrdersFacade {
         } catch (Exception ex) {
             return false;
         }
-
     }
 }

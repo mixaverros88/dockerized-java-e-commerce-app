@@ -1,30 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Produnit;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.ProductUnitFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ProductUnitManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ProductUnitManage.class);
 
     @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα της Μονάδας Μέτρησης")
     private String name;
@@ -33,6 +27,11 @@ public class ProductUnitManage implements Serializable {
 
     @EJB
     ProductUnitFacade productUnitFacade;
+
+    @PostConstruct
+    public void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Product Unit Edit Manage"); }
+    }
 
     public String changeStatusProductUnit(int status, int id) {
         productUnitFacade.changeStatusProductUnitFromDB(status, id);

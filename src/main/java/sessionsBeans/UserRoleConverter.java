@@ -1,31 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Role;
-
+import org.apache.log4j.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-/**
- * @author user
- */
 @ManagedBean(name = "userRoleConverter")
 public class UserRoleConverter implements Converter {
+
+    final static Logger logger = Logger.getLogger(UserRoleConverter.class);
 
     @EJB
     private UserAddFacade roleFacade;
 
-    public UserRoleConverter() {
-
-    }
-
+    public UserRoleConverter() { }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -39,6 +30,4 @@ public class UserRoleConverter implements Converter {
         System.out.println(result);
         return result;
     }
-
-
 }

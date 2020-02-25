@@ -7,7 +7,11 @@ package helpers;
  * @version 1.0
  */
 public class SlugName {
+
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SlugName.class);
+
     public static String convertToSlugName(String name) {
+        if(logger.isDebugEnabled()){ logger.debug("Convert To Slug Name : " + name); }
         return name
                         .replaceAll(" ", "-")
                         .replaceAll("α", "a")

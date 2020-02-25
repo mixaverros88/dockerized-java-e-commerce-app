@@ -1,34 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Product;
-
+import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-/**
- * @author user
- */
 @ManagedBean
 @SessionScoped
 public class CartManage implements Serializable {
 
+    final static Logger logger = Logger.getLogger(CartManage.class);
 
     private List<Product> products = new ArrayList<>();
     private float credits;
 
-    public CartManage() {
+    public CartManage(){}
+
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Cart Manage"); }
     }
+
 
     public String add(Product p) {
         HttpSession session = SessionUtils.getSession();

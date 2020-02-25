@@ -1,36 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import helpers.MailSender;
-
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.PasswordResetFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class PasswordResetManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(PasswordResetManage.class);
 
     @NotNull(message = "Παρακαλώ συμπληρώστε το email σας.")
     private String email;
 
     @EJB
     PasswordResetFacade passwordResetFacade;
+
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Password Reset Manage"); }
+    }
 
     public String valid() throws NoSuchAlgorithmException {
         Custvend u = passwordResetFacade.validateEmail(email);

@@ -19,12 +19,11 @@ import javax.faces.convert.Converter;
 @ManagedBean(name = "vatConverter")
 public class VatConverter implements Converter {
 
+
     @EJB
     private VatFacade vatFacade;
 
-    public VatConverter() {
-
-    }
+    public VatConverter() {}
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

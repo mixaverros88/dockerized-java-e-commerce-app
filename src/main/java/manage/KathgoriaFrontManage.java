@@ -1,30 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Prodcategory;
 import entities.Product;
-
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.ProductFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class KathgoriaFrontManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(KathgoriaFrontManage.class);
 
     private List<Product> products;
 
@@ -33,6 +27,11 @@ public class KathgoriaFrontManage implements Serializable {
 
     @EJB
     CategoryFacade categoryFacade;
+
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Category front manage"); }
+    }
 
     public List<Product> getAllProductsByCategory(int categoryID) {
         Prodcategory prodcategory = categoryFacade.searchWithID(categoryID);

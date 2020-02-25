@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import entities.Roles;
 import helpers.HashinUtils;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,14 +18,14 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.log4j.Logger;
 import sessionsBeans.CustvendFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class CustvendEditManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(CustvendEditManage.class);
 
     @NotNull(message = "Συμπληρώστε το όνομα")
     private String fname;
@@ -68,8 +62,6 @@ public class CustvendEditManage implements Serializable {
     private Roles rr;
     private List<Roles> roles;
     private List<Custvend> custvend;
-
-
     private Custvend custvendA;
 
     @EJB
@@ -79,10 +71,9 @@ public class CustvendEditManage implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        if(logger.isDebugEnabled()){ logger.debug("Init Edit User"); }
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-
         custvendA = (Custvend) sessionMap.get("editCustvend");
         System.out.println("22222" + custvendA.getFname());
     }

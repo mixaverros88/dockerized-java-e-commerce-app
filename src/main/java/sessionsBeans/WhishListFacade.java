@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Custvend;
 import entities.Product;
 import entities.Wishlist;
 import helpers.MailSender;
-
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,11 +12,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @Stateless
 public class WhishListFacade {
+
+    final static Logger logger = Logger.getLogger(WhishListFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -40,12 +34,9 @@ public class WhishListFacade {
         List<Wishlist> wishlist = query.getResultList();
 
         for (Wishlist whi : wishlist) {
-            //MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "<p>Αγαπητέ "+whi.getCustvendid().getFname()+" "+whi.getCustvendid().getLname()+",</p><h3>Το προϊόν: "+whi.getProductid().getName()+" είναι διαθέσιμο.</h3><p> Πατηστε <a href='/java-e-commerce/web/proion.xhtml?id="+whi.getProductid().getProductid()+"'>εδώ</a> για να το αγοράσετε</p>");
-
             MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "Το προϊόν:" + whi.getProductid().getName() + " είναι διαθέσιμο. <br/> Πατηστε <a href='/java-e-commerce/web/proion.xhtml?id=" + whi.getProductid().getProductid() + "'>εδώ</a> για να το αγοράσεται");
             updateWhishListInform(whi.getWishlistid());
         }
-
     }
 
     public List<Wishlist> getAllWishlistBySyuserFromDB(Custvend custvend) {
@@ -59,7 +50,6 @@ public class WhishListFacade {
     }
 
     public boolean insertWhiShListToDB(Wishlist wishlist) {
-
         try {
             em.persist(wishlist);
             em.flush();

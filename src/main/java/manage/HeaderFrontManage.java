@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Prodcategory;
-
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 
 /**
@@ -22,7 +18,13 @@ import sessionsBeans.CategoryFacade;
 @RequestScoped
 public class HeaderFrontManage implements Serializable {
 
+    final static Logger logger = Logger.getLogger(HeaderFrontManage.class);
     private List<Prodcategory> prodcategory;
+
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Header Front Mangage"); }
+    }
 
     @EJB
     CategoryFacade categoryFacade;

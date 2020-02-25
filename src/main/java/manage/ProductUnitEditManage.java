@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Produnit;
-
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -17,14 +11,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
+import org.apache.log4j.Logger;
 import sessionsBeans.ProductUnitFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ProductUnitEditManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ProductUnitEditManage.class);
 
     @NotNull(message = "Name can't be null")
     private String name;
@@ -40,20 +34,15 @@ public class ProductUnitEditManage implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        if(logger.isDebugEnabled()){ logger.debug("Init Product Unit Edit Manage"); }
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-
         produnit = (Produnit) sessionMap.get("editProductUnit");
-        System.out.println("22222" + produnit.getName());
-//        category = categoryFacade.searchWithID(2);
-//        System.out.println("ccccccccccccssscc"+category.getName());
     }
 
     public String updateProductUnit() {
 
         Produnit produnitUpdate = new Produnit();
-
         produnitUpdate.setName(produnit.getName());
         produnitUpdate.setIsactive(produnit.getIsactive());
         produnitUpdate.setProdunitid(produnit.getProdunitid());
@@ -63,7 +52,6 @@ public class ProductUnitEditManage implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("DATA OK"));
             return "produnitAll";
         }
-
         return "";
     }
 

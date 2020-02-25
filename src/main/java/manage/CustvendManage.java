@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import entities.Roles;
 import helpers.HashinUtils;
 import helpers.MailSender;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,16 +20,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.log4j.Logger;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
 import sessionsBeans.UserAddFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class CustvendManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(CustvendManage.class);
 
     @NotNull(message = "Συμπληρώστε το όνομα")
     private String fname;
@@ -87,15 +81,14 @@ public class CustvendManage implements Serializable {
 
     @PostConstruct
     void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Manage Users"); }
         roles = userAddFacade.findRoles1();
         //
         String urlCompare = "/java-e-commerce/web/register.xhtml";
         String urtString = url.toString();
         if (urlCompare.equals(urtString)) {
-
             roles.remove(0);
         }
-
     }
 
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
@@ -111,8 +104,6 @@ public class CustvendManage implements Serializable {
         sessionMap.put("editCustvend", u);
 
         return "/web/custvendEdit.xhtml?faces-redirect=true";
-
-
     }
 
     public List<Custvend> getAllCustvendData() {

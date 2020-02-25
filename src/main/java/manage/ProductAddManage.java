@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
@@ -12,7 +7,6 @@ import entities.Product;
 import entities.Produnit;
 import helpers.ConvertToGreeklish;
 import helpers.DateTime;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -23,19 +17,18 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
 import sessionsBeans.ProductUnitFacade;
 import sessionsBeans.UploadImageFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ProductAddManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ProductAddManage.class);
 
     @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα του προϊόντος")
     private String name;
@@ -75,6 +68,7 @@ public class ProductAddManage implements Serializable {
 
     @PostConstruct
     void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Product add Manage"); }
         custvends = custvendFacade.getAllCustvendVendorFromDB();
         prodcategorys = categoryFacade.getAllCategoriesWhereIsActive();
         photosList = uploadImageFacade.getAllfiles();

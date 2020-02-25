@@ -3,6 +3,7 @@ package sessionsBeans;
 import entities.Role;
 import entities.Roles;
 import entities.User;
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,6 +12,8 @@ import javax.persistence.TypedQuery;
 
 @Stateless
 public class UserAddFacade {
+
+    final static Logger logger = Logger.getLogger(UserAddFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -42,7 +45,6 @@ public class UserAddFacade {
 
     }
 
-
     public List<Role> findRoles() {
         //JBQL
         TypedQuery<Role> query = em.createNamedQuery("Role.findAll", Role.class);
@@ -54,7 +56,6 @@ public class UserAddFacade {
         TypedQuery<Roles> query = em.createNamedQuery("Roles.findAll", Roles.class);
         return query.getResultList();
     }
-
 
     public Role returnOneRole(String id) {
         Role rol;
@@ -69,7 +70,6 @@ public class UserAddFacade {
     }
 
     public boolean insertUserToDB(User u) {
-
         try {
             em.persist(u);
             em.flush();

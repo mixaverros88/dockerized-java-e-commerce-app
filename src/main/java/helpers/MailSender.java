@@ -19,7 +19,10 @@ import javax.mail.PasswordAuthentication;
 
 public class MailSender {
 
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(MailSender.class);
+
     public String generatePassword() {
+        if(logger.isDebugEnabled()){ logger.debug("Start Generate Password"); }
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
@@ -27,10 +30,13 @@ public class MailSender {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
+        if(logger.isDebugEnabled()){ logger.debug("End Generate Password, Password: " + salt.toString()); }
         return salt.toString();
     }
 
     public static boolean send(String to, String sub, String msg) {
+
+        if(logger.isDebugEnabled()){ logger.debug("Start Send New Password Via email"); }
 
         String htmlMailBefore = "<!doctype html>\n" +
                 "<html>\n" +

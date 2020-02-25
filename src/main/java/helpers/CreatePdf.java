@@ -24,6 +24,7 @@ import sessionsBeans.ProductFacade;
  */
 public class CreatePdf {
 
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(CreatePdf.class);
     @EJB
     ProductFacade productFacade;
 
@@ -40,7 +41,7 @@ public class CreatePdf {
 
     public String createPDF(List<Product> pd, Custvend custvend, int orderID, int shipping) throws DocumentException {
 
-
+        if(logger.isDebugEnabled()){ logger.debug("Start Create Create PDF "); }
         FacesContext ctx = FacesContext.getCurrentInstance();
         Float vat = Float.parseFloat(ctx.getExternalContext().getInitParameter("vat"));
 
@@ -176,6 +177,7 @@ public class CreatePdf {
             Logger.getLogger(CreatePdf.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        if(logger.isDebugEnabled()){ logger.debug("End Create Create PDF "); }
         return orderID + ".pdf";
     }
 }

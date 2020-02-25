@@ -1,31 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
-
 import entities.Vat;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.VatFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class VatManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(VatManage.class);
 
     @NotNull(message = "Παρακαλώ Συμπληρώστε το ποσοστό του ΦΠΑ")
     private float percnt;
@@ -35,6 +28,10 @@ public class VatManage implements Serializable {
     @EJB
     VatFacade vatFacade;
 
+    @PostConstruct
+    public void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Vat Manage"); }
+    }
 
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 

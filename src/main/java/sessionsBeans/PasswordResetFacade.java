@@ -1,28 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Custvend;
-
 import helpers.HashinUtils;
-
+import org.apache.log4j.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- * @author user
- */
 @Stateless
 public class PasswordResetFacade {
 
+    final static Logger logger = Logger.getLogger(PasswordResetFacade.class);
+
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
-
 
     protected EntityManager getEm() {
         return em;
@@ -34,7 +26,6 @@ public class PasswordResetFacade {
         String hashpass = hash.hashPass(newPass);
         Query query = em.createNativeQuery("UPDATE custvend SET passwd ='" + hashpass + "' WHERE email='" + email + "' ");
         query.executeUpdate();
-
         return newPass;
     }
 
@@ -55,10 +46,6 @@ public class PasswordResetFacade {
             System.out.println("Error in login() -->" + ex.getMessage());
             return user;
         }
-
         return user;
-
     }
-
-
 }

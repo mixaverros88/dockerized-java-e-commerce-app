@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Vat;
-
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,12 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @Stateless
 public class VatFacade {
 
+    final static Logger logger = Logger.getLogger(VatFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -34,13 +27,11 @@ public class VatFacade {
         return vat;
     }
 
-
     public Vat searchWithID(int id) {
         Vat vat = null;
         TypedQuery<Vat> query = em.createNamedQuery("Vat.findByVatid", Vat.class).setParameter("vatid", id);
         return query.getSingleResult();
     }
-
 
     public boolean updateVatToDatabase(Vat vat) {
         System.out.println("VAT=" + vat.getPercnt() + " " + vat.getIsactive() + " " + vat.getVatid());
@@ -59,14 +50,12 @@ public class VatFacade {
         return query.executeUpdate();
     }
 
-
     public int changeStatusVatFromDB(int status, int id) {
         Query query = em.createNativeQuery("UPDATE vat SET ISACTIVE =" + status + " WHERE VATID=" + id);
         return query.executeUpdate();
     }
 
     public boolean insertVatToDB(Vat vat) {
-
         try {
             em.persist(vat);
             em.flush();

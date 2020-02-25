@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import entities.Product;
 import entities.Wishlist;
 import helpers.DateTime;
-
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,16 +13,16 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.ProductFacade;
 import sessionsBeans.WhishListFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ProionFrontManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ProionFrontManage.class);
+
     private Product pro;
     private float selectqnt;
 
@@ -40,6 +35,10 @@ public class ProionFrontManage implements Serializable {
     @ManagedProperty(value = "#{cartManage}")
     CartManage myCart;
 
+    @PostConstruct
+    public void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Product Front Manage"); }
+    }
 
     public void addToCart() {
         int qnt = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendQty"));
@@ -49,8 +48,6 @@ public class ProionFrontManage implements Serializable {
         Product pro = productFacade.getProductFromDatabaseByID(id);
         pro.setQty(qnt);
         myCart.add(pro);
-
-
     }
 
     public float getRound2demicalsNumber(float num) {
@@ -65,8 +62,6 @@ public class ProionFrontManage implements Serializable {
     public void addToWishList() {
         HttpSession session = SessionUtils.getSession();
         Custvend custvend = (Custvend) session.getAttribute("Custvend");
-
-
         float qnt = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sendQty"));
         int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
 
@@ -83,8 +78,6 @@ public class ProionFrontManage implements Serializable {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν Δεν προσθέθηκε στην Wishlist"));
         }
-
-
     }
 
     public String getIdFromUrl() {
@@ -93,17 +86,10 @@ public class ProionFrontManage implements Serializable {
 
     public boolean checkIfProductExists() {
         if (productFacade.checkIfProductExistsInDB(getIdFromUrl()) == 0) {
-//           FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν που ζητήσατε δεν βρέθηκε."));
             return false;
         }
         return true;
-    }
-
-    public void checkIfProductExistsInCart(int id) {
-        myCart.chechIfProducIsToCart(id);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το προϊόν δεν υπάρχει"));
-
     }
 
     public Product getProduct() {
@@ -117,7 +103,6 @@ public class ProionFrontManage implements Serializable {
     public void setMyCart(CartManage myCart) {
         this.myCart = myCart;
     }
-
 
     public Product getPro() {
         return pro;
@@ -134,6 +119,5 @@ public class ProionFrontManage implements Serializable {
     public void setSelectqnt(float selectqnt) {
         this.selectqnt = selectqnt;
     }
-
 
 }

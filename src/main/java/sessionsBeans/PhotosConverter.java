@@ -1,29 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Photos;
-
+import org.apache.log4j.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-/**
- * @author user
- */
 @ManagedBean(name = "photosConverter")
 public class PhotosConverter implements Converter {
 
+    final static Logger logger = Logger.getLogger(PhotosConverter.class);
     @EJB
     private UploadImageFacade uploadImageFacade;
 
-    public PhotosConverter() {
-    }
+    public PhotosConverter() { }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -37,5 +29,4 @@ public class PhotosConverter implements Converter {
         System.out.println(result);
         return result;
     }
-
 }

@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Role;
 import entities.User;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -17,15 +11,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.UserAddFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class userAdd implements Serializable {
+
+    final static Logger logger = Logger.getLogger(userAdd.class);
 
     @NotNull(message = "At can't be null")
     private int at;
@@ -50,6 +43,7 @@ public class userAdd implements Serializable {
     //θα είναι η πρώτη μέθοδος που θα τρέξει όταν παέι να δημιουργιθεί το bean
     @PostConstruct
     void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Add User"); }
         roles = userAddFacade.findRoles();
         user = userAddFacade.getUserToEdit(1);
     }
@@ -74,7 +68,6 @@ public class userAdd implements Serializable {
     public void insertUser() {
         User u;
         boolean mr = false;
-//        HashinUtils hash = new HashinUtils();
         if (password.equals(passwordCheck)) {
             u = new User();
             u.setAt(Integer.toString(at));
@@ -87,13 +80,10 @@ public class userAdd implements Serializable {
             System.out.println(u.toString());
             mr = userAddFacade.insertUserToDB(u);
         }
-        //mhnhmata από το magaebean στην σελίδα
         if (mr) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("DATA OK"));
         }
-
     }
-
 
     public User getUser() {
         return user;
@@ -120,7 +110,6 @@ public class userAdd implements Serializable {
     }
 
     private String pass;
-
 
     public int getAt() {
         return at;

@@ -1,5 +1,6 @@
 package helpers;
 
+import org.apache.log4j.Logger;
 import java.util.Date;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Date;
 
 public class Chart {
 
+    final static Logger logger = Logger.getLogger(Chart.class);
     private Date dateChart;
     private double sumChart;
 

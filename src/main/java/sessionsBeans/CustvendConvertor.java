@@ -1,31 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Custvend;
-
+import org.apache.log4j.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-/**
- * @author user
- */
 @ManagedBean(name = "custvendConvertor")
 public class CustvendConvertor implements Converter {
 
+    final static Logger logger = Logger.getLogger(CustvendConvertor.class);
 
     @EJB
     private CustvendFacade custvendFacade;
 
-    public CustvendConvertor() {
-
-    }
+    public CustvendConvertor() { }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -39,6 +30,5 @@ public class CustvendConvertor implements Converter {
         System.out.println(result);
         return result;
     }
-
 
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
@@ -12,7 +7,6 @@ import entities.Product;
 import entities.Produnit;
 import helpers.ConvertToGreeklish;
 import helpers.DateTime;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -24,18 +18,18 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.ProductFacade;
 import sessionsBeans.ProductUnitFacade;
 import sessionsBeans.UploadImageFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ProductEditManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ProductEditManage.class);
 
     @NotNull(message = "Παρακαλώ συμπληρώστε το όνομα του προϊόντος")
     private String name;
@@ -80,6 +74,7 @@ public class ProductEditManage implements Serializable {
     @PostConstruct
     public void init() {
 
+        if(logger.isDebugEnabled()){ logger.debug("Init Product edit maange"); }
         custvends = custvendFacade.getAllCustvendVendorFromDB();
         prodcategorys = categoryFacade.getAllCategoriesWhereIsActive();
         photosList = uploadImageFacade.getAllfiles();
@@ -106,13 +101,6 @@ public class ProductEditManage implements Serializable {
         producUpdate.setProductid(product.getProductid());
         producUpdate.setName(product.getName());
         producUpdate.setSlugname(ConvertToGreeklish.greek2Roman(product.getName()));
-
-//        int isactiveInt;
-//        if(isactive.equals("true")){
-//            isactiveInt=1;
-//        }else{
-//            isactiveInt=0;
-//        }
 
         producUpdate.setIsactive(1);
         producUpdate.setIsvisible((short) 1);

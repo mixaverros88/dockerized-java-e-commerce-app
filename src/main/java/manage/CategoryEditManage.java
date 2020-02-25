@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Prodcategory;
-
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -17,15 +11,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class CategoryEditManage implements Serializable {
 
+    final static Logger logger = Logger.getLogger(CategoryEditManage.class);
 
     @NotNull(message = "Name can't be null")
     private String name;
@@ -43,30 +36,22 @@ public class CategoryEditManage implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        if(logger.isDebugEnabled()){ logger.debug("Init Category Edit Manage"); }
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-
         category = (Prodcategory) sessionMap.get("editUser");
-        System.out.println("22222" + category.getName());
     }
 
     public String updateCategory() {
 
         Prodcategory categoryUpdate = new Prodcategory();
-
         categoryUpdate.setName(category.getName());
-
-        System.out.println("Category is active: " + String.valueOf(category.getIsactive()));
         categoryUpdate.setIsactive(category.getIsactive());
-
         //mhnhmata από το magaebean στην σελίδα
         if (categoryFacade.updateCategoryToDatabase(categoryUpdate)) {
-
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Η κατηγορία ανανεώθηκε επιτυχώς"));
             return "categoryAll";
         }
-
         return "";
     }
 
@@ -78,7 +63,6 @@ public class CategoryEditManage implements Serializable {
     public void setCategory(Prodcategory category) {
         this.category = category;
     }
-
 
     public int getProdcategoryid() {
         return prodcategoryid;

@@ -1,21 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import entities.Orderlines;
 import helpers.Chart;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.OrderlinesFacade;
@@ -24,12 +18,11 @@ import sessionsBeans.ProductFacade;
 import sessionsBeans.SallesFacade;
 import sessionsBeans.UserAllFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class MainManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(MainManage.class);
 
     private int countCategories;
     private List<Chart> chart;
@@ -56,7 +49,9 @@ public class MainManage implements Serializable {
     OrderlinesFacade orderlinesFacade;
 
     @PostConstruct
-    void init() {}
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Main Manage"); }
+    }
 
     public int countAllCategories() {
         return categoryFacade.coutnCategories();

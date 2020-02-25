@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import entities.User;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,17 +12,15 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.LoginFacade;
-import sessionsBeans.ProductFacade;
 
-
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class LoginManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(LoginManage.class);
+
     @NotNull(message = "Username can't be null")
     private String username;
     @NotNull(message = "Password can't be null")
@@ -38,8 +32,10 @@ public class LoginManage implements Serializable {
     @EJB
     LoginFacade loginFacade;
 
-    @EJB
-    ProductFacade productFacade;
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Login Manage"); }
+    }
 
     public String valid() throws NoSuchAlgorithmException {
         Custvend u = loginFacade.getUser(username, pass);

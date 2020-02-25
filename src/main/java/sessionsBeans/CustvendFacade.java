@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Custvend;
 import entities.Roles;
-
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,12 +10,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @SuppressWarnings("ALL")
 @Stateless
 public class CustvendFacade {
+
+    final static Logger logger = Logger.getLogger(CustvendConvertor.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -29,9 +23,7 @@ public class CustvendFacade {
         return em;
     }
 
-
     public List<Custvend> getAllCustvendVendorFromDB() {
-
         Roles role = new Roles();
         role.setRoleid(3);
         TypedQuery<Custvend> query = em.createQuery("SELECT o FROM Custvend o WHERE o.roleid = :roleid", Custvend.class).setParameter("roleid", role);
@@ -83,22 +75,16 @@ public class CustvendFacade {
         query.executeUpdate();
     }
 
-
     public boolean updateCustvendToDatabase(Custvend custvend) {
-
-
-        em.merge(custvend);
-        em.flush();
-//            em.getTransaction().begin();
-//            em.merge(custvend);
-//            em.flush();
-//            em.getTransaction().commit();
-        return true;
-//                
-//        }catch(Exception ex){
-//            System.out.println(ex);
-//            return false;
-//        }  
+        if(logger.isDebugEnabled()){ logger.debug("Insert Balance in database : " + custvend.toString()); }
+        try {
+            em.merge(custvend);
+            em.flush();
+            return true;
+        } catch (Exception ex) {
+            logger.error("This is error : " + ex);
+            return false;
+        }
     }
 
     public Custvend searchWithID(int id) {
@@ -107,7 +93,6 @@ public class CustvendFacade {
         return query.getSingleResult();
 
     }
-
 
     public Long checkIfPhoneNumberExists(String phone) {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(o) FROM Custvend o WHERE o.phone = :phone", Long.class).setParameter("phone", phone);
@@ -124,7 +109,6 @@ public class CustvendFacade {
         return query.getSingleResult();
     }
 
-
     public Custvend returnOneCustvend(String id) {
         Custvend custvend;
         custvend = em.find(Custvend.class, Integer.parseInt(id));
@@ -137,7 +121,6 @@ public class CustvendFacade {
     }
 
     public boolean insertCustVendToDB(Custvend custvend) {
-
         try {
             em.persist(custvend);
             em.flush();

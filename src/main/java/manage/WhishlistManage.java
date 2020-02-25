@@ -1,27 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Product;
-
+import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-/**
- * @author user
- */
 @ManagedBean
 @SessionScoped
 public class WhishlistManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(WhishlistManage.class);
+
+    @PostConstruct
+    public void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Whishlist Manager"); }
+    }
 
     private List<Product> products = new ArrayList<>();
 

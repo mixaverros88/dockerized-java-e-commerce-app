@@ -1,26 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Custvend;
 import entities.Orderlines;
 import entities.Orders;
 import entities.Roles;
-
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @Stateless
 public class OrderlinesFacade {
+
+    final static Logger logger = Logger.getLogger(OrderlinesFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -29,9 +23,7 @@ public class OrderlinesFacade {
         return em;
     }
 
-
     public double orderDetailsSallesByVendorFROMDB(Custvend custvend) {
-
         Roles r = new Roles();
         r.setRoleid(2);
         try {
@@ -49,7 +41,6 @@ public class OrderlinesFacade {
         return query.getResultList();
     }
 
-
     public List<Orderlines> getAllOrderSFromVendroFROMDB(Custvend custvend) {
         TypedQuery<Orderlines> query = em.createQuery("SELECT o FROM Orderlines o WHERE o.vendor = :vendor ORDER BY o.orderlinesid DESC", Orderlines.class).setParameter("vendor", custvend);
         return query.getResultList();
@@ -60,17 +51,13 @@ public class OrderlinesFacade {
         return query.setMaxResults(6).getResultList();
     }
 
-
     public Orderlines getQntOfProduct(Orders order) {
-
         TypedQuery<Orderlines> query = em.createQuery("SELECT o FROM Orderlines o WHERE o.orderid = :orderid", Orderlines.class)
                 .setParameter("orderid", order);
         return query.getSingleResult();
     }
 
-
     public List<Orderlines> getQntsOfProduct(Orders order) {
-
         TypedQuery<Orderlines> query = em.createQuery("SELECT o FROM Orderlines o WHERE o.orderid = :orderid", Orderlines.class)
                 .setParameter("orderid", order);
         return query.getResultList();
@@ -86,8 +73,6 @@ public class OrderlinesFacade {
     }
 
     public boolean insertProductToOrdersLinesToDB(Orderlines orderlines) {
-
-
         try {
             em.persist(orderlines);
             em.flush();
@@ -95,7 +80,6 @@ public class OrderlinesFacade {
         } catch (Exception ex) {
             return false;
         }
-
     }
 
 }

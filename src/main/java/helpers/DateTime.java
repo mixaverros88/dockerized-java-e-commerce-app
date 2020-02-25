@@ -12,6 +12,8 @@ import java.util.Date;
  */
 public class DateTime {
 
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DateTime.class);
+
     public static String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();

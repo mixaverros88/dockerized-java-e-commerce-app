@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sessionsBeans;
 
 import entities.Custvend;
 import entities.Prodcategory;
 import entities.Product;
 import entities.Produnit;
-
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,12 +12,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @Stateless
 public class ProductFacade {
 
+    final static Logger logger = Logger.getLogger(ProductFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -31,26 +24,17 @@ public class ProductFacade {
         return em;
     }
 
-
     public boolean updateProductToDatabase(Product product) {
-
-
-        em.merge(product);
-        em.flush();
-//            em.getTransaction().begin();
-//            em.merge(custvend);
-//            em.flush();
-//            em.getTransaction().commit();
-        return true;
-//                
-//        }catch(Exception ex){
-//            System.out.println(ex);
-//            return false;
-//        }  
+        try {
+            em.merge(product);
+            em.flush();
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
     }
 
     public boolean insertProductToDB(Product product) {
-
         try {
             em.persist(product);
             em.flush();
@@ -60,13 +44,10 @@ public class ProductFacade {
         }
     }
 
-
     public long chechIfTheVendorAsycToProductFromDB(Custvend custvend) {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.vendor = :vendor", Long.class).setParameter("vendor", custvend);
         return  query.getSingleResult();
-
     }
-
 
     public long countProductsFromDB(int roleid, int sysuser) {
         long countryCount;
@@ -136,23 +117,19 @@ public class ProductFacade {
 
 
     public Product returnOneProduct(String id) {
-
         Product product;
         product = em.find(Product.class, Integer.parseInt(id));
         System.out.println("productFacade: " + product);
         return product;
     }
 
-
     public Product returnOneProduct2(String id) {
-
         Product product;
         product = em.find(Product.class, Integer.parseInt(id));
         return product;
     }
 
     public Produnit returnOneUnit(String id) {
-
         Produnit rol;
         rol = em.find(Produnit.class, Integer.parseInt(id));
         return rol;

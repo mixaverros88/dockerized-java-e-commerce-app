@@ -1,26 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import helpers.MailSender;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
 import javax.faces.context.FacesContext;
 
-
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ContactManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ContactManage.class);
+
     //    @Size(min=10, max=10, message="O αριθμός τηλεφώνου θα πρέπει να είναι 10 ψηφία")
     @NotNull(message = "Συμπληρώστε το ονοματεπώνυμο σας")
     private String name;
@@ -31,15 +27,17 @@ public class ContactManage implements Serializable {
     @NotNull(message = "Συμπληρώστε το μηνυμα σας")
     private String message;
 
-    public String sentContactEmail() {
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Contact Manage"); }
+    }
 
+    public String sentContactEmail() {
         if (MailSender.send("mverros@kathimerini.gr", "Φόρμα Επικοινωνίας", "<h3>Στοιχεία Αποστολέα</h3><table><tr><td>Email</td><td>" + getEmail() + "</td></tr><tr><td>Όνομα</td><td>" + getName() + "</td></tr><tr><td>Τηλέφωνο</td><td>" + getPhoneNumber() + "</td></tr><tr><td>Μήνυμα</td><td>" + getMessage() + "</td></tr></table>")) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("To email σας εστάλει επιτυχώς. Σύντομα θα επικοινωνήσουμε μαζί σας"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("To email σας ΔΕΝ εστάλει επιτυχώς. Παρακαλώ προσπαθήστε ξανά"));
         }
-
-
         return "";
     }
 
@@ -59,7 +57,6 @@ public class ContactManage implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -75,6 +72,5 @@ public class ContactManage implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
-
 
 }

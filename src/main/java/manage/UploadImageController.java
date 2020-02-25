@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Photos;
 import helpers.DateTime;
 import helpers.SlugName;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.activation.MimetypesFileTypeMap;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,15 +16,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.UploadImageFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class UploadImageController implements Serializable {
+
+    final static Logger logger = Logger.getLogger(UploadImageController.class);
 
     private List<Photos> photos;
 
@@ -41,6 +35,11 @@ public class UploadImageController implements Serializable {
 
     @EJB
     UploadImageFacade uploadImageFacade;
+
+    @PostConstruct
+    public void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Upload Image Manage"); }
+    }
 
     public String doUpload() throws IOException {
 

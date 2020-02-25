@@ -1,6 +1,7 @@
 package sessionsBeans;
 
 import entities.Produnit;
+import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,11 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/**
- * @author user
- */
 @Stateless
 public class ProductUnitFacade {
+
+    final static Logger logger = Logger.getLogger(ProductUnitFacade.class);
 
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
@@ -45,11 +45,9 @@ public class ProductUnitFacade {
     }
 
     public Produnit searchWithID(int id) {
-
         Produnit produnit = null;
         TypedQuery<Produnit> query = em.createNamedQuery("Produnit.findByProdunitid", Produnit.class).setParameter("produnitid", id);
         return query.getSingleResult();
-
     }
 
     public int deleteProductUnitFromDB(int id) {

@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Custvend;
 import entities.Orders;
 import entities.Wishlist;
 import helpers.HashinUtils;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,17 +18,16 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.CustvendFacade;
 import sessionsBeans.OrdersFacade;
 import sessionsBeans.WhishListFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class ProfileFrontManage implements Serializable {
+
+    final static Logger logger = Logger.getLogger(ProfileFrontManage.class);
 
     @NotNull(message = "Συμπληρώστε το όνομα")
     private String fname;
@@ -82,14 +75,12 @@ public class ProfileFrontManage implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        if (logger.isDebugEnabled()) {  logger.debug("Init Product Front Manage"); }
         HttpSession session = SessionUtils.getSession();
         Custvend custvend = (Custvend) session.getAttribute("Custvend");
-
     }
 
     public String updateCustvend() {
-
         Custvend custvendpdate = new Custvend();
         HashinUtils hu = new HashinUtils();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -100,7 +91,6 @@ public class ProfileFrontManage implements Serializable {
         custvendpdate.setLname(custvend.getLname().trim());
         custvendpdate.setAfm(custvend.getAfm().trim());
         custvendpdate.setUsername(custvend.getUsername().trim());
-
         custvendpdate.setAddress(custvend.getAddress().trim());
         custvendpdate.setZip(custvend.getZip().trim());
         custvendpdate.setCity(custvend.getCity().trim());
@@ -113,6 +103,7 @@ public class ProfileFrontManage implements Serializable {
         custvendpdate.setUpddate(date);
 
         //mhnhmata από το magaebean στην σελίδα
+        // TODO profile id
         if (custvendFacade.updateCustvendToDatabase(custvendpdate)) {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Η επεξεργασία του χρήστη"));

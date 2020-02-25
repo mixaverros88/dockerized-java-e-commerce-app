@@ -1,11 +1,21 @@
 package manage;
 
 import entities.Custvend;
+import org.apache.log4j.Logger;
+
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
+
+    final static Logger logger = Logger.getLogger(SallesManage.class);
+
+    @PostConstruct
+    public void init() {
+        if (logger.isDebugEnabled()) {  logger.debug("Init Session Utils"); }
+    }
 
     public static HttpSession getSession() {
         return (HttpSession) FacesContext.getCurrentInstance()

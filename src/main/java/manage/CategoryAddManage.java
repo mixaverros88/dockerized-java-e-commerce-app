@@ -1,30 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manage;
 
 import entities.Prodcategory;
 import helpers.ConvertToGreeklish;
-
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
-
+import org.apache.log4j.Logger;
 import sessionsBeans.CategoryFacade;
 
-/**
- * @author user
- */
 @ManagedBean
 @RequestScoped
 public class CategoryAddManage implements Serializable {
 
+    final static Logger logger = Logger.getLogger(CategoryAddManage.class);
 
     @NotNull(message = "Συμπληρώστε το όνομα της κατηγορίας")
     private String name;
@@ -34,6 +27,11 @@ public class CategoryAddManage implements Serializable {
 
     @EJB
     CategoryFacade categoryFacade;
+
+    @PostConstruct
+    void init() {
+        if(logger.isDebugEnabled()){ logger.debug("Init Add category"); }
+    }
 
     public String insertCategory() {
         Prodcategory category = new Prodcategory();
