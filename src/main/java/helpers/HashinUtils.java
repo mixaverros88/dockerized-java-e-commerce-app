@@ -23,7 +23,7 @@ public class HashinUtils {
     }
 
     public boolean checkHash(String userPassword, String dbPassword) {
-        if(logger.isDebugEnabled()){ logger.debug("check Hash"); }
+        if(logger.isDebugEnabled()){ logger.debug("Check Hash"); }
         return BCrypt.checkpw(userPassword, dbPassword);
     }
 }

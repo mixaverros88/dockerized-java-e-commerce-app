@@ -29,7 +29,7 @@ public class CreatePdf {
     ProductFacade productFacade;
 
     // TODO change file path
-    public static String File = "C:/Users/user/Documents/NetBeansProjects/PrimeFaces/new.pdf";
+    public static String File = "src/main/webapp/web/resources/example.pdf";
     public static final String DEST = "results/zugferd/pdf/basic%05d.pdf";
     public static final String ICC = "resources/color/sRGB_CS_profile.icm";
     public static final String REGULAR = "resources/fonts/Alkaios.ttf";
@@ -53,7 +53,7 @@ public class CreatePdf {
         float linesumval = 0;
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("C:/Users/user/Documents/NetBeansProjects/PrimeFaces/web/resources/invoices/" + orderID + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("src/main/webapp/web/resources/invoices/" + orderID + ".pdf"));
             document.open();
 
 

@@ -365,6 +365,7 @@ public class MailSender {
                 "  </body>\n" +
                 "</html>";
 
+        // TODO Add email
         String fromEmail = "";
         String passwordEmail = "";
         //Get properties object

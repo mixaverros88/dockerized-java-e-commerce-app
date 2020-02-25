@@ -16,10 +16,7 @@ public class Chart {
     private Date dateChart;
     private double sumChart;
 
-
-    public Chart() {
-
-    }
+    public Chart() { }
 
     public Chart(Date dateChart, double sumChart) {
         this.dateChart = dateChart;

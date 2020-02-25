@@ -27,6 +27,7 @@ public class DateTime {
     }
 
     public static Date getNowDateTime() {
+        if(logger.isDebugEnabled()){ logger.debug("Get Now Date Time"); }
         return new Date();
     }
 
