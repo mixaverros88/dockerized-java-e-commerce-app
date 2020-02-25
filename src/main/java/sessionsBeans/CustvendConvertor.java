@@ -20,14 +20,14 @@ public class CustvendConvertor implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(value);
+        if(logger.isDebugEnabled()){ logger.debug(value); }
         return custvendFacade.returnOneCustvend(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         String result = (value instanceof Custvend) ? ((Custvend) value).getCustvendid().toString() : null;
-        System.out.println(result);
+        if(logger.isDebugEnabled()){ logger.debug(result); }
         return result;
     }
 

@@ -20,10 +20,6 @@ public class ProductFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public boolean updateProductToDatabase(Product product) {
         try {
             em.merge(product);
@@ -62,13 +58,24 @@ public class ProductFacade {
     }
 
     public int changeStatusProductFromDatabase(int status, int id) {
-        Query query = em.createNativeQuery("UPDATE product SET ISACTIVE =" + status + " WHERE PRODUCTID=" + id);
-        return query.executeUpdate();
+        Product product = em.find(Product.class, id);
+        if (product != null){
+            product.setIsactive(status);
+            em.merge(product);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public int deleteProductFromDatabase(int id) {
-        Query query = em.createNativeQuery("DELETE FROM product WHERE PRODUCTID =" + id);
-        return query.executeUpdate();
+        Product product = em.find(Product.class, id);
+        if (product != null){
+            em.remove(product);
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     public void updateQntProduct(float qnt, int id) {
@@ -86,7 +93,6 @@ public class ProductFacade {
         return query.getResultList();
     }
 
-
     public List<Product> getAllProductsByIsactiveFromDB(int isactive) {
         TypedQuery<Product> query = em.createNamedQuery("Product.findByIsactive", Product.class).setParameter("isactive", 1);
         return query.getResultList();
@@ -97,42 +103,21 @@ public class ProductFacade {
         return query.getResultList();
     }
 
-    public List<Product> getAllProductsFromDatabaseByID(int id) {
-        TypedQuery<Product> query = em.createNamedQuery("Product.findByProductid", Product.class).setParameter("productid", id);
-        return query.getResultList();
-    }
-
-
     public int checkIfProductExistsInDB(String id) {
-        int foo = Integer.parseInt(id);
-        TypedQuery<Product> query = em.createNamedQuery("Product.findByProductid", Product.class).setParameter("productid", foo);
+        TypedQuery<Product> query = em.createNamedQuery("Product.findByProductid", Product.class).setParameter("productid", Integer.parseInt(id));
         return query.getResultList().size();
     }
 
     public Product getProductFromDatabaseByID(int id) {
-        Product product;
-        product = em.find(Product.class, id);
-        return product;
+        return em.find(Product.class, id);
     }
-
 
     public Product returnOneProduct(String id) {
-        Product product;
-        product = em.find(Product.class, Integer.parseInt(id));
-        System.out.println("productFacade: " + product);
-        return product;
-    }
-
-    public Product returnOneProduct2(String id) {
-        Product product;
-        product = em.find(Product.class, Integer.parseInt(id));
-        return product;
+        return em.find(Product.class, Integer.parseInt(id));
     }
 
     public Produnit returnOneUnit(String id) {
-        Produnit rol;
-        rol = em.find(Produnit.class, Integer.parseInt(id));
-        return rol;
+        return em.find(Produnit.class, Integer.parseInt(id));
     }
 
 }

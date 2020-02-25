@@ -112,12 +112,4 @@ public class MainManage implements Serializable {
 
         return count;
     }
-
-    public int getCountCategories() {
-        return countCategories;
-    }
-
-    public void setCountCategories(int countCategories) {
-        this.countCategories = countCategories;
-    }
 }

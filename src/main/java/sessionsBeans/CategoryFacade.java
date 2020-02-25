@@ -1,6 +1,7 @@
 package sessionsBeans;
 
 import entities.Prodcategory;
+import org.apache.log4j.Category;
 import org.apache.log4j.Logger;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -50,8 +51,13 @@ public class CategoryFacade {
 
     public int deleteCategory(int id) {
         if(logger.isDebugEnabled()){ logger.debug("Delete Category with id: " + id); }
-        Query query = em.createNativeQuery("DELETE FROM prodcategory WHERE PRODCATEGORYID =" + id);
-        return query.executeUpdate();
+        Prodcategory prodcategory = em.find(Prodcategory.class, id);
+        if(prodcategory != null){
+            em.remove(id);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public int coutnCategories() {
@@ -62,8 +68,10 @@ public class CategoryFacade {
 
     public int changeStatus(int status, int id) {
         if(logger.isDebugEnabled()){ logger.debug("Change status to : " + status + " + of a category with id : " + id); }
-        Query query = em.createNativeQuery("UPDATE prodcategory SET ISACTIVE =" + status + " WHERE PRODCATEGORYID=" + id);
-        return query.executeUpdate();
+        Prodcategory prodcategory = em.find(Prodcategory.class, id);
+        prodcategory.setIsactive(status);
+        em.merge(prodcategory);
+        return 1;
     }
 
     public boolean updateCategoryToDatabase(Prodcategory prodcategory) {

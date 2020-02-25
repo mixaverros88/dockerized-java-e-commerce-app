@@ -14,10 +14,6 @@ public class BallanceFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public boolean insertBalanceToDB(Ballance ballance) {
         if(logger.isDebugEnabled()){ logger.debug("Insert Balance in database : " + ballance.toString()); }
         try {

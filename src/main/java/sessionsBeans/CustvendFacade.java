@@ -19,17 +19,12 @@ public class CustvendFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public List<Custvend> getAllCustvendVendorFromDB() {
         Roles role = new Roles();
         role.setRoleid(3);
         TypedQuery<Custvend> query = em.createQuery("SELECT o FROM Custvend o WHERE o.roleid = :roleid", Custvend.class).setParameter("roleid", role);
         return query.getResultList();
     }
-
 
     public List<Custvend> getAllCustvendFromDB() {
         TypedQuery<Custvend> query = em.createNamedQuery("Custvend.findAll", Custvend.class);
@@ -42,13 +37,25 @@ public class CustvendFacade {
     }
 
     public int changeStatusCustvendFromDB(int status, int id) {
-        Query query = em.createNativeQuery("UPDATE Custvend SET ISACTIVE =" + status + " WHERE CUSTVENDID=" + id);
-        return query.executeUpdate();
+        Custvend custvend = em.find(Custvend.class, id);
+        if( custvend != null){
+            custvend.setIsactive(status);
+            em.merge(custvend);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public int changeRegisterCustvendFromDB(int register, int id) {
-        Query query = em.createNativeQuery("UPDATE Custvend SET REGISTER =" + register + " WHERE CUSTVENDID=" + id);
-        return query.executeUpdate();
+        Custvend custvend = em.find(Custvend.class, id);
+        if( custvend != null){
+            custvend.setRegister(register);
+            em.merge(custvend);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public Custvend getBallanceAmount(int id) {
@@ -62,17 +69,19 @@ public class CustvendFacade {
     }
 
     public void changeBallanceCustvendFromDB(float linesumval, int id) {
-        Custvend custvend = getBallanceAmount(id);
-        float balance = custvend.getBallance() + (linesumval);
-        Query query = em.createNativeQuery("UPDATE Custvend SET BALLANCE =" + balance + " WHERE CUSTVENDID=" + id);
-        query.executeUpdate();
+        Custvend custvend = em.find(Custvend.class, id);
+        if(custvend != null){
+            custvend.setBallance(linesumval);
+            em.merge(custvend);
+        }
     }
 
     public void changeCreditsCustvendFromDB(float credits, int id) {
-        Custvend custvend = getBallanceAmount(id);
-        credits = custvend.getCredits() + (credits);
-        Query query = em.createNativeQuery("UPDATE Custvend SET credits =" + credits + " WHERE CUSTVENDID=" + id);
-        query.executeUpdate();
+        Custvend custvend = em.find(Custvend.class, id);
+        if(custvend != null){
+            custvend.setCredits(credits);
+            em.merge(custvend);
+        }
     }
 
     public boolean updateCustvendToDatabase(Custvend custvend) {
@@ -88,10 +97,7 @@ public class CustvendFacade {
     }
 
     public Custvend searchWithID(int id) {
-        Custvend custvend = null;
-        TypedQuery<Custvend> query = em.createNamedQuery("Custvend.findByCustvendid", Custvend.class).setParameter("custvendid", id);
-        return query.getSingleResult();
-
+        return em.find(Custvend.class, id);
     }
 
     public Long checkIfPhoneNumberExists(String phone) {
@@ -110,14 +116,17 @@ public class CustvendFacade {
     }
 
     public Custvend returnOneCustvend(String id) {
-        Custvend custvend;
-        custvend = em.find(Custvend.class, Integer.parseInt(id));
-        return custvend;
+        return em.find(Custvend.class, Integer.parseInt(id));
     }
 
     public int deleteCustvendFacadeFromDB(int id) {
-        Query query = em.createNativeQuery("DELETE FROM Custvend WHERE CUSTVENDID =" + id);
-        return query.executeUpdate();
+        Custvend custvend = em.find(Custvend.class, id);
+        if(custvend != null){
+            em.remove(custvend);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public boolean insertCustVendToDB(Custvend custvend) {

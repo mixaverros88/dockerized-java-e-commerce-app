@@ -20,14 +20,14 @@ public class CategoryConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(value);
+        if(logger.isDebugEnabled()){ logger.debug(value); }
         return categoryFacade.returnOneCategory(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         String result = (value instanceof Prodcategory) ? ((Prodcategory) value).getProdcategoryid().toString() : null;
-        System.out.println(result);
+        if(logger.isDebugEnabled()){ logger.debug(result); }
         return result;
     }
 
