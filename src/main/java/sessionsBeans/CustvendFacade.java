@@ -78,7 +78,7 @@ public class CustvendFacade {
     public boolean updateCustvendToDatabase(Custvend custvend) {
         if(logger.isDebugEnabled()){ logger.debug("Insert Balance in database : " + custvend.toString()); }
         try {
-            em.merge(custvend);
+            em.persist(custvend);
             em.flush();
             return true;
         } catch (Exception ex) {
