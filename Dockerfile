@@ -19,4 +19,4 @@ USER jboss
 # Expose the ports we're interested in
 EXPOSE 8080
 
-CMD ["/opt/jboss/wildfly/customization/execute.sh"]
+CMD ["chmod", "+x","/opt/jboss/wildfly/customization/execute.sh"]
