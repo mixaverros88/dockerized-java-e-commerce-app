@@ -1,7 +1,9 @@
-package sessionsBeans;
+package converters;
 
 import entities.Product;
 import org.apache.log4j.Logger;
+import sessionsBeans.ProductFacade;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
@@ -20,14 +22,12 @@ public class ProductConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(value);
         return productFacade.returnOneProduct(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         String result = (value instanceof Product) ? ((Product) value).getProductid().toString() : null;
-        System.out.println(result);
         return result;
     }
 

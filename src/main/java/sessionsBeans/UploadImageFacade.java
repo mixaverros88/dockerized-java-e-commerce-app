@@ -17,24 +17,23 @@ public class UploadImageFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public List<Photos> getAllfiles() {
         TypedQuery<Photos> query = em.createNamedQuery("Photos.findAll", Photos.class);
         return query.getResultList();
     }
 
     public Photos returnOnePhoto(String id) {
-        Photos photos;
-        photos = em.find(Photos.class, Integer.parseInt(id));
-        return photos;
+        return em.find(Photos.class, Integer.parseInt(id));
     }
 
-    public int deletePhotoFromDatabase(int photosid) {
-        Query query = em.createNativeQuery("DELETE FROM photos WHERE photosid =" + photosid);
-        return query.executeUpdate();
+    public int deletePhotoFromDatabase(int id) {
+        Photos photo = em.find(Photos.class, id);
+        if( photo != null){
+            em.remove(photo);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public boolean insertFilePathToDB(Photos photo) {

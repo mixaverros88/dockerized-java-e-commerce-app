@@ -45,13 +45,13 @@ public class UserAddFacade {
 
     }
 
-    public List<Role> findRoles() {
+    public List<Role> findRole() {
         //JBQL
         TypedQuery<Role> query = em.createNamedQuery("Role.findAll", Role.class);
         return query.getResultList();
     }
 
-    public List<Roles> findRoles1() {
+    public List<Roles> findRoles() {
         //JBQL
         TypedQuery<Roles> query = em.createNamedQuery("Roles.findAll", Roles.class);
         return query.getResultList();

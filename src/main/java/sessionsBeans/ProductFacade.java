@@ -79,13 +79,19 @@ public class ProductFacade {
     }
 
     public void updateQntProduct(float qnt, int id) {
-        Query query = em.createNativeQuery("UPDATE product SET QTY =QTY-" + qnt + " WHERE PRODUCTID=" + id);
-        query.executeUpdate();
+        Product product = em.find(Product.class, id);
+        if( product != null){
+            product.setQty((int) qnt);
+            em.merge(product);
+        }
     }
 
     public void updateQntProductVendorSalle(float qnt, int id) {
-        Query query = em.createNativeQuery("UPDATE product SET QTY =QTY+" + qnt + " WHERE PRODUCTID=" + id);
-        query.executeUpdate();
+        Product product = em.find(Product.class, id);
+        if( product != null){
+            product.setQty((int) qnt);
+            em.merge(product);
+        }
     }
 
     public List<Product> getAllProductsFromDatabase() {

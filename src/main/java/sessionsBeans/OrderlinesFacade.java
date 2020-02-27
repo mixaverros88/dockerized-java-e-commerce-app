@@ -19,10 +19,6 @@ public class OrderlinesFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public double orderDetailsSallesByVendorFROMDB(Custvend custvend) {
         Roles r = new Roles();
         r.setRoleid(2);

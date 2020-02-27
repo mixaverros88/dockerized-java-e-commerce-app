@@ -20,10 +20,6 @@ public class WhishListFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public void chechIfTheProductIsInWhishList(Product product, float qty) {
 
         TypedQuery<Wishlist> query = em.createQuery("SELECT o FROM Wishlist o WHERE o.productid = :productid AND o.qty <= :qty AND o.inform = :inform", Wishlist.class)
@@ -35,7 +31,7 @@ public class WhishListFacade {
 
         for (Wishlist whi : wishlist) {
             MailSender.send(whi.getCustvendid().getEmail(), "ezikos - Ενημέρωση Διαθεσιμότητας", "Το προϊόν:" + whi.getProductid().getName() + " είναι διαθέσιμο. <br/> Πατηστε <a href='/java-e-commerce/web/proion.xhtml?id=" + whi.getProductid().getProductid() + "'>εδώ</a> για να το αγοράσεται");
-            updateWhishListInform(whi.getWishlistid());
+            updateWhishListInform(whi);
         }
     }
 
@@ -44,9 +40,11 @@ public class WhishListFacade {
         return query.getResultList();
     }
 
-    public void updateWhishListInform(int id) {
-        Query query = em.createNativeQuery("UPDATE wishlist SET INFORM =" + 1 + " WHERE WISHLISTID=" + id);
-        query.executeUpdate();
+    public void updateWhishListInform(Wishlist wishlist) {
+        if ( wishlist != null){
+            wishlist.setInform(1);
+            em.merge(wishlist);
+        }
     }
 
     public boolean insertWhiShListToDB(Wishlist wishlist) {

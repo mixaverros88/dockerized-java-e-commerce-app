@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sessionsBeans;
+package converters;
 
 import entities.Vat;
+import sessionsBeans.VatFacade;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -27,14 +28,12 @@ public class VatConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        System.out.println(value);
         return vatFacade.returnOneVat(value);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         String result = (value instanceof Vat) ? ((Vat) value).getVatid().toString() : null;
-        System.out.println(result);
         return result;
     }
 

@@ -39,8 +39,7 @@ public class UserAllManage implements Serializable {
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         String fiel_at = params.get("action");
 
-        User u = userAllFacade.searchWithat(fiel_at);
-        User u2 = userAllFacade.searchWithat(fiel_at);
+        Custvend u = userAllFacade.searchWithat(fiel_at);
 
         sessionMap.put("editCategory", u);
         return "/userEdit.xhtml?faces-redirect=true";

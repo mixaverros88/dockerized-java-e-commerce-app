@@ -32,10 +32,6 @@ public class OrdersFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     //vendorTransaction if is 1 the transaction is sale from vendor to as
     //vendorTransaction if is 2 the transaction is sale from as to customer
     public List<Orders> getAllSallesFromDB(Roles roleid, Custvend custvend, int vendorTransaction, String view) {
@@ -69,7 +65,6 @@ public class OrdersFacade {
 
 
     public Orders getOrderByIDFromDB(int orderid) {
-        Orders orders = null;
         TypedQuery<Orders> query = em.createNamedQuery("Orders.findByOrderid", Orders.class).setParameter("orderid", orderid);
         return query.getSingleResult();
     }
@@ -122,7 +117,6 @@ public class OrdersFacade {
     public List<Chart> listForChartFromDB() {
         Roles r = new Roles();
         r.setRoleid(2);
-        List<Chart> result;
         String queryStr = "SELECT new helpers.Chart(CAST(o.orderdate AS date) as dateChart, ROUND(SUM(o.sumamnt),2) as sumChart) FROM Orders o WHERE o.isapprv= :isapprv AND o.roleid= :roleid group by CAST(o.orderdate AS date)";
         short isapprv = 1;
         Query query = em.createQuery(queryStr).setParameter("isapprv", isapprv).setParameter("roleid", r);

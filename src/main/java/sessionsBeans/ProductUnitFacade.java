@@ -17,13 +17,14 @@ public class ProductUnitFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public int changeStatusProductUnitFromDB(int status, int id) {
-        Query query = em.createNativeQuery("UPDATE produnit SET ISACTIVE =" + status + " WHERE PRODUNITID=" + id);
-        return query.executeUpdate();
+        Produnit produnit = em.find(Produnit.class, id);
+        if(produnit != null){
+            em.merge(produnit);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public List<Produnit> getAllProdunitFromDB() {
@@ -36,23 +37,27 @@ public class ProductUnitFacade {
         return query.getResultList();
     }
 
-    public boolean updatProductUnitToDB(Produnit produnitid) {
-
-        Query query = em.createNativeQuery("UPDATE produnit SET NAME ='" + produnitid.getName() + "', ISACTIVE =" + produnitid.getIsactive() + "  WHERE PRODUNITID=" + produnitid.getProdunitid());
-        query.executeUpdate();
-
-        return true;
+    public boolean updateProductUnitToDB(Produnit produnit) {
+        if( produnit != null){
+            em.merge(produnit);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public Produnit searchWithID(int id) {
-        Produnit produnit = null;
-        TypedQuery<Produnit> query = em.createNamedQuery("Produnit.findByProdunitid", Produnit.class).setParameter("produnitid", id);
-        return query.getSingleResult();
+        return em.find(Produnit.class, id);
     }
 
     public int deleteProductUnitFromDB(int id) {
-        Query query = em.createNativeQuery("DELETE FROM produnit WHERE PRODUNITID =" + id);
-        return query.executeUpdate();
+        Produnit produnit = em.find(Produnit.class, id);
+        if( produnit != null){
+            em.remove(produnit);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public boolean insertProductUnitToDB(Produnit produnit) {

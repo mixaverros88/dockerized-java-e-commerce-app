@@ -44,7 +44,7 @@ public class userAdd implements Serializable {
     @PostConstruct
     void init() {
         if (logger.isDebugEnabled()) {  logger.debug("Init Add User"); }
-        roles = userAddFacade.findRoles();
+        roles = userAddFacade.findRole();
         user = userAddFacade.getUserToEdit(1);
     }
 

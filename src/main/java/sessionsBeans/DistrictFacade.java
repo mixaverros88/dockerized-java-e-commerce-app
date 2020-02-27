@@ -2,11 +2,9 @@ package sessionsBeans;
 
 import entities.District;
 import org.apache.log4j.Logger;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 @Stateless
 public class DistrictFacade {
@@ -20,15 +18,8 @@ public class DistrictFacade {
         return em;
     }
 
-    public List<District> findAllDistricts() {
-        TypedQuery<District> query = em.createNamedQuery("District.findAll", District.class);
-        return query.getResultList();
-    }
-
     public District returnOneDistrict(String id) {
-        District district;
-        district = em.find(District.class, Integer.parseInt(id));
-        return district;
+        return em.find(District.class, Integer.parseInt(id));
     }
 
 }

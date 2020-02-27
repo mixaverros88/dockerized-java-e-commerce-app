@@ -1,5 +1,6 @@
 package sessionsBeans;
 
+import converters.CustvendConvertor;
 import entities.Custvend;
 import entities.Roles;
 import org.apache.log4j.Logger;
@@ -7,7 +8,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 @SuppressWarnings("ALL")

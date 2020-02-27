@@ -69,16 +69,24 @@ public class CategoryFacade {
     public int changeStatus(int status, int id) {
         if(logger.isDebugEnabled()){ logger.debug("Change status to : " + status + " + of a category with id : " + id); }
         Prodcategory prodcategory = em.find(Prodcategory.class, id);
-        prodcategory.setIsactive(status);
-        em.merge(prodcategory);
-        return 1;
+        if( prodcategory != null){
+            prodcategory.setIsactive(status);
+            em.merge(prodcategory);
+            return 1;
+        }else {
+            return 0;
+        }
+
     }
 
     public boolean updateCategoryToDatabase(Prodcategory prodcategory) {
         if(logger.isDebugEnabled()){ logger.debug("Update category"); }
-        Query query = em.createNativeQuery("UPDATE prodcategory SET NAME ='" + prodcategory.getName() + "', ISACTIVE =" + prodcategory.getIsactive() + "  WHERE PRODCATEGORYID=" + prodcategory.getProdcategoryid());
-        query.executeUpdate();
-        return true;
+        if( prodcategory != null){
+            em.merge(prodcategory);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public boolean insertCategoryToDB(Prodcategory prodcategory) {

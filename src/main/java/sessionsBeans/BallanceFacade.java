@@ -21,7 +21,7 @@ public class BallanceFacade {
             em.flush();
             return true;
         } catch (Exception ex) {
-            logger.error("This is error : " + ex);
+            logger.error("Insert Balance in database " + ex);
             return false;
         }
     }

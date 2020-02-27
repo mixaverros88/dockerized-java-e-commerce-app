@@ -17,45 +17,56 @@ public class VatFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public Vat returnOneVat(String id) {
-        Vat vat;
-        vat = em.find(Vat.class, Integer.parseInt(id));
-        return vat;
+        return em.find(Vat.class, Integer.parseInt(id));
     }
 
     public Vat searchWithID(int id) {
-        Vat vat = null;
-        TypedQuery<Vat> query = em.createNamedQuery("Vat.findByVatid", Vat.class).setParameter("vatid", id);
-        return query.getSingleResult();
+        return  em.find(Vat.class, id);
     }
 
     public boolean updateVatToDatabase(Vat vat) {
-        System.out.println("VAT=" + vat.getPercnt() + " " + vat.getIsactive() + " " + vat.getVatid());
-        Query query = em.createNativeQuery("UPDATE vat SET PERCNT =" + vat.getPercnt() + ", ISACTIVE =" + vat.getIsactive() + "  WHERE VATID=" + vat.getVatid());
-        query.executeUpdate();
-        return true;
+        if(logger.isDebugEnabled()){ logger.debug("Update Vat: " + vat); }
+        if(vat != null){
+            em.merge(vat);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public List<Vat> getAllVatFromDB() {
+        if(logger.isDebugEnabled()){ logger.debug("Get All Vats"); }
         TypedQuery<Vat> query = em.createNamedQuery("Vat.findAll", Vat.class);
         return query.getResultList();
     }
 
     public int deleteVatFromDB(int id) {
-        Query query = em.createNativeQuery("DELETE FROM vat WHERE VATID =" + id);
-        return query.executeUpdate();
+        if(logger.isDebugEnabled()){ logger.debug("Delete Vat FromDB "); }
+        Vat vat = em.find(Vat.class, id);
+        if(vat != null){
+            em.remove(vat);
+            return 1;
+        }else {
+            return 0;
+        }
+
     }
 
     public int changeStatusVatFromDB(int status, int id) {
-        Query query = em.createNativeQuery("UPDATE vat SET ISACTIVE =" + status + " WHERE VATID=" + id);
-        return query.executeUpdate();
+        if(logger.isDebugEnabled()){ logger.debug("Change Status Vat From DB : "); }
+        Vat vat = em.find(Vat.class, id);
+        if(vat != null){
+            vat.setIsactive((short) status);
+            em.merge(vat);
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     public boolean insertVatToDB(Vat vat) {
+        if(logger.isDebugEnabled()){ logger.debug("Insert Vate in database : " + vat.toString()); }
         try {
             em.persist(vat);
             em.flush();
@@ -64,4 +75,5 @@ public class VatFacade {
             return false;
         }
     }
+
 }

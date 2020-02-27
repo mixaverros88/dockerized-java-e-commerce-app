@@ -82,7 +82,7 @@ public class CustvendManage implements Serializable {
     @PostConstruct
     void init() {
         if(logger.isDebugEnabled()){ logger.debug("Init Manage Users"); }
-        roles = userAddFacade.findRoles1();
+        roles = userAddFacade.findRoles();
         //
         String urlCompare = "/java-e-commerce/web/register.xhtml";
         String urtString = url.toString();
@@ -94,15 +94,11 @@ public class CustvendManage implements Serializable {
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
     public String editCustvend() {
-
-        System.out.println("AAAAAAAAAAAAAAAAAAAA");
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         int categoryId = Integer.parseInt(params.get("custvendid"));
         Custvend u = custvendFacade.searchWithID(categoryId);
-        System.out.println("CCCCCCCCCC" + u);
         sessionMap.put("editCustvend", u);
-
         return "/web/custvendEdit.xhtml?faces-redirect=true";
     }
 
@@ -110,10 +106,8 @@ public class CustvendManage implements Serializable {
         return custvend = custvendFacade.getAllCustvendFromDB();
     }
 
-
     public long chechIfTheVendorAsycToProduct(Custvend custvend) {
         return productFacade.chechIfTheVendorAsycToProductFromDB(custvend);
-
     }
 
     public String deleteCustvend(int id) {
@@ -156,10 +150,7 @@ public class CustvendManage implements Serializable {
 
     public String insertCustVend() {
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
-
-
         HashinUtils hu = new HashinUtils();
         Custvend custvend = new Custvend();
         custvend.setFname(fname.trim());

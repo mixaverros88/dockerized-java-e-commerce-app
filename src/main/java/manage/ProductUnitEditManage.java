@@ -48,7 +48,7 @@ public class ProductUnitEditManage implements Serializable {
         produnitUpdate.setProdunitid(produnit.getProdunitid());
 
         //mhnhmata από το magaebean στην σελίδα
-        if (productUnitFacade.updatProductUnitToDB(produnitUpdate)) {
+        if (productUnitFacade.updateProductUnitToDB(produnitUpdate)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("DATA OK"));
             return "produnitAll";
         }

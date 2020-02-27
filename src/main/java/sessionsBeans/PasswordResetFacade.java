@@ -16,10 +16,6 @@ public class PasswordResetFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public String changeUserPass(String email, String newPass) {
 
         HashinUtils hash = new HashinUtils();
