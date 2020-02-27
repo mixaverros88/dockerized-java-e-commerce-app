@@ -11,13 +11,12 @@ RUN mvn package
 
 # Stage 3: spin up a tomcat container
 FROM jboss/wildfly:11.0.0.Final
-ADD standalone.xml /opt/jboss/wildfly/standalone/configuration
+
+COPY --from=packageSourceCode /app/customization /opt/jboss/wildfly/customization/
 COPY --from=packageSourceCode /app/target/java-e-commerce.war /opt/jboss/wildfly/standalone/deployments/
 
 USER jboss
 # Expose the ports we're interested in
 EXPOSE 8080
 
-# Set the default command to run on boot
-# This will boot WildFly in the standalone mode and bind to all interface
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+CMD ["/opt/jboss/wildfly/customization/execute.sh"]
