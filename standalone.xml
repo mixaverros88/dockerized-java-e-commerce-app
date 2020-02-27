@@ -149,7 +149,7 @@
                     </security>
                 </datasource>
                 <datasource jta="true" jndi-name="java:jboss/datasources/test_poll" pool-name="test_poll" enabled="true" use-java-context="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://java-e-commerce-mysql:3306/poll</connection-url>
+                    <connection-url>jdbc:mysql://mysqlapp:3306/poll</connection-url>
                     <driver>mysql</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
                     <pool>
@@ -530,8 +530,8 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="java-e-commerce.war" runtime-name="java-e-commerce.war">
-            <fs-exploded path="/opt/jboss/wildfly/exploded/java-e-commerce.war"/>
-        </deployment>
+        <!-- <deployment name="java-e-commerce.war" runtime-name="java-e-commerce.war">
+            <fs-exploded path="/opt/jboss/wildfly/standalone/deployments/java-e-commerce.war"/>
+        </deployment> -->
     </deployments>
 </server>
