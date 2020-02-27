@@ -149,7 +149,7 @@
                     </security>
                 </datasource>
                 <datasource jta="true" jndi-name="java:jboss/datasources/test_poll" pool-name="test_poll" enabled="true" use-java-context="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://localhost:3306/poll</connection-url>
+                    <connection-url>jdbc:mysql://java-e-commerce-mysql:3306/poll</connection-url>
                     <driver>mysql</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
                     <pool>
