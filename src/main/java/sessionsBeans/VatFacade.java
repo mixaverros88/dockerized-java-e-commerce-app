@@ -18,10 +18,12 @@ public class VatFacade {
     private EntityManager em;
 
     public Vat returnOneVat(String id) {
+        if(logger.isDebugEnabled()){ logger.debug("Return vat with id: " + id); }
         return em.find(Vat.class, Integer.parseInt(id));
     }
 
     public Vat searchWithID(int id) {
+        if(logger.isDebugEnabled()){ logger.debug("Search vat with id : " + id); }
         return  em.find(Vat.class, id);
     }
 
@@ -66,7 +68,7 @@ public class VatFacade {
     }
 
     public boolean insertVatToDB(Vat vat) {
-        if(logger.isDebugEnabled()){ logger.debug("Insert Vate in database : " + vat.toString()); }
+        if(logger.isDebugEnabled()){ logger.debug("Insert Vat in database : " + vat.toString()); }
         try {
             em.persist(vat);
             em.flush();

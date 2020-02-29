@@ -29,7 +29,7 @@ public class UserAddFacade {
             user = (User) em.createQuery(
 
                     "SELECT u FROM User u WHERE u.at = :at")
-                    .setParameter("at", 1)
+                    .setParameter("at", at)
                     .getSingleResult();
 
             if (user != null) {
@@ -46,27 +46,21 @@ public class UserAddFacade {
     }
 
     public List<Role> findRole() {
-        //JBQL
         TypedQuery<Role> query = em.createNamedQuery("Role.findAll", Role.class);
         return query.getResultList();
     }
 
     public List<Roles> findRoles() {
-        //JBQL
         TypedQuery<Roles> query = em.createNamedQuery("Roles.findAll", Roles.class);
         return query.getResultList();
     }
 
     public Role returnOneRole(String id) {
-        Role rol;
-        rol = em.find(Role.class, Integer.parseInt(id));
-        return rol;
+        return em.find(Role.class, Integer.parseInt(id));
     }
 
     public Roles returnOneRoles(String id) {
-        Roles roles;
-        roles = em.find(Roles.class, Integer.parseInt(id));
-        return roles;
+        return em.find(Roles.class, Integer.parseInt(id));
     }
 
     public boolean insertUserToDB(User u) {

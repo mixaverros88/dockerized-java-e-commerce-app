@@ -130,7 +130,9 @@ public class CustvendFacade {
     }
 
     public boolean insertCustVendToDB(Custvend custvend) {
+
         try {
+            if(logger.isDebugEnabled()){ logger.debug("Insert user to database"); }
             em.persist(custvend);
             em.flush();
             return true;

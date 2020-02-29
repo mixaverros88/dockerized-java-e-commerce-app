@@ -166,7 +166,7 @@ public class CustvendManage implements Serializable {
         custvend.setCity(city);
         custvend.setAddress(address.trim());
         custvend.setPhone(phone.trim());
-        custvend.setJobname(jobname.trim());
+        custvend.setJobname(jobname);
         custvend.setBallance(0.0f);
         custvend.setBallance((float) 0.0);
         custvend.setRemarks("");
@@ -183,27 +183,31 @@ public class CustvendManage implements Serializable {
 
         custvend.setPasswd(hu.hashPass(password.trim()));
 
+        if(logger.isDebugEnabled()){ logger.debug("AM Validation"); }
         if (custvend.getRoleid().getRoleid() == 3 && custvend.getAfm() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Εφόσον είσται προμηθευτής θα πρέπει να εισάγεται ΑΦΜ"));
             return "";
         }
 
+        if(logger.isDebugEnabled()){ logger.debug("Password Validation"); }
         if (!password.equals(passwordCheck)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Τα password δεν ταιριάζουν"));
             return "";
         }
 
-
+        if(logger.isDebugEnabled()){ logger.debug("Phone Validation"); }
         if (custvendFacade.checkIfPhoneNumberExists(phone) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο αριθμός τηλεφώνου που δώσατε υπάρχει."));
             return "";
         }
 
+        if(logger.isDebugEnabled()){ logger.debug("Email Validation"); }
         if (custvendFacade.checkIfΕmailExists(email) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το email που δώσατε υπάρχει."));
             return "";
         }
 
+        if(logger.isDebugEnabled()){ logger.debug("Username Validation"); }
         if (custvendFacade.checkIfUserNameExists(username) > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Το username που δώσατε υπάρχει."));
             return "";
@@ -211,20 +215,28 @@ public class CustvendManage implements Serializable {
 
         //mhnhmata από το magaebean στην σελίδα
         if (custvendFacade.insertCustVendToDB(custvend)) {
+            if(logger.isDebugEnabled()){ logger.debug("After adding the user"); }
 
-            String urlCompare = "/java-e-commerce/web/register.xhtml";
+            //TODO change url
+            String urlCompare = "http://localhost:8080/java-e-commerce/web/register.xhtml";
             String urtString = url.toString();
-            MailSender mailSend = new MailSender();
+            //MailSender mailSend = new MailSender();
+
+            if(logger.isDebugEnabled()){ logger.debug("url.toString()" + url.toString()); }
+
             if (urlCompare.equals(urtString)) {
                 if (rr.getRoleid() == 2) {
+                    if(logger.isDebugEnabled()){ logger.debug("User role = 2 "); }
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς"));
                     MailSender.send(custvend.getEmail(), "ezikos.gr Δημιουργία Λογαριασμού", "<h3>Ο λογαριασμός σας στο ezikos.gr δημιουργήθηκε επιτυχώς.</h3> <br/> Για να συνδεθείτε πατήστε <a href=\"/java-e-commerce/web/login.xhtml\">εδώ</a>");
                     return "login";
                 } else if (rr.getRoleid() == 3) {
+                    if(logger.isDebugEnabled()){ logger.debug("User role = 3 "); }
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς. Θα σας αποσταλεί email όταν θα ενεργοποιηθεί"));
-                    return "vendorMessage";
+                    return "index";
                 }
             } else {
+                if(logger.isDebugEnabled()){ logger.debug("User role = 1 "); }
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ο λογαριασμό σας δημιουργήθηκε επιτυχώς"));
                 return "custvenAll";
             }

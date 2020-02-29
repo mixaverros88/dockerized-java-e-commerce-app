@@ -17,11 +17,13 @@ public class UserAllFacade {
     private EntityManager em;
 
     public List<Custvend> getAllUsers() {
+        if(logger.isDebugEnabled()){ logger.debug("Return all user"); }
         TypedQuery<Custvend> query = em.createNamedQuery("Custvend.findAll", Custvend.class);
          return query.getResultList();
     }
 
     public Custvend searchWithat(String at) {
+        if(logger.isDebugEnabled()){ logger.debug("Return category where id: "); }
         return em.find(Custvend.class, at);
     }
 

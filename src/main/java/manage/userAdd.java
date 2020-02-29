@@ -45,7 +45,7 @@ public class userAdd implements Serializable {
     void init() {
         if (logger.isDebugEnabled()) {  logger.debug("Init Add User"); }
         roles = userAddFacade.findRole();
-        user = userAddFacade.getUserToEdit(1);
+        user = userAddFacade.getUserToEdit(at);
     }
 
     public String getPasswordCheck() {

@@ -18,10 +18,6 @@ public class CategoryFacade {
     @PersistenceContext(unitName = "PrimeFacesPU")
     private EntityManager em;
 
-    protected EntityManager getEm() {
-        return em;
-    }
-
     public List<Prodcategory> getAllCategories() {
         if(logger.isDebugEnabled()){ logger.debug("Get All Categories"); }
         TypedQuery<Prodcategory> query = em.createNamedQuery("Prodcategory.findAll", Prodcategory.class);
@@ -41,12 +37,7 @@ public class CategoryFacade {
     }
 
     public Prodcategory searchWithID(int id) {
-
-        Prodcategory prodcategory = null;
-        TypedQuery<Prodcategory> query = em.createNamedQuery("Prodcategory.findByProdcategoryid", Prodcategory.class).setParameter("prodcategoryid", id);
-        Prodcategory results = query.getSingleResult();
-        System.out.println("Name: " + results.getName());
-        return results;
+        return em.find(Prodcategory.class, id);
     }
 
     public int deleteCategory(int id) {
