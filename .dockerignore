@@ -5,4 +5,3 @@ dockerRun.sh
 pom.xml
 /icons/*
 /src/*
-/target/*
