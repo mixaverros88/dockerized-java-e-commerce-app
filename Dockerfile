@@ -10,7 +10,7 @@ ENV MYSQL_PASSWORD M!xalis1029
 ENV MYSQL_DATABASE test_poll
 
 # Add standalone xml file
-COPY /customization/standalone.xml ${WILDFLY_HOME}/standalone/configuration/standalone.xml
+COPY /customization/standalone-verros.xml ${WILDFLY_HOME}/standalone/configuration/standalone-verros.xml
 # Get MySQL driver
 ADD https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar ${WILDFLY_HOME}/modules/com/mysql/jdbc/main/mysql-connector-java-5.1.39-bin.jar
 # MYSQL JDBC Module
@@ -28,5 +28,4 @@ USER root
 RUN chmod +x ${WILDFLY_HOME}/bin/start-wildfly.sh
 #USER jboss
 COPY /target/java-e-commerce.war ${WILDFLY_HOME}/standalone/deployments/
-
 ENTRYPOINT ["sh", "-c", "${WILDFLY_HOME}/bin/start-wildfly.sh"]
