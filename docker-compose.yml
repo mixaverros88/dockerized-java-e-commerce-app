@@ -1,12 +1,6 @@
 version: '3'
 
 services:
-  javaecommerce:
-    image: mixaverross88/java-e-commerce:3.0
-    ports:
-      - 80:8080
-    networks:
-      - isolated
   mysqlapp:
     image: mixaverross88/java-e-commerce-mysql:1.0
     secrets:
@@ -15,6 +9,13 @@ services:
       - MYSQL_ROOT_PASSWORD=/run/secrets/mysql_root_pass
     ports:
       - 3306:3306
+    networks:
+      - isolated
+  javaecommerce:
+    image: mixaverross88/java-e-commerce:3.0
+    ports:
+      - 8080:8080
+      - 9990:9990
     networks:
       - isolated
 
