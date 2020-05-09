@@ -163,8 +163,8 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-				<datasource jndi-name="java:jboss/datasources/poll"
-					pool-name="poll" enabled="true" use-java-context="true">
+				<datasource jndi-name="java:jboss/datasources/test_poll"
+					pool-name="test_poll" enabled="true" use-java-context="true">
 					<connection-url>jdbc:mysql://mysqlapp:3306/poll?useSSL=false</connection-url>
 					<driver>mysql</driver>
 					<security>
