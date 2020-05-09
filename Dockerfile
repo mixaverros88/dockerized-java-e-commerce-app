@@ -7,7 +7,7 @@ ENV WILDFLY_VERSION 9.0.2.Final
 ENV MYSQL_HOST mysqlapp
 ENV MYSQL_USER root
 ENV MYSQL_PASSWORD M!xalis1029
-ENV MYSQL_DATABASE test_poll
+ENV MYSQL_DATABASE poll
 
 # Add standalone xml file
 COPY /customization/standalone-verros.xml ${WILDFLY_HOME}/standalone/configuration/standalone-verros.xml
