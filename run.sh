@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #Delete running containers
 docker rm $(docker ps -a -q ) -f
 

@@ -9,107 +9,136 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <properties>
+
+        <!--dependencies-->
+        <javax.faces>2.1</javax.faces>
+        <javax.servlet>2.5</javax.servlet>
+        <log4j>1.2.17</log4j>
+        <javax.validation>2.0.0.CR1</javax.validation>
+        <javax.ejb>3.2.1</javax.ejb>
+        <javax.persistence>2.2</javax.persistence>
+        <javax.mail>1.4.4</javax.mail>
+        <javax.activation>1.1.1</javax.activation>
+        <org.primefaces>5.0</org.primefaces>
+        <org.hibernate>4.3.11.Final</org.hibernate>
+        <org.mindrot>0.3m</org.mindrot>
+        <org.omnifaces>1.5</org.omnifaces>
+        <org.jscience>4.3.1</org.jscience>
+        <com.itextpdf>5.4.1</com.itextpdf>
+        <javax.inject>1</javax.inject>
+        <javax.enterprise>1.2</javax.enterprise>
+        <javax.servlet-api>3.0.1</javax.servlet-api>
+        <docmosis>4.3.1</docmosis>
+        <org.hibernate.javax.persistence>1.0.1.Final</org.hibernate.javax.persistence>
+
+        <!--plugins-->
+        <org.wildfly.plugins>1.1.0.Alpha7</org.wildfly.plugins>
+        <org.apache.maven.plugins>3.7.0</org.apache.maven.plugins>
+        <org.apache.tomcat.maven>2.2</org.apache.tomcat.maven>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax.faces-api</artifactId>
-            <version>2.1</version>
+            <version>${javax.faces}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${javax.servlet}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${log4j}</version>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>2.0.0.CR1</version>
+            <version>${javax.validation}</version>
         </dependency>
         <dependency>
             <groupId>javax.ejb</groupId>
             <artifactId>javax.ejb-api</artifactId>
-            <version>3.2.1</version>
+            <version>${javax.ejb}</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
+            <version>${javax.persistence}</version>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4.4</version>
+            <version>${javax.mail}</version>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
-            <version>1.1.1</version>
+            <version>${javax.activation}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>5.0</version>
+            <version>${org.primefaces}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${org.hibernate}</version>
         </dependency>
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
-            <version>0.3m</version>
+            <version>${org.mindrot}</version>
         </dependency>
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
-            <version>1.5</version>
+            <version>${org.omnifaces}</version>
         </dependency>
         <dependency>
             <groupId>org.jscience</groupId>
             <artifactId>jscience</artifactId>
-            <version>4.3.1</version>
+            <version>${org.jscience}</version>
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.4.1</version>
+            <version>${com.itextpdf}</version>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <version>${javax.inject}</version>
         </dependency>
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>1.2</version>
+            <version>${javax.enterprise}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>${javax.servlet-api}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com</groupId>
             <artifactId>docmosis</artifactId>
-            <version>4.3.1</version>
+            <version>${docmosis}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/docmosis.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
+            <version>${org.hibernate.javax.persistence}</version>
         </dependency>
     </dependencies>
 
@@ -126,12 +155,12 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.1.0.Alpha7</version>
+                <version>${org.wildfly.plugins}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>${org.apache.maven.plugins}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -141,7 +170,7 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <version>${org.apache.tomcat.maven}</version>
                 <configuration>
                     <server>TomcatServer</server>
                     <url>http://localhost:8080/manager/text</url>
