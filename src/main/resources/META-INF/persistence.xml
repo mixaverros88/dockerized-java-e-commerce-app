@@ -5,7 +5,7 @@
              version="2.0">
 
   <persistence-unit name="PrimeFacesPU" transaction-type="JTA">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
 
     <!-- Dont forget to inform to your persistence.xml the datasource name -->
     <jta-data-source>java:jboss/datasources/poll</jta-data-source>

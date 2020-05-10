@@ -3,12 +3,10 @@ version: '3'
 services:
   mysqlapp:
     image: mixaverross88/java-e-commerce-mysql:1.0
-    secrets:
-      - mysql_root_pass
     enviroment:
-      - MYSQL_ROOT_PASSWORD=/run/secrets/mysql_root_pass
+      - MYSQL_ROOT_PASSWORD=kdiosk33
     ports:
-      - 3306:3306
+      - 3311:3306
     networks:
       - isolated
   javaecommerce:
