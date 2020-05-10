@@ -51,8 +51,8 @@ RUN echo "=> Starting WildFly server" && \
       $JBOSS_CLI --connect --command="/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)" && \
     echo "=> Creating a new datasource" && \
       $JBOSS_CLI --connect --command="data-source add \
-        --name=${DB_NAME}DS \
-        --jndi-name=java:jboss/datasources/${DB_NAME}DS \
+        --name=${DB_NAME} \
+        --jndi-name=java:jboss/datasources/${DB_NAME} \
         --user-name=${DB_USER} \
         --password=${DB_PASS} \
         --driver-name=mysql \
