@@ -15,7 +15,7 @@
 
     <!-- Once your are using a datasource, is not required to configure properties below -->
     <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysqlapp:3306/poll?useSSL=false" />
       <!--without docker-->
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/poll?useSSL=false" />-->

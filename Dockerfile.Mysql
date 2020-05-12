@@ -4,7 +4,7 @@ WORKDIR /app
 Run wget https://raw.githubusercontent.com/mixaverros88/dockerized-java-e-commerce-app/master/customization/dataBase.sql
 
 # Stage 2: spin up a mysql container
-FROM mysql
+FROM mysql:5.7
 # Add a database
 ENV MYSQL_DATABASE poll
 # Add the content of the sql-scripts/ directory to your image
