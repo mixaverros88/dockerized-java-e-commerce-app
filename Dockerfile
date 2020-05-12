@@ -25,7 +25,7 @@ ENV DB_USER root
 ENV DB_PASS kdiosk33
 ENV DB_URI mysqlapp
 
-ENV MYSQL_VERSION 8.0.19
+ENV MYSQL_VERSION 8.0.17
 ENV JBOSS_CLI /opt/jboss/wildfly/bin/jboss-cli.sh
 ENV DEPLOYMENT_DIR /opt/jboss/wildfly/standalone/deployments/
 #ENV JAVA_OPTS
