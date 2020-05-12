@@ -7,7 +7,7 @@ docker network create --driver bridge my_isolated_bridge_network
 docker build -t mixaverross88/java-e-commerce-mysql:1.1 -f Dockerfile.Mysql .
 
 # Run Mysql Image
-docker run -d -p 3306:3306 --name mysqlapp \
+docker run -d -p 3311:3306 --name mysqlapp \
 --network=my_isolated_bridge_network \
 -e MYSQL_ROOT_PASSWORD='kdiosk33' mixaverross88/java-e-commerce-mysql:1.1
 

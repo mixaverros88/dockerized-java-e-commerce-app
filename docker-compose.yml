@@ -6,7 +6,7 @@ services:
     enviroment:
       - MYSQL_ROOT_PASSWORD=kdiosk33
     ports:
-      - 3306:3306
+      - 3311:3306
     networks:
       - isolated
   javaecommerce:
