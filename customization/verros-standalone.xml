@@ -149,7 +149,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/poll" pool-name="MySQLPool">
-                    <connection-url>jdbc:mysql://localhost:3306/poll?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</connection-url>
+                    <connection-url>jdbc:mysql://mysqlapp:3311/poll?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</connection-url>
                     <driver>mysql</driver>
                     <pool>
                         <max-pool-size>30</max-pool-size>
@@ -520,9 +520,4 @@
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
-    <deployments>
-        <deployment name="java-e-commerce.war" runtime-name="java-e-commerce.war">
-            <content sha1="87323b19651fbef2dd9d3125446975a0108f5c48"/>
-        </deployment>
-    </deployments>
 </server>

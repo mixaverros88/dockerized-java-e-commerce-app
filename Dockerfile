@@ -19,11 +19,11 @@ ENV WILDFLY_HOME /opt/jboss/wildfly
 ENV WILDFLY_VERSION 11.0.0.Final
 ENV MYSQL_HOST mysqlapp:3311
 ENV MYSQL_USER root
-ENV MYSQL_PASSWORD kdiosk33
+ENV MYSQL_PASSWORD M!xalis1029
 ENV MYSQL_DATABASE poll
 
 # Add standalone xml file
-COPY customization/standalone.xml ${WILDFLY_HOME}/standalone/configuration/standalone.xml
+COPY customization/verros-standalone.xml ${WILDFLY_HOME}/standalone/configuration/verros-standalone.xml
 # Get MySQL driver
 ADD https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.19/mysql-connector-java-8.0.19.jar ${WILDFLY_HOME}/modules/com/mysql/jdbc/main/mysql-connector-java-8.0.19-bin.jar
 # MYSQL JDBC Module
@@ -36,7 +36,7 @@ EXPOSE 8080 9990
 VOLUME ${WILDFLY_HOME}/standalone/deployments/
 VOLUME ${WILDFLY_HOME}/standalone/log/
 # RUN script
-COPY start-wildfly.sh ${WILDFLY_HOME}/bin/start-wildfly.sh
+COPY customization/start-wildfly.sh ${WILDFLY_HOME}/bin/start-wildfly.sh
 USER root
 RUN chmod +x ${WILDFLY_HOME}/bin/start-wildfly.sh
 #USER jboss
