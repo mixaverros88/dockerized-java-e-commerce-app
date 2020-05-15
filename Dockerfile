@@ -12,64 +12,33 @@ RUN mvn package
 # WildFly 8 on Docker with Centos 7 and OpenJDK 1.7
 FROM jboss/wildfly:11.0.0.Final
 
-# Maintainer
-MAINTAINER Mike Verros <mixalisverros@hotmail.gr>
+MAINTAINER Mike Verros "mixalisverros@hotmail.gr"
 
-# Appserver
-ENV WILDFLY_USER admin
-ENV WILDFLY_PASS adminPassword
+# ENV VARIABLES
+ENV WILDFLY_HOME /opt/jboss/wildfly
+ENV WILDFLY_VERSION 11.0.0.Final
+ENV MYSQL_HOST mysqlapp:3311
+ENV MYSQL_USER root
+ENV MYSQL_PASSWORD kdiosk33
+ENV MYSQL_DATABASE poll
 
-# Database
-ENV DB_NAME poll
-ENV DB_USER root
-ENV DB_PASS kdiosk33
-ENV DB_URI mysqlapp
-
-ENV MYSQL_VERSION 8.0.17
-ENV JBOSS_CLI /opt/jboss/wildfly/bin/jboss-cli.sh
-ENV DEPLOYMENT_DIR /opt/jboss/wildfly/standalone/deployments/
-#ENV JAVA_OPTS
-
-# Setting up WildFly Admin Console
-RUN echo "=> Adding WildFly administrator"
-RUN $JBOSS_HOME/bin/add-user.sh -u $WILDFLY_USER -p $WILDFLY_PASS --silent
-
-COPY --from=packageSourceCode /app/target/java-e-commerce.war ${DEPLOYMENT_DIR}
-
-# Configure Wildfly server
-RUN echo "=> Starting WildFly server" && \
-      bash -c '$JBOSS_HOME/bin/standalone.sh &' && \
-    echo "=> Waiting for the server to boot" && \
-      bash -c 'until `$JBOSS_CLI -c ":read-attribute(name=server-state)" 2> /dev/null | grep -q running`; do echo `$JBOSS_CLI -c ":read-attribute(name=server-state)" 2> /dev/null`; sleep 1; done' && \
-    echo "=> Downloading MySQL driver" && \
-      curl --location --output /tmp/mysql-connector-java-${MYSQL_VERSION}.jar --url http://search.maven.org/remotecontent?filepath=mysql/mysql-connector-java/${MYSQL_VERSION}/mysql-connector-java-${MYSQL_VERSION}.jar && \
-    echo "=> Adding MySQL module" && \
-      $JBOSS_CLI --connect --command="module add --name=com.mysql --resources=/tmp/mysql-connector-java-${MYSQL_VERSION}.jar --dependencies=javax.api,javax.transaction.api" && \
-    echo "=> Adding MySQL driver" && \
-                                     #/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-class-name=com.mysql.jdbc.Driver)
-                                     #/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql.driver,driver-class-name=com.mysql.cj.jdbc.Driver)
-      $JBOSS_CLI --connect --command="/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-class-name=com.mysql.cj.jdbc.Driver" && \
-    echo "=> Creating a new datasource" && \
-      $JBOSS_CLI --connect --command="data-source add \
-        --name=poll \
-        --jndi-name=java:jboss/datasources/poll \
-        --user-name=root \
-        --password=kdiosk33 \
-        --driver-name=mysql \
-        --connection-url=jdbc:mysql://mysqlapp:3311/poll?useSSL=false \
-        --use-ccm=false \
-        --max-pool-size=25 \
-        --blocking-timeout-wait-millis=5000 \
-        --enabled=true" && \
-    echo "=> Shutting down WildFly and Cleaning up" && \
-      $JBOSS_CLI --connect --command=":shutdown" && \
-      rm -rf $JBOSS_HOME/standalone/configuration/standalone_xml_history/ $JBOSS_HOME/standalone/log/* && \
-      rm -f /tmp/*.jar
-
-# Expose http and admin ports
+# Add standalone xml file
+COPY customization/standalone.xml ${WILDFLY_HOME}/standalone/configuration/standalone.xml
+# Get MySQL driver
+ADD https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.19/mysql-connector-java-8.0.19.jar ${WILDFLY_HOME}/modules/com/mysql/jdbc/main/mysql-connector-java-8.0.19-bin.jar
+# MYSQL JDBC Module
+COPY customization/module.xml ${WILDFLY_HOME}/modules/com/mysql/jdbc/main/module.xml
+# Add console admin user
+RUN ${WILDFLY_HOME}/bin/add-user.sh admin adminPassword  --silent
+# Ports
 EXPOSE 8080 9990
+# Volumes
+VOLUME ${WILDFLY_HOME}/standalone/deployments/
+VOLUME ${WILDFLY_HOME}/standalone/log/
+# RUN script
+COPY start-wildfly.sh ${WILDFLY_HOME}/bin/start-wildfly.sh
+USER root
+RUN chmod +x ${WILDFLY_HOME}/bin/start-wildfly.sh
+#USER jboss
 
-#echo "=> Restarting WildFly"
-# Set the default command to run on boot
-# This will boot WildFly in the standalone mode and bind to all interfaces
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+ENTRYPOINT ["sh", "-c", "${WILDFLY_HOME}/bin/start-wildfly.sh"]
