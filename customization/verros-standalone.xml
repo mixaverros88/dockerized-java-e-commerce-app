@@ -148,19 +148,18 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:jboss/datasources/poll" pool-name="MySQLPool">
+                <datasource jndi-name="java:jboss/datasources/poll" pool-name="MySQLPool" enabled="true" use-java-context="true">
                     <connection-url>jdbc:mysql://mysqlapp:3311/poll?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</connection-url>
                     <driver>mysql</driver>
-                    <pool>
-                        <max-pool-size>30</max-pool-size>
-                    </pool>
                     <security>
                         <user-name>root</user-name>
                         <password>M!xalis1029</password>
                     </security>
                 </datasource>
                 <drivers>
-                    <driver name="mysql" module="com.mysql"/>
+                    <driver name="mysql" module="com.mysql.jdbc">
+                        <driver-class>com.mysql.jdbc.Driver</driver-class>
+                    </driver>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
