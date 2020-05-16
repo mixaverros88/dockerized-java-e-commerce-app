@@ -149,7 +149,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/poll" pool-name="MySQLPool" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:mysql://mysqlapp:3311/poll?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</connection-url>
+                    <connection-url>jdbc:mysql://mysqlapp/poll</connection-url>
                     <driver>mysql</driver>
                     <security>
                         <user-name>root</user-name>
