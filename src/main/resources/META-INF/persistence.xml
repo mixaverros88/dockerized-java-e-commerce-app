@@ -20,7 +20,7 @@
       <!--without docker-->
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/poll?useSSL=false" />-->
       <property name="javax.persistence.jdbc.user" value="root" />
-      <property name="javax.persistence.jdbc.password" value="kdiosk33" />
+      <property name="javax.persistence.jdbc.password" value="M!xalis1029" />
 
       <property name="javax.persistence.validation.mode" value="none" />
 
