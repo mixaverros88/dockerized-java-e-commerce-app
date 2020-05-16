@@ -37,6 +37,8 @@ VOLUME ${WILDFLY_HOME}/standalone/deployments/
 VOLUME ${WILDFLY_HOME}/standalone/log/
 # RUN script
 COPY customization/start-wildfly.sh ${WILDFLY_HOME}/bin/start-wildfly.sh
+#Deploy
+COPY --from=packageSourceCode /app/target/java-e-commerce.war ${DEPLOYMENT_DIR}
 USER root
 RUN chmod +x ${WILDFLY_HOME}/bin/start-wildfly.sh
 #USER jboss
