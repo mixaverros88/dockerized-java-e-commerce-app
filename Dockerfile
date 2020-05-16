@@ -21,6 +21,7 @@ ENV MYSQL_HOST mysqlapp:3311
 ENV MYSQL_USER root
 ENV MYSQL_PASSWORD M!xalis1029
 ENV MYSQL_DATABASE poll
+ENV DEPLOYMENT_DIR /opt/jboss/wildfly/standalone/deployments/
 
 # Add standalone xml file
 COPY customization/verros-standalone.xml ${WILDFLY_HOME}/standalone/configuration/verros-standalone.xml
