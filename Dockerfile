@@ -27,7 +27,7 @@ COPY customization/verros-standalone.xml ${WILDFLY_HOME}/standalone/configuratio
 # Get MySQL driver
 COPY customization/mysql-connector-java-8.0.19.jar ${WILDFLY_HOME}/modules/com/mysql/jdbc/main/mysql-connector-java-8.0.19.jar
 # MYSQL JDBC Module
-COPY customization/module.xml ${WILDFLY_HOME}/modules/system/layers/base/com/mysql/jdbc/main/module.xml
+COPY customization/module.xml ${WILDFLY_HOME}/modules/com/mysql/jdbc/main/module.xml
 # Add console admin user
 RUN ${WILDFLY_HOME}/bin/add-user.sh admin adminPassword  --silent
 # Ports
