@@ -9,6 +9,15 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <profiles>
+        <profile>
+            <id>noTests</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
 
         <!--dependencies-->
