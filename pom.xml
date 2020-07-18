@@ -44,7 +44,6 @@
         <!--plugins-->
         <org.wildfly.plugins>1.1.0.Alpha7</org.wildfly.plugins>
         <org.apache.maven.plugins>3.7.0</org.apache.maven.plugins>
-        <org.apache.tomcat.maven>2.2</org.apache.tomcat.maven>
     </properties>
 
     <dependencies>
