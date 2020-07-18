@@ -66,9 +66,9 @@ mvn clean wildfly:deploy
 You can use the dataBase.sql in order to create the poll database and insert some values.
 
 ### :passport_control: Initial admin credentials ###
-Username: 
+Username: admin
 
-Password:
+Password: admin
 
 # Database Diagram
 ![preview image](https://raw.githubusercontent.com/mixaverros88/java-e-commerce/master/src/main/resources/database_diagram.png)
