@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/mixaverros88/dockerized-java-e-commerce-app.svg?branch=master)](https://travis-ci.com/mixaverros88/dockerized-java-e-commerce-app)
-
 # e-commerce Web Application using JEE and JSF framework
 ![preview image](https://raw.githubusercontent.com/mixaverros88/java-e-commerce/master/src/main/resources/e-commerce.jpg)
 
