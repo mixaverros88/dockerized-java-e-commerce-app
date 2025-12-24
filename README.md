@@ -3,8 +3,8 @@
 
 ### :ghost: This project was created for the final examination of  [Boot Camp 3](https://www.afdemp.org/%CF%84%CE%BF-coding-bootcamp-3-%CE%BE%CE%B5%CE%BA%CE%AF%CE%BD%CE%B7%CF%83%CE%B5/)
 
-The main idea behind this, is that we have to create a e-grocery store that sales several products from various vendors.
-The grocery shop earn profits only through commissions.
+dockerized-java-e-commerce-app is a Java-based e-commerce web application built using Java EE and JSF (JavaServer Faces) and containerized with Docker & Docker-Compose for easy deployment. The project appears to be created as part of a final Bootcamp examination and demonstrates a full online store experience with both admin and user functionality. 
+
 ### :pencil: List of requirements
 
 ## Admin Panel ##
